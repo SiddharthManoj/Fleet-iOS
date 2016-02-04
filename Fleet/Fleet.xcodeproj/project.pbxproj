@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A13C91E01C62E896003C1A56 /* Quicksand_Dash.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91D91C62E896003C1A56 /* Quicksand_Dash.otf */; };
+		A13C91E11C62E896003C1A56 /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DA1C62E896003C1A56 /* Quicksand-Bold.otf */; };
+		A13C91E21C62E896003C1A56 /* Quicksand-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DB1C62E896003C1A56 /* Quicksand-BoldItalic.otf */; };
+		A13C91E31C62E896003C1A56 /* Quicksand-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DC1C62E896003C1A56 /* Quicksand-Italic.otf */; };
+		A13C91E41C62E896003C1A56 /* Quicksand-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DD1C62E896003C1A56 /* Quicksand-Light.otf */; };
+		A13C91E51C62E896003C1A56 /* Quicksand-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DE1C62E896003C1A56 /* Quicksand-LightItalic.otf */; };
+		A13C91E61C62E896003C1A56 /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DF1C62E896003C1A56 /* Quicksand-Regular.otf */; };
+		A13C91E91C62EA66003C1A56 /* Corbert-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91E81C62EA66003C1A56 /* Corbert-Regular.otf */; };
 		B7F34A391C60677900799BE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F34A381C60677900799BE6 /* AppDelegate.swift */; };
 		B7F34A3E1C60677900799BE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F34A3C1C60677900799BE6 /* Main.storyboard */; };
 		B7F34A401C60677900799BE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7F34A3F1C60677900799BE6 /* Assets.xcassets */; };
@@ -15,6 +23,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A13C91D91C62E896003C1A56 /* Quicksand_Dash.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Quicksand_Dash.otf; sourceTree = "<group>"; };
+		A13C91DA1C62E896003C1A56 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.otf"; sourceTree = "<group>"; };
+		A13C91DB1C62E896003C1A56 /* Quicksand-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-BoldItalic.otf"; sourceTree = "<group>"; };
+		A13C91DC1C62E896003C1A56 /* Quicksand-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Italic.otf"; sourceTree = "<group>"; };
+		A13C91DD1C62E896003C1A56 /* Quicksand-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Light.otf"; sourceTree = "<group>"; };
+		A13C91DE1C62E896003C1A56 /* Quicksand-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-LightItalic.otf"; sourceTree = "<group>"; };
+		A13C91DF1C62E896003C1A56 /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.otf"; sourceTree = "<group>"; };
+		A13C91E81C62EA66003C1A56 /* Corbert-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Corbert-Regular.otf"; sourceTree = "<group>"; };
 		B7F34A351C60677900799BE6 /* Fleet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fleet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F34A381C60677900799BE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7F34A3D1C60677900799BE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,11 +51,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A13C91E71C62E89B003C1A56 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A13C91D91C62E896003C1A56 /* Quicksand_Dash.otf */,
+				A13C91DA1C62E896003C1A56 /* Quicksand-Bold.otf */,
+				A13C91DB1C62E896003C1A56 /* Quicksand-BoldItalic.otf */,
+				A13C91DC1C62E896003C1A56 /* Quicksand-Italic.otf */,
+				A13C91DD1C62E896003C1A56 /* Quicksand-Light.otf */,
+				A13C91DE1C62E896003C1A56 /* Quicksand-LightItalic.otf */,
+				A13C91DF1C62E896003C1A56 /* Quicksand-Regular.otf */,
+				A13C91E81C62EA66003C1A56 /* Corbert-Regular.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		B7F34A2C1C60677900799BE6 = {
 			isa = PBXGroup;
 			children = (
 				B7F34A371C60677900799BE6 /* Fleet */,
 				B7F34A361C60677900799BE6 /* Products */,
+				A13C91E71C62E89B003C1A56 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,7 +164,15 @@
 			files = (
 				B7F34A431C60677900799BE6 /* LaunchScreen.storyboard in Resources */,
 				B7F34A401C60677900799BE6 /* Assets.xcassets in Resources */,
+				A13C91E41C62E896003C1A56 /* Quicksand-Light.otf in Resources */,
+				A13C91E21C62E896003C1A56 /* Quicksand-BoldItalic.otf in Resources */,
+				A13C91E61C62E896003C1A56 /* Quicksand-Regular.otf in Resources */,
 				B7F34A3E1C60677900799BE6 /* Main.storyboard in Resources */,
+				A13C91E91C62EA66003C1A56 /* Corbert-Regular.otf in Resources */,
+				A13C91E01C62E896003C1A56 /* Quicksand_Dash.otf in Resources */,
+				A13C91E11C62E896003C1A56 /* Quicksand-Bold.otf in Resources */,
+				A13C91E51C62E896003C1A56 /* Quicksand-LightItalic.otf in Resources */,
+				A13C91E31C62E896003C1A56 /* Quicksand-Italic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +332,7 @@
 				B7F34A491C60677900799BE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
