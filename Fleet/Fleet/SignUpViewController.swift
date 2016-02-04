@@ -1,14 +1,14 @@
 //
-//  LoginViewController.swift
+//  SignUpViewController.swift
 //  Fleet
 //
-//  Created by Rahul Madduluri on 2/1/16.
+//  Created by Spencer Congero on 2/4/16.
 //  Copyright © 2016 fleet. All rights reserved.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate
+class SignUpViewController: UIViewController, UITextFieldDelegate
 {
     var bgColorRed: CGFloat = 255/255
     var bgColorGreen: CGFloat = 255/255
@@ -49,6 +49,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     
     var nameFieldYPos: CGFloat = 310
     var passFieldYPos: CGFloat = 360
+    var emailFieldYPos: CGFloat = 410
     
     var signUpYPos: CGFloat = 481
     var signUpWidth: CGFloat = 260
@@ -80,6 +81,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     
     var nameString: String = "NAME"
     var passwordString: String = "PASSWORD"
+    var emailString: String = "EMAIL"
     
     var logoImg: String = "logo.png"
     var loginBoxImg: String = "login_box.png"
@@ -90,21 +92,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     var fleetName: UILabel!
     var fleetTag: UILabel!
     var loginBox: UIImageView!
-    var loginText: UILabel!
+    var loginText: UITextView!
     var nameTextField: UITextField!
     var nameLabel: UILabel!
     var namePlaceholder: NSMutableAttributedString!
     var passTextField: UITextField!
     var passLabel: UILabel!
+    var emailTextField: UITextField!
+    var emailLabel: UILabel!
     var loginButton: UIButton!
     var signUpButton: UIButton!
     var signUpBox: UIImageView!
     
     var nameBorder = CALayer()
     var passBorder = CALayer()
-
+    var emailBorder = CALayer()
+    
     // MARK: - UIViewController methods
-
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -116,8 +121,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         _addLoginBox()
         _addNameTextField()
         _addPassTextField()
+        _addEmailTextField()
         _addLoginButton()
-        _addSignUpButton()
     }
     
     // MARK: - Internal methods
@@ -140,22 +145,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         })
     }
     
+    func emailPressed(sender: UITextField!)
+    {
+        UIView.animateWithDuration(0.5, animations: {
+            self.emailLabel.center = CGPointMake(23, 20)
+            self.emailLabel.alpha = 1
+            self.emailBorder.borderColor = UIColor(white: 0, alpha: 1).CGColor
+        })
+    }
+    
     func signupPressed(sender: UIButton!)
     {
-        let vc = SignUpViewController()
+       
+    }
+    
+    func loginPressed(sender: UIButton!)
+    {
+        let vc = LoginViewController()
         let modalStyle = UIModalTransitionStyle.FlipHorizontal
         vc.modalTransitionStyle = modalStyle
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
-    func loginPressed(sender: UIButton!)
-    {
-        let vc = CameraViewController()
-        let modalStyle = UIModalTransitionStyle.CrossDissolve
-        vc.modalTransitionStyle = modalStyle
-        self.presentViewController(vc, animated: true, completion: nil)
-    }
-
     // MARK: - Private methods
     
     private func _addFleetHeading()
@@ -192,8 +203,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         
         self.view.addSubview(loginBox)
         
-        self.loginText = UILabel(frame: CGRect(x: self.view.center.x - loginTextWidth/2, y: loginTextYPos, width: loginTextWidth, height: loginTextHeight))
-        self.loginText.attributedText = NSAttributedString(string: loginString, attributes: [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont(name: quicksandReg, size: 21)!])
+        self.loginText = UITextView(frame: CGRect(x: self.view.center.x - loginTextWidth/2, y: loginTextYPos, width: loginTextWidth, height: loginTextHeight))
+        self.loginText.attributedText = NSAttributedString(string: signUpString, attributes: [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont(name: quicksandReg, size: 21)!])
         self.loginText.backgroundColor = UIColor(white: 1, alpha: 0)
         self.loginText.textAlignment = .Center
         
@@ -219,10 +230,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         self.nameLabel.center = CGPointMake(self.nameTextField.frame.width/2, self.nameTextField.frame.height/2)
         
         self.nameTextField.addSubview(nameLabel)
-
+        
         self.nameTextField.textColor = UIColor.blackColor()
         self.nameTextField.delegate = self
-
+        
         let width = CGFloat(1.0)
         self.nameBorder.borderColor = UIColor(white: 0, alpha: 0.3).CGColor
         self.nameBorder.frame = CGRect(x: 0, y: nameTextField.frame.size.height - width, width:  nameTextField.frame.size.width, height: nameTextField.frame.size.height)
@@ -260,7 +271,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         self.passTextField.textColor = UIColor.blackColor()
         self.passTextField.secureTextEntry = true
         self.passTextField.delegate = self
-
+        
         let width = CGFloat(1.0)
         self.passBorder.borderColor = UIColor(white: 0, alpha: 0.3).CGColor
         self.passBorder.frame = CGRect(x: 0, y: passTextField.frame.size.height - width, width:  passTextField.frame.size.width, height: passTextField.frame.size.height)
@@ -277,10 +288,47 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         self.view.addSubview(self.passTextField)
     }
     
+    private func _addEmailTextField()
+    {
+        self.emailTextField = UITextField(frame: CGRect(x: self.view.center.x - textFieldWidth/2, y: emailFieldYPos, width: textFieldWidth, height: textFieldHeight))
+        self.emailTextField.font = UIFont(name: quicksandReg, size: 16)
+        let emailPlaceholder = NSAttributedString(string: emailString, attributes: [
+            NSForegroundColorAttributeName : UIColor(white: 0, alpha: 1),
+            NSFontAttributeName : UIFont(name: quicksandReg, size: 16)!
+            ])
+        
+        self.emailLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        self.emailLabel.attributedText = emailPlaceholder
+        self.emailLabel.textAlignment = .Center
+        self.emailLabel.alpha = 0.5
+        self.emailLabel.center = CGPointMake(self.emailTextField.frame.width/2, self.emailTextField.frame.height/2)
+        
+        self.emailTextField.addSubview(emailLabel)
+        
+        self.emailTextField.textColor = UIColor.blackColor()
+        self.emailTextField.autocapitalizationType = .None
+        self.emailTextField.delegate = self
+        
+        let width = CGFloat(1.0)
+        self.emailBorder.borderColor = UIColor(white: 0, alpha: 0.3).CGColor
+        self.emailBorder.frame = CGRect(x: 0, y: emailTextField.frame.size.height - width, width:  emailTextField.frame.size.width, height: emailTextField.frame.size.height)
+        
+        self.emailBorder.borderWidth = width
+        emailTextField.layer.addSublayer(self.emailBorder)
+        emailTextField.layer.masksToBounds = true
+        
+        emailTextField.leftViewMode = UITextFieldViewMode.Always
+        emailTextField.leftView = UIView(frame: CGRectMake(0,0,110,10))
+        
+        self.emailTextField.addTarget(self, action: "emailPressed:", forControlEvents: .TouchDown)
+        
+        self.view.addSubview(self.emailTextField)
+    }
+    
     private func _addLoginButton()
     {
         self.loginButton = UIButton()
-        self.loginButton.setTitle(loginString, forState: .Normal)
+        self.loginButton.setTitle(signUpString, forState: .Normal)
         self.loginButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         self.loginButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.loginButton.frame = CGRectMake(self.view.center.x - loginWidth/2, self.view.center.y + loginYOffset, loginWidth, loginHeight)
@@ -288,35 +336,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         self.loginButton.addTarget(self, action: "loginPressed:", forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.loginButton)
-    }
-    
-    private func _addSignUpButton()
-    {
-        let signUpQuestionLabel = UILabel(frame: CGRect(x: self.view.center.x - signUpQuestionWidth/2, y: signUpQuestionYPos, width: signUpQuestionWidth, height: signUpQuestionHeight))
-        
-        let signUpQuestionText = NSMutableAttributedString(string: loginQuestionString, attributes: [
-            NSForegroundColorAttributeName: UIColor.blackColor(),
-            NSFontAttributeName: UIFont(name: quicksandReg, size: 18)!,
-            ])
-
-        signUpQuestionLabel.attributedText = signUpQuestionText
-        signUpQuestionLabel.textAlignment = .Center
-        signUpQuestionLabel.backgroundColor = UIColor(white: 1, alpha: 0)
-        
-        self.view.addSubview(signUpQuestionLabel)
-        
-        self.signUpBox = UIImageView(frame: CGRect(x: self.view.center.x - signUpBoxWidth/2, y: signUpBoxYPos, width: signUpBoxWidth, height: signUpBoxHeight))
-        self.signUpBox.image = UIImage(named: signUpBoxImg)
-        
-        self.view.addSubview(signUpBox)
-        
-        self.signUpButton = UIButton()
-        self.signUpButton.setTitle(signUpString, forState: .Normal)
-        self.signUpButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        self.signUpButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
-        self.signUpButton.frame = CGRectMake(self.view.center.x - signUpWidth/2, signUpYPos, signUpWidth, signUpHeight)
-        self.signUpButton.addTarget(self, action: "signupPressed:", forControlEvents: .TouchUpInside)
-        
-        self.view.addSubview(self.signUpButton)
     }
 }

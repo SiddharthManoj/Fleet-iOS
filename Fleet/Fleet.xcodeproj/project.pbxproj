@@ -15,6 +15,11 @@
 		A13C91E51C62E896003C1A56 /* Quicksand-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DE1C62E896003C1A56 /* Quicksand-LightItalic.otf */; };
 		A13C91E61C62E896003C1A56 /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DF1C62E896003C1A56 /* Quicksand-Regular.otf */; };
 		A13C91E91C62EA66003C1A56 /* Corbert-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91E81C62EA66003C1A56 /* Corbert-Regular.otf */; };
+		A1873DB51C64056800EE5DC6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DB41C64056800EE5DC6 /* SignUpViewController.swift */; };
+		A1873DB71C640A9400EE5DC6 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DB61C640A9400EE5DC6 /* CameraViewController.swift */; };
+		A1873DB91C640ACF00EE5DC6 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DB81C640ACF00EE5DC6 /* VideosViewController.swift */; };
+		A1873DBB1C640AE200EE5DC6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DBA1C640AE200EE5DC6 /* ProfileViewController.swift */; };
+		A1873DBD1C640AEF00EE5DC6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DBC1C640AEF00EE5DC6 /* SettingsViewController.swift */; };
 		B7F34A391C60677900799BE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F34A381C60677900799BE6 /* AppDelegate.swift */; };
 		B7F34A3E1C60677900799BE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F34A3C1C60677900799BE6 /* Main.storyboard */; };
 		B7F34A401C60677900799BE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7F34A3F1C60677900799BE6 /* Assets.xcassets */; };
@@ -31,6 +36,11 @@
 		A13C91DE1C62E896003C1A56 /* Quicksand-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-LightItalic.otf"; sourceTree = "<group>"; };
 		A13C91DF1C62E896003C1A56 /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.otf"; sourceTree = "<group>"; };
 		A13C91E81C62EA66003C1A56 /* Corbert-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Corbert-Regular.otf"; sourceTree = "<group>"; };
+		A1873DB41C64056800EE5DC6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		A1873DB61C640A9400EE5DC6 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = ../CameraViewController.swift; sourceTree = "<group>"; };
+		A1873DB81C640ACF00EE5DC6 /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
+		A1873DBA1C640AE200EE5DC6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A1873DBC1C640AEF00EE5DC6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B7F34A351C60677900799BE6 /* Fleet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fleet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F34A381C60677900799BE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7F34A3D1C60677900799BE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -100,6 +110,11 @@
 			isa = PBXGroup;
 			children = (
 				B7F34A4A1C606C2500799BE6 /* LoginViewController.swift */,
+				A1873DB41C64056800EE5DC6 /* SignUpViewController.swift */,
+				A1873DB61C640A9400EE5DC6 /* CameraViewController.swift */,
+				A1873DB81C640ACF00EE5DC6 /* VideosViewController.swift */,
+				A1873DBA1C640AE200EE5DC6 /* ProfileViewController.swift */,
+				A1873DBC1C640AEF00EE5DC6 /* SettingsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -183,6 +198,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1873DBB1C640AE200EE5DC6 /* ProfileViewController.swift in Sources */,
+				A1873DB91C640ACF00EE5DC6 /* VideosViewController.swift in Sources */,
+				A1873DBD1C640AEF00EE5DC6 /* SettingsViewController.swift in Sources */,
+				A1873DB51C64056800EE5DC6 /* SignUpViewController.swift in Sources */,
+				A1873DB71C640A9400EE5DC6 /* CameraViewController.swift in Sources */,
 				B7F34A4B1C606C2500799BE6 /* LoginViewController.swift in Sources */,
 				B7F34A391C60677900799BE6 /* AppDelegate.swift in Sources */,
 			);
