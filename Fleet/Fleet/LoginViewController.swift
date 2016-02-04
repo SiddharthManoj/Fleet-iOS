@@ -67,6 +67,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     var signUpQuestionWidth: CGFloat = 200
     var signUpQuestionHeight: CGFloat = 50
     
+    var quicksandReg: String = "Quicksand-Regular"
+    var quicksandBold: String = "Quicksand-Bold"
+    var corbertReg: String = "Corbert-Regular"
+    
+    var fleetTitle: String = "fleet"
+    var fleetTagString: String = "see the world. as it happens."
+    var loginQuestionString: String = "new to fleet?"
+    
+    var signUpString: String = "SIGN UP"
+    var loginString: String = "LOG IN"
+    
+    var nameString: String = "NAME"
+    var passwordString: String = "PASSWORD"
+    
+    var logoImg: String = "logo.png"
+    var loginBoxImg: String = "login_box.png"
+    var signUpBoxImg: String = "signup_box.png"
+    
     // Do any additional setup after loading the view.
     var fleetLogo: UIImageView!
     var fleetName: UILabel!
@@ -106,9 +124,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     
     func namePressed(sender: UITextField!)
     {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = NSTextAlignment.Left
-        
         UIView.animateWithDuration(0.5, animations: {
             self.nameLabel.center = CGPointMake(22, 20)
             self.nameLabel.alpha = 1
@@ -143,22 +158,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     private func _addFleetHeading()
     {
         self.fleetName = UILabel(frame: CGRect(x: fleetNameXPos, y: fleetNameYPos, width: fleetNameWidth, height: fleetNameHeight))
-        self.fleetName.attributedText = NSAttributedString(string: "fleet", attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: "Corbert-Regular", size: 85)!])
+        self.fleetName.attributedText = NSAttributedString(string: fleetTitle, attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: corbertReg, size: 85)!])
         self.fleetName.backgroundColor = UIColor(white: 1, alpha: 0)
         
         self.view.addSubview(fleetName)
         
         self.fleetLogo = UIImageView(frame: CGRect(x: logoXPos, y: logoYPos, width: logoWidth, height: logoHeight))
-        self.fleetLogo.image = UIImage(named: "logo.png")
+        self.fleetLogo.image = UIImage(named: logoImg)
         
         self.view.addSubview(fleetLogo)
         
         self.fleetTag = UILabel(frame: CGRect(x: self.view.center.x - fleetTagWidth/2, y: fleetTagYPos, width: fleetTagWidth, height: fleetTagHeight))
-        let fleetText = NSMutableAttributedString(string: "see the world. as it happens.", attributes: [
+        let fleetText = NSMutableAttributedString(string: fleetTagString, attributes: [
             NSForegroundColorAttributeName: UIColor.blackColor(),
-            NSFontAttributeName: UIFont(name: "Quicksand-Regular", size: 18)!,
+            NSFontAttributeName: UIFont(name: quicksandReg, size: 18)!,
             ])
-        fleetText.addAttributes([NSFontAttributeName : UIFont(name: "Quicksand-Bold", size: 18)!], range: NSMakeRange(18,2))
+        fleetText.addAttributes([NSFontAttributeName : UIFont(name: quicksandBold, size: 18)!], range: NSMakeRange(18,2))
         self.fleetTag.attributedText = fleetText
         self.fleetTag.textAlignment = .Center
         self.fleetTag.backgroundColor = UIColor(white: 1, alpha: 0)
@@ -170,12 +185,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     private func _addLoginBox()
     {
         self.loginBox = UIImageView(frame: CGRect(x: loginBoxXPos, y: loginBoxYPos, width: loginBoxWidth, height: loginBoxHeight))
-        self.loginBox.image = UIImage(named: "login_box.png")
+        self.loginBox.image = UIImage(named: loginBoxImg)
         
         self.view.addSubview(loginBox)
         
         self.loginText = UITextView(frame: CGRect(x: self.view.center.x - loginTextWidth/2, y: loginTextYPos, width: loginTextWidth, height: loginTextHeight))
-        self.loginText.attributedText = NSAttributedString(string: "LOG IN", attributes: [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont(name: "Quicksand-Regular", size: 21)!])
+        self.loginText.attributedText = NSAttributedString(string: loginString, attributes: [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont(name: quicksandReg, size: 21)!])
         self.loginText.backgroundColor = UIColor(white: 1, alpha: 0)
         self.loginText.textAlignment = .Center
         
@@ -185,13 +200,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     private func _addNameTextField()
     {
         self.nameTextField = UITextField(frame: CGRect(x: self.view.center.x - textFieldWidth/2, y: nameFieldYPos, width: textFieldWidth, height: textFieldHeight))
-        self.nameTextField.font = UIFont(name: "Quicksand-Regular", size: 16)
+        self.nameTextField.font = UIFont(name: quicksandReg, size: 16)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.Center
         
-        let passPlaceholder = NSAttributedString(string: "NAME", attributes: [
+        let passPlaceholder = NSAttributedString(string: nameString, attributes: [
             NSForegroundColorAttributeName : UIColor(white: 0, alpha: 1),
-            NSFontAttributeName : UIFont(name: "Quicksand-Regular", size: 16)!
+            NSFontAttributeName : UIFont(name: quicksandReg, size: 16)!
             ])
         
         self.nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
@@ -224,10 +239,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     private func _addPassTextField()
     {
         self.passTextField = UITextField(frame: CGRect(x: self.view.center.x - textFieldWidth/2, y: passFieldYPos, width: textFieldWidth, height: textFieldHeight))
-        self.passTextField.font = UIFont(name: "Quicksand-Regular", size: 16)
-        let passPlaceholder = NSAttributedString(string: "PASSWORD", attributes: [
+        self.passTextField.font = UIFont(name: quicksandReg, size: 16)
+        let passPlaceholder = NSAttributedString(string: passwordString, attributes: [
             NSForegroundColorAttributeName : UIColor(white: 0, alpha: 1),
-            NSFontAttributeName : UIFont(name: "Quicksand-Regular", size: 16)!
+            NSFontAttributeName : UIFont(name: quicksandReg, size: 16)!
             ])
         //self.passTextField.attributedPlaceholder = passPlaceholder
         
@@ -262,9 +277,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     private func _addLoginButton()
     {
         self.loginButton = UIButton()
-        self.loginButton.setTitle("LOG IN", forState: .Normal)
+        self.loginButton.setTitle(loginString, forState: .Normal)
         self.loginButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.loginButton.titleLabel?.font = UIFont(name: "Quicksand-Regular", size: 20)
+        self.loginButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.loginButton.frame = CGRectMake(self.view.center.x - loginWidth/2, self.view.center.y + loginYOffset, loginWidth, loginHeight)
         self.loginButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
         self.loginButton.addTarget(self, action: "loginPressed:", forControlEvents: .TouchUpInside)
@@ -276,9 +291,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     {
         let signUpQuestionLabel = UILabel(frame: CGRect(x: self.view.center.x - signUpQuestionWidth/2, y: signUpQuestionYPos, width: signUpQuestionWidth, height: signUpQuestionHeight))
         
-        let signUpQuestionText = NSMutableAttributedString(string: "new to fleet?", attributes: [
+        let signUpQuestionText = NSMutableAttributedString(string: loginQuestionString, attributes: [
             NSForegroundColorAttributeName: UIColor.blackColor(),
-            NSFontAttributeName: UIFont(name: "Quicksand-Regular", size: 18)!,
+            NSFontAttributeName: UIFont(name: quicksandReg, size: 18)!,
             ])
 
         signUpQuestionLabel.attributedText = signUpQuestionText
@@ -288,14 +303,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         self.view.addSubview(signUpQuestionLabel)
         
         self.signUpBox = UIImageView(frame: CGRect(x: self.view.center.x - signUpBoxWidth/2, y: signUpBoxYPos, width: signUpBoxWidth, height: signUpBoxHeight))
-        self.signUpBox.image = UIImage(named: "signup_box.png")
+        self.signUpBox.image = UIImage(named: signUpBoxImg)
         
         self.view.addSubview(signUpBox)
         
         self.signUpButton = UIButton()
-        self.signUpButton.setTitle("SIGN UP", forState: .Normal)
+        self.signUpButton.setTitle(signUpString, forState: .Normal)
         self.signUpButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        self.signUpButton.titleLabel?.font = UIFont(name: "Quicksand-Regular", size: 20)
+        self.signUpButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.signUpButton.frame = CGRectMake(self.view.center.x - signUpWidth/2, signUpYPos, signUpWidth, signUpHeight)
         self.signUpButton.addTarget(self, action: "signupPressed:", forControlEvents: .TouchUpInside)
         
