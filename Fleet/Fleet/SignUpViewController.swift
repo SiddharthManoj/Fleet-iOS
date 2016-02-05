@@ -48,8 +48,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
     var textFieldHeight: CGFloat = 40
     
     var nameFieldYPos: CGFloat = 310
-    var passFieldYPos: CGFloat = 360
-    var emailFieldYPos: CGFloat = 410
+    var passFieldYPos: CGFloat = 410
+    var emailFieldYPos: CGFloat = 360
     
     var signUpYPos: CGFloat = 481
     var signUpWidth: CGFloat = 260
@@ -92,7 +92,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
     var fleetName: UILabel!
     var fleetTag: UILabel!
     var loginBox: UIImageView!
-    var loginText: UITextView!
+    var loginText: UILabel!
     var nameTextField: UITextField!
     var nameLabel: UILabel!
     var namePlaceholder: NSMutableAttributedString!
@@ -203,7 +203,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
         
         self.view.addSubview(loginBox)
         
-        self.loginText = UITextView(frame: CGRect(x: self.view.center.x - loginTextWidth/2, y: loginTextYPos, width: loginTextWidth, height: loginTextHeight))
+        self.loginText = UILabel(frame: CGRect(x: self.view.center.x - loginTextWidth/2, y: loginTextYPos, width: loginTextWidth, height: loginTextHeight))
         self.loginText.attributedText = NSAttributedString(string: signUpString, attributes: [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont(name: quicksandReg, size: 21)!])
         self.loginText.backgroundColor = UIColor(white: 1, alpha: 0)
         self.loginText.textAlignment = .Center
