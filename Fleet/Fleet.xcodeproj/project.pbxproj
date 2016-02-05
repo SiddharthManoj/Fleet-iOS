@@ -32,23 +32,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A13C91D91C62E896003C1A56 /* Quicksand_Dash.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Quicksand_Dash.otf; sourceTree = "<group>"; };
-		A13C91DA1C62E896003C1A56 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.otf"; sourceTree = "<group>"; };
-		A13C91DB1C62E896003C1A56 /* Quicksand-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-BoldItalic.otf"; sourceTree = "<group>"; };
-		A13C91DC1C62E896003C1A56 /* Quicksand-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Italic.otf"; sourceTree = "<group>"; };
-		A13C91DD1C62E896003C1A56 /* Quicksand-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Light.otf"; sourceTree = "<group>"; };
-		A13C91DE1C62E896003C1A56 /* Quicksand-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-LightItalic.otf"; sourceTree = "<group>"; };
-		A13C91DF1C62E896003C1A56 /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.otf"; sourceTree = "<group>"; };
-		A13C91E81C62EA66003C1A56 /* Corbert-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Corbert-Regular.otf"; sourceTree = "<group>"; };
+		A13C91D91C62E896003C1A56 /* Quicksand_Dash.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Quicksand_Dash.otf; path = Fleet/Assets.xcassets/Quicksand_Dash.otf; sourceTree = "<group>"; };
+		A13C91DA1C62E896003C1A56 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Bold.otf"; path = "Fleet/Assets.xcassets/Quicksand-Bold.otf"; sourceTree = "<group>"; };
+		A13C91DB1C62E896003C1A56 /* Quicksand-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-BoldItalic.otf"; path = "Fleet/Assets.xcassets/Quicksand-BoldItalic.otf"; sourceTree = "<group>"; };
+		A13C91DC1C62E896003C1A56 /* Quicksand-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Italic.otf"; path = "Fleet/Assets.xcassets/Quicksand-Italic.otf"; sourceTree = "<group>"; };
+		A13C91DD1C62E896003C1A56 /* Quicksand-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Light.otf"; path = "Fleet/Assets.xcassets/Quicksand-Light.otf"; sourceTree = "<group>"; };
+		A13C91DE1C62E896003C1A56 /* Quicksand-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-LightItalic.otf"; path = "Fleet/Assets.xcassets/Quicksand-LightItalic.otf"; sourceTree = "<group>"; };
+		A13C91DF1C62E896003C1A56 /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Regular.otf"; path = "Fleet/Assets.xcassets/Quicksand-Regular.otf"; sourceTree = "<group>"; };
+		A13C91E81C62EA66003C1A56 /* Corbert-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Corbert-Regular.otf"; path = "Fleet/Assets.xcassets/Corbert-Regular.otf"; sourceTree = "<group>"; };
 		A1873DB41C64056800EE5DC6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		A1873DB61C640A9400EE5DC6 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = ../CameraViewController.swift; sourceTree = "<group>"; };
+		A1873DB61C640A9400EE5DC6 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		A1873DB81C640ACF00EE5DC6 /* VideosSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosSearchViewController.swift; sourceTree = "<group>"; };
 		A1873DBA1C640AE200EE5DC6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A1873DBC1C640AEF00EE5DC6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A1873DBE1C6441EF00EE5DC6 /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
-		A1FD7EC61C65234B00603DF6 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Video.swift; path = ../Video.swift; sourceTree = "<group>"; };
+		A1FD7EC61C65234B00603DF6 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		A1FD7EC91C65408D00603DF6 /* VideosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosTableViewCell.swift; sourceTree = "<group>"; };
-		A1FD7ECC1C654B1900603DF6 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoViewController.swift; path = ../VideoViewController.swift; sourceTree = "<group>"; };
+		A1FD7ECC1C654B1900603DF6 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		B7F34A351C60677900799BE6 /* Fleet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fleet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F34A381C60677900799BE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7F34A3D1C60677900799BE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
