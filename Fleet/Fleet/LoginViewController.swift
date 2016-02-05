@@ -150,7 +150,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     
     func loginPressed(sender: UIButton!)
     {
+        /*
         let vc = CameraViewController()
+        let modalStyle = UIModalTransitionStyle.CrossDissolve
+        vc.modalTransitionStyle = modalStyle
+        self.presentViewController(vc, animated: true, completion: nil)
+        */
+        
+        let vc = ScrollViewController()
         let modalStyle = UIModalTransitionStyle.CrossDissolve
         vc.modalTransitionStyle = modalStyle
         self.presentViewController(vc, animated: true, completion: nil)

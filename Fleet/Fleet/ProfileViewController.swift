@@ -18,11 +18,16 @@ class ProfileViewController: UIViewController, UITextFieldDelegate
     var fleetColorGreen: CGFloat = 206/255
     var fleetColorBlue: CGFloat = 177/255
     
+    var settingsYPos: CGFloat = 300
+    var settingsWidth: CGFloat = 200
+    var settingsHeight: CGFloat = 80
+    
     var quicksandReg: String = "Quicksand-Regular"
     var quicksandBold: String = "Quicksand-Bold"
     var corbertReg: String = "Corbert-Regular"
     
     var fleetTitle: String = "fleet"
+    var settingsString: String = "SETTINGS"
     
     var logoImg: String = "logo.png"
     var loginBoxImg: String = "login_box.png"
@@ -31,6 +36,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate
     // Do any additional setup after loading the view.
     
     var profileLabel: UILabel!
+    var settingsButton: UIButton!
     
     // MARK: - UIViewController methods
     
@@ -49,13 +55,36 @@ class ProfileViewController: UIViewController, UITextFieldDelegate
         self.profileLabel.backgroundColor = UIColor(white: 1, alpha: 0)
         
         self.view.addSubview(profileLabel)
+        
+        /////
+        
+        
+        _addSettingsButton()
 
         
     }
     
     // MARK: - Internal methods
     
+    func settingsPressed(sender: UIButton!)
+    {
+        let vc = SettingsViewController()
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
     
     // MARK: - Private methods
+    
+    private func _addSettingsButton()
+    {
+        self.settingsButton = UIButton()
+        self.settingsButton.setTitle(settingsString, forState: .Normal)
+        self.settingsButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.settingsButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
+        self.settingsButton.frame = CGRectMake(self.view.center.x - settingsWidth/2, settingsYPos, settingsWidth, settingsHeight)
+        self.settingsButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
+        self.settingsButton.addTarget(self, action: "settingsPressed:", forControlEvents: .TouchUpInside)
+        
+        self.view.addSubview(self.settingsButton)
+    }
     
 }

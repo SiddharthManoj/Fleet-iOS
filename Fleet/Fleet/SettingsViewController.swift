@@ -18,11 +18,16 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
     var fleetColorGreen: CGFloat = 206/255
     var fleetColorBlue: CGFloat = 177/255
     
+    var doneYPos: CGFloat = 500
+    var doneWidth: CGFloat = 200
+    var doneHeight: CGFloat = 80
+    
     var quicksandReg: String = "Quicksand-Regular"
     var quicksandBold: String = "Quicksand-Bold"
     var corbertReg: String = "Corbert-Regular"
     
     var fleetTitle: String = "fleet"
+    var doneString: String = "DONE"
     
     var logoImg: String = "logo.png"
     var loginBoxImg: String = "login_box.png"
@@ -31,6 +36,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
     // Do any additional setup after loading the view.
     
     var settingsLabel: UILabel!
+    var doneButton: UIButton!
     
     // MARK: - UIViewController methods
     
@@ -43,18 +49,40 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
         
         // quickly just for testing, will delete later
         
-        self.settingsLabel = UILabel(frame: CGRect(x: self.view.center.x - 200/2, y: 100, width: 200, height: 50))
+        self.settingsLabel = UILabel(frame: CGRect(x: self.view.center.x - 200/2, y: 100, width: 200, height: 80))
         self.settingsLabel.attributedText = NSAttributedString(string: "settings", attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: corbertReg, size: 50)!])
         self.settingsLabel.textAlignment = .Center
         self.settingsLabel.backgroundColor = UIColor(white: 1, alpha: 0)
         
         self.view.addSubview(settingsLabel)
+        
+        /////
+        
+        
+        _addDoneButton()
 
     }
     
     // MARK: - Internal methods
     
+    func donePressed(sender: UIButton!)
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     // MARK: - Private methods
+    
+    private func _addDoneButton()
+    {
+        self.doneButton = UIButton()
+        self.doneButton.setTitle(doneString, forState: .Normal)
+        self.doneButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.doneButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
+        self.doneButton.frame = CGRectMake(self.view.center.x - doneWidth/2, doneYPos, doneWidth, doneHeight)
+        self.doneButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
+        self.doneButton.addTarget(self, action: "donePressed:", forControlEvents: .TouchUpInside)
+        
+        self.view.addSubview(self.doneButton)
+    }
     
 }
