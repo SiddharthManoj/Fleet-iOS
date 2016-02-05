@@ -55,7 +55,7 @@ class ScrollViewController: UIViewController, UITextFieldDelegate
         self.scrollView.showsVerticalScrollIndicator = false
     
         let cameraVC = CameraViewController()
-        let videosVC = VideosViewController()
+        let videosVC = VideosSearchViewController()
         let profileVC = ProfileViewController()
         
         
