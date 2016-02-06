@@ -22,6 +22,7 @@
 		A1873DBB1C640AE200EE5DC6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DBA1C640AE200EE5DC6 /* ProfileViewController.swift */; };
 		A1873DBD1C640AEF00EE5DC6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DBC1C640AEF00EE5DC6 /* SettingsViewController.swift */; };
 		A1873DBF1C6441EF00EE5DC6 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DBE1C6441EF00EE5DC6 /* ScrollViewController.swift */; };
+		A1F47E8F1C65686E005EC95E /* VideoSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F47E8E1C65686E005EC95E /* VideoSearchBar.swift */; };
 		A1FD7EC71C65234B00603DF6 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD7EC61C65234B00603DF6 /* Video.swift */; };
 		A1FD7ECA1C65408D00603DF6 /* VideosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD7EC91C65408D00603DF6 /* VideosTableViewCell.swift */; };
 		A1FD7ECD1C654B1900603DF6 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD7ECC1C654B1900603DF6 /* VideoViewController.swift */; };
@@ -52,6 +53,7 @@
 		A1873DBA1C640AE200EE5DC6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A1873DBC1C640AEF00EE5DC6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A1873DBE1C6441EF00EE5DC6 /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
+		A1F47E8E1C65686E005EC95E /* VideoSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSearchBar.swift; sourceTree = "<group>"; };
 		A1FD7EC61C65234B00603DF6 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		A1FD7EC91C65408D00603DF6 /* VideosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosTableViewCell.swift; sourceTree = "<group>"; };
 		A1FD7ECC1C654B1900603DF6 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				A1FD7EC91C65408D00603DF6 /* VideosTableViewCell.swift */,
+				A1F47E8E1C65686E005EC95E /* VideoSearchBar.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				A1873DB51C64056800EE5DC6 /* SignUpViewController.swift in Sources */,
 				A1873DB71C640A9400EE5DC6 /* CameraViewController.swift in Sources */,
 				B70999AA1C6572A9003B2BB3 /* NetworkingManager.swift in Sources */,
+				A1F47E8F1C65686E005EC95E /* VideoSearchBar.swift in Sources */,
 				B7F34A4B1C606C2500799BE6 /* LoginViewController.swift in Sources */,
 				B7F34A391C60677900799BE6 /* AppDelegate.swift in Sources */,
 			);

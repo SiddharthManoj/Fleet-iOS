@@ -24,6 +24,10 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     var newBool: Bool = false
     var followBool: Bool = false
     
+    var searchActive: Bool = false
+    
+    var filtered: [Video] = []
+    
     var quicksandReg: String = "Quicksand-Regular"
     var quicksandBold: String = "Quicksand-Bold"
     var corbertReg: String = "Corbert-Regular"
@@ -48,6 +52,9 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     var hotButton: UIButton!
     var newButton: UIButton!
     var followButton: UIButton!
+    
+    var scrollBorderTop = CALayer()
+    var scrollBorderBottom = CALayer()
     
     // MARK: - UIViewController methods
     
@@ -85,6 +92,22 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {
+        
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
     }
     
@@ -240,8 +263,10 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     private func _addSearch()
     {
-        self.searchBar = UISearchBar(frame: CGRect(x: 0, y: 22, width: self.view.frame.width, height: 40))
+        self.searchBar = VideoSearchBar(frame: CGRectMake(0,22,self.view.frame.size.width,40), font: quicksandReg, textColor: UIColor.blackColor())
         self.searchBar.placeholder = "SEARCH"
+        
+        self.searchBar.delegate = self
         
         self.view.addSubview(searchBar)
     }
@@ -289,6 +314,21 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         self.scrollView.addSubview(followButton)
         
         self.scrollView.contentSize = CGSizeMake(self.hotButton.frame.width+self.newButton.frame.width+self.followButton.frame.width, 60)
+        
+        let width = CGFloat(1.0)
+        self.scrollBorderTop.borderColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1).CGColor
+        self.scrollBorderTop.frame = CGRect(x: 0, y: width, width:  scrollView.frame.size.width, height: width)
+        
+        self.scrollBorderTop.borderWidth = width
+        self.scrollView.layer.addSublayer(self.scrollBorderTop)
+        self.scrollView.layer.masksToBounds = true
+
+        self.scrollBorderBottom.borderColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1).CGColor
+        self.scrollBorderBottom.frame = CGRect(x: 0, y: scrollView.frame.size.height - width, width:  scrollView.frame.size.width, height: scrollView.frame.size.height)
+        
+        self.scrollBorderBottom.borderWidth = width
+        self.scrollView.layer.addSublayer(self.scrollBorderBottom)
+        self.scrollView.layer.masksToBounds = true
         
         self.view.addSubview(scrollView)
     }
