@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B383BD47FD8997D4C98A02D /* libPods-Fleet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F2CA0A6CE55E46B401C72B /* libPods-Fleet.a */; };
 		A13C91E01C62E896003C1A56 /* Quicksand_Dash.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91D91C62E896003C1A56 /* Quicksand_Dash.otf */; };
 		A13C91E11C62E896003C1A56 /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DA1C62E896003C1A56 /* Quicksand-Bold.otf */; };
 		A13C91E21C62E896003C1A56 /* Quicksand-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DB1C62E896003C1A56 /* Quicksand-BoldItalic.otf */; };
@@ -32,6 +33,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00F2CA0A6CE55E46B401C72B /* libPods-Fleet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fleet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		225533EADE5D50650757E24C /* Pods-Fleet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fleet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fleet/Pods-Fleet.release.xcconfig"; sourceTree = "<group>"; };
+		7EB452B85A0A0798363F1B52 /* Pods-Fleet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fleet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fleet/Pods-Fleet.debug.xcconfig"; sourceTree = "<group>"; };
 		A13C91D91C62E896003C1A56 /* Quicksand_Dash.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Quicksand_Dash.otf; path = Fleet/Assets.xcassets/Quicksand_Dash.otf; sourceTree = "<group>"; };
 		A13C91DA1C62E896003C1A56 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Bold.otf"; path = "Fleet/Assets.xcassets/Quicksand-Bold.otf"; sourceTree = "<group>"; };
 		A13C91DB1C62E896003C1A56 /* Quicksand-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-BoldItalic.otf"; path = "Fleet/Assets.xcassets/Quicksand-BoldItalic.otf"; sourceTree = "<group>"; };
@@ -49,6 +53,7 @@
 		A1FD7EC61C65234B00603DF6 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		A1FD7EC91C65408D00603DF6 /* VideosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosTableViewCell.swift; sourceTree = "<group>"; };
 		A1FD7ECC1C654B1900603DF6 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		B70999A81C656FC7003B2BB3 /* Fleet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fleet-Bridging-Header.h"; sourceTree = "<group>"; };
 		B7F34A351C60677900799BE6 /* Fleet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fleet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F34A381C60677900799BE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7F34A3D1C60677900799BE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,12 +68,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B383BD47FD8997D4C98A02D /* libPods-Fleet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		895D5E74BC9CF3A14AA2992E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				00F2CA0A6CE55E46B401C72B /* libPods-Fleet.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8DD3FBFC081C7F0078BE83A2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7EB452B85A0A0798363F1B52 /* Pods-Fleet.debug.xcconfig */,
+				225533EADE5D50650757E24C /* Pods-Fleet.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A13C91E71C62E89B003C1A56 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,9 +126,12 @@
 		B7F34A2C1C60677900799BE6 = {
 			isa = PBXGroup;
 			children = (
+				B70999A81C656FC7003B2BB3 /* Fleet-Bridging-Header.h */,
 				B7F34A371C60677900799BE6 /* Fleet */,
 				B7F34A361C60677900799BE6 /* Products */,
 				A13C91E71C62E89B003C1A56 /* Resources */,
+				8DD3FBFC081C7F0078BE83A2 /* Pods */,
+				895D5E74BC9CF3A14AA2992E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,9 +180,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B7F34A471C60677900799BE6 /* Build configuration list for PBXNativeTarget "Fleet" */;
 			buildPhases = (
+				12660BE9D9BC302BCE53BD88 /* Check Pods Manifest.lock */,
 				B7F34A311C60677900799BE6 /* Sources */,
 				B7F34A321C60677900799BE6 /* Frameworks */,
 				B7F34A331C60677900799BE6 /* Resources */,
+				6679F7725AA02396B6BA25C1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -220,6 +248,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		12660BE9D9BC302BCE53BD88 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6679F7725AA02396B6BA25C1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Fleet/Pods-Fleet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B7F34A311C60677900799BE6 /* Sources */ = {
@@ -345,23 +406,27 @@
 		};
 		B7F34A481C60677900799BE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7EB452B85A0A0798363F1B52 /* Pods-Fleet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Fleet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fleet.Fleet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fleet-Bridging-Header.h";
 			};
 			name = Debug;
 		};
 		B7F34A491C60677900799BE6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 225533EADE5D50650757E24C /* Pods-Fleet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Fleet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fleet.Fleet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fleet-Bridging-Header.h";
 			};
 			name = Release;
 		};
