@@ -45,6 +45,7 @@ class VideoSearchBar: UISearchBar
             
             searchField.font = preferredFont
             searchField.textColor = preferredTextColor
+            searchField.clearButtonMode = .Always
             
             searchField.backgroundColor = UIColor(white: 1, alpha: 1)
             

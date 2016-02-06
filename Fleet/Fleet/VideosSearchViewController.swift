@@ -92,23 +92,39 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {
-        
+        searchActive = true
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        
+    func searchBarTextDidEndEditing(searchBar: UISearchBar)
+    {
+        searchActive = false
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        
+    func searchBarCancelButtonClicked(searchBar: UISearchBar)
+    {
+        searchActive = false
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        
+    func searchBarSearchButtonClicked(searchBar: UISearchBar)
+    {
+        searchActive = false
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        filtered = currentVideos.filter({ (video) -> Bool in
+            let tmpVideo: Video = video
+            let tmpTitle = tmpVideo.title
+            let range = tmpTitle.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range != nil
+        })
+        if filtered.count == 0 {
+            searchActive = false
+        }
+        else {
+            searchActive = true
+        }
+        self.tableView.reloadData()
     }
     
     // MARK: - UITableView methods
@@ -119,6 +135,9 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        if searchActive {
+            return filtered.count
+        }
         return currentVideos.count
     }
     
@@ -132,20 +151,15 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
             cell.backgroundColor = UIColor(white: 0.98, alpha: 1)
         }
         
-        cell.title.text = currentVideos[indexPath.row].title
-        cell.user.text = currentVideos[indexPath.row].user
-        
-        if currentVideos[indexPath.row].timeRemaining < 10 {
-            cell.timer.image = UIImage(named: "red_timer.png")
-        }
-        else if currentVideos[indexPath.row].timeRemaining < 20 {
-            cell.timer.image = UIImage(named: "orange_timer.png")
-        }
-        else if currentVideos[indexPath.row].timeRemaining < 30 {
-            cell.timer.image = UIImage(named: "yellow_timer.png")
+        if searchActive {
+            cell.title.text = filtered[indexPath.row].title
+            cell.user.text = filtered[indexPath.row].user
+            _addTimers(filtered, cell: cell, indexPath: indexPath)
         }
         else {
-            cell.timer.image = UIImage(named: "green_timer.png")
+            cell.title.text = currentVideos[indexPath.row].title
+            cell.user.text = currentVideos[indexPath.row].user
+            _addTimers(currentVideos, cell: cell, indexPath: indexPath)
         }
 
         return cell
@@ -258,6 +272,21 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
             self.hotButton.alpha = 0.4
             self.newButton.alpha = 0.4
             self.followButton.alpha = 1
+        }
+    }
+    
+    private func _addTimers(videos: [Video], cell: VideosTableViewCell, indexPath: NSIndexPath) {
+        if videos[indexPath.row].timeRemaining < 10 {
+            cell.timer.image = UIImage(named: "red_timer.png")
+        }
+        else if videos[indexPath.row].timeRemaining < 20 {
+            cell.timer.image = UIImage(named: "orange_timer.png")
+        }
+        else if videos[indexPath.row].timeRemaining < 30 {
+            cell.timer.image = UIImage(named: "yellow_timer.png")
+        }
+        else {
+            cell.timer.image = UIImage(named: "green_timer.png")
         }
     }
     
