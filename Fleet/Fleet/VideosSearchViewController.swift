@@ -346,14 +346,14 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         
         let width = CGFloat(1.0)
         self.scrollBorderTop.borderColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1).CGColor
-        self.scrollBorderTop.frame = CGRect(x: 0, y: width, width:  scrollView.frame.size.width, height: width)
+        self.scrollBorderTop.frame = CGRect(x: 0, y: width, width:  scrollView.contentSize.width, height: width)
         
         self.scrollBorderTop.borderWidth = width
         self.scrollView.layer.addSublayer(self.scrollBorderTop)
         self.scrollView.layer.masksToBounds = true
 
         self.scrollBorderBottom.borderColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1).CGColor
-        self.scrollBorderBottom.frame = CGRect(x: 0, y: scrollView.frame.size.height - width, width:  scrollView.frame.size.width, height: scrollView.frame.size.height)
+        self.scrollBorderBottom.frame = CGRect(x: 0, y: scrollView.frame.size.height - width, width:  scrollView.contentSize.width, height: scrollView.frame.size.height)
         
         self.scrollBorderBottom.borderWidth = width
         self.scrollView.layer.addSublayer(self.scrollBorderBottom)
