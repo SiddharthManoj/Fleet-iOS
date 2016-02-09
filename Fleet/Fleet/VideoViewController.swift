@@ -22,6 +22,8 @@ class VideoViewController: UIViewController {
     var doneWidth: CGFloat = 200
     var doneHeight: CGFloat = 80
     
+    var numBars: Int = 40
+    
     var quicksandReg: String = "Quicksand-Regular"
     var quicksandBold: String = "Quicksand-Bold"
     var corbertReg: String = "Corbert-Regular"
@@ -39,11 +41,19 @@ class VideoViewController: UIViewController {
     var videoLabel: UILabel!
     var doneButton: UIButton!
     
-    var focusView: UIView!
+    var focusView: UIImageView!
     var focusTouch: UITapGestureRecognizer!
     var focusLocation: CGPoint!
     
     var gradient: CGGradientRef!
+    
+    var timelineBars: [UIImageView]!
+    
+    var timelineBarHeights: [CGFloat]!
+    
+    var counter: Int!
+    
+    var timerSpeed: NSTimeInterval = 0.4
     
     
     // MARK: - UIViewController methods
@@ -65,10 +75,19 @@ class VideoViewController: UIViewController {
         
         self.view.addSubview(videoLabel)
         
+        self.counter = 1
+        
         _addDoneButton()
         _addFocusView()
         _addTapGesture()
+        _setHeights()
+        _addTimeline()
+        _addTimer()
 
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     // MARK: - Internal methods
@@ -92,6 +111,16 @@ class VideoViewController: UIViewController {
         
     }
     
+    func countSec(sender: NSTimer!)
+    {
+        for bar in self.timelineBars {
+            UIView.animateWithDuration(1, animations: {
+                bar.frame = CGRect(x: bar.frame.origin.x, y: -5, width: 5, height: max(CGFloat(45 - abs(self.timelineBars.indexOf(bar)! - self.counter)*5), 25))
+            })
+        }
+        self.counter = self.counter + 1
+    }
+    
     // MARK: - Private methods
     
     private func _addDoneButton()
@@ -109,8 +138,8 @@ class VideoViewController: UIViewController {
     
     private func _addFocusView()
     {
-        self.focusView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-        self.focusView.backgroundColor = UIColor.redColor()
+        self.focusView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        self.focusView.image = UIImage(named: "china_background")
         self.view.addSubview(focusView)
     }
     
@@ -193,6 +222,33 @@ class VideoViewController: UIViewController {
     {
         //self.focusTouch = UITapGestureRecognizer(target: self, action: "focusTapped:")
         //self.view.addGestureRecognizer(focusTouch)
+    }
+    
+    private func _addTimeline()
+    {
+        self.timelineBars = [UIImageView]()
+        self.timelineBars.removeAll()
+        for i in 0...(numBars+1) {
+            let newBar = UIImageView(frame: CGRect(x:Int(self.view.frame.width)/numBars * i, y: -5, width: 5, height: Int(self.timelineBarHeights[i])))
+            newBar.image = UIImage(named: "time_bar.png")
+            newBar.alpha = 0.9
+            self.timelineBars.append(newBar)
+            self.view.addSubview(self.timelineBars[i])
+        }
+    }
+    
+    private func _setHeights()
+    {
+        self.timelineBarHeights = [45, 40, 35, 30]
+        for _ in 0...(numBars - 3) {
+            self.timelineBarHeights.append(25)
+        }
+        print(self.timelineBarHeights.count)
+    }
+    
+    private func _addTimer()
+    {
+        _ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: "countSec:", userInfo: nil, repeats: true)
     }
 
     
