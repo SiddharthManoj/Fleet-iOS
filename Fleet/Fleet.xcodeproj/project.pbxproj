@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B383BD47FD8997D4C98A02D /* libPods-Fleet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F2CA0A6CE55E46B401C72B /* libPods-Fleet.a */; };
+		A115BBFE1C69C18300F3C784 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115BBFD1C69C18300F3C784 /* GradientView.swift */; };
 		A13C91E01C62E896003C1A56 /* Quicksand_Dash.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91D91C62E896003C1A56 /* Quicksand_Dash.otf */; };
 		A13C91E11C62E896003C1A56 /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DA1C62E896003C1A56 /* Quicksand-Bold.otf */; };
 		A13C91E21C62E896003C1A56 /* Quicksand-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DB1C62E896003C1A56 /* Quicksand-BoldItalic.otf */; };
@@ -39,6 +40,8 @@
 		00F2CA0A6CE55E46B401C72B /* libPods-Fleet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fleet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		225533EADE5D50650757E24C /* Pods-Fleet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fleet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fleet/Pods-Fleet.release.xcconfig"; sourceTree = "<group>"; };
 		7EB452B85A0A0798363F1B52 /* Pods-Fleet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fleet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fleet/Pods-Fleet.debug.xcconfig"; sourceTree = "<group>"; };
+		A115BBFC1C69C18300F3C784 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		A115BBFD1C69C18300F3C784 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		A13C91D91C62E896003C1A56 /* Quicksand_Dash.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Quicksand_Dash.otf; path = Fleet/Assets.xcassets/Quicksand_Dash.otf; sourceTree = "<group>"; };
 		A13C91DA1C62E896003C1A56 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Bold.otf"; path = "Fleet/Assets.xcassets/Quicksand-Bold.otf"; sourceTree = "<group>"; };
 		A13C91DB1C62E896003C1A56 /* Quicksand-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-BoldItalic.otf"; path = "Fleet/Assets.xcassets/Quicksand-BoldItalic.otf"; sourceTree = "<group>"; };
@@ -96,6 +99,15 @@
 				225533EADE5D50650757E24C /* Pods-Fleet.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A115BBFF1C69C18900F3C784 /* gradient */ = {
+			isa = PBXGroup;
+			children = (
+				A115BBFC1C69C18300F3C784 /* GradientView.h */,
+				A115BBFD1C69C18300F3C784 /* GradientView.swift */,
+			);
+			name = gradient;
 			sourceTree = "<group>";
 		};
 		A13C91E71C62E89B003C1A56 /* Resources */ = {
@@ -159,6 +171,7 @@
 				B7F34A4C1C606C2900799BE6 /* ViewControllers */,
 				A1FD7ECB1C65409600603DF6 /* Views */,
 				A1FD7EC81C65237000603DF6 /* Models */,
+				A115BBFF1C69C18900F3C784 /* gradient */,
 				B7F34A3C1C60677900799BE6 /* Main.storyboard */,
 				B7F34A3F1C60677900799BE6 /* Assets.xcassets */,
 				B7F34A411C60677900799BE6 /* LaunchScreen.storyboard */,
@@ -298,6 +311,7 @@
 			files = (
 				A1873DBB1C640AE200EE5DC6 /* ProfileViewController.swift in Sources */,
 				A1873DB91C640ACF00EE5DC6 /* VideosSearchViewController.swift in Sources */,
+				A115BBFE1C69C18300F3C784 /* GradientView.swift in Sources */,
 				A1873DBD1C640AEF00EE5DC6 /* SettingsViewController.swift in Sources */,
 				A1873DBF1C6441EF00EE5DC6 /* ScrollViewController.swift in Sources */,
 				A1FD7EC71C65234B00603DF6 /* Video.swift in Sources */,
