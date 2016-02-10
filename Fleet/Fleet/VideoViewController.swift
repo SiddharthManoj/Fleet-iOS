@@ -243,7 +243,6 @@ class VideoViewController: UIViewController {
         for _ in 0...(numBars - 3) {
             self.timelineBarHeights.append(25)
         }
-        print(self.timelineBarHeights.count)
     }
     
     private func _addTimer()
@@ -251,5 +250,4 @@ class VideoViewController: UIViewController {
         _ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: "countSec:", userInfo: nil, repeats: true)
     }
 
-    
 }
