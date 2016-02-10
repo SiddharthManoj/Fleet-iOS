@@ -212,7 +212,6 @@ public class GradientView: UIView {
         let colors = myColors
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let colorSpaceModel = CGColorSpaceGetModel(colorSpace)
         
         if let locations = locations {
             gradient = CGGradientCreateWithColors(colorSpace, colors, locations)

@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import MobileCoreServices
+import MediaPlayer
+import AVFoundation
 
-class ScrollViewController: UIViewController, UITextFieldDelegate
+class ScrollViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     var bgColorRed: CGFloat = 255/255
     var bgColorGreen: CGFloat = 255/255
@@ -53,15 +56,11 @@ class ScrollViewController: UIViewController, UITextFieldDelegate
         self.scrollView.bounces = false
         self.scrollView.showsHorizontalScrollIndicator = false
         self.scrollView.showsVerticalScrollIndicator = false
-    
-        let cameraVC = CameraViewController()
+        
+        _addCameraSubview()
+        
         let videosVC = VideosSearchViewController()
         let profileVC = ProfileViewController()
-        
-        
-        self.addChildViewController(cameraVC)
-        self.scrollView.addSubview(cameraVC.view)
-        cameraVC.didMoveToParentViewController(self)
         
         var videosFrame = videosVC.view.frame
         videosFrame.origin.x = self.view.frame.size.width
@@ -83,9 +82,68 @@ class ScrollViewController: UIViewController, UITextFieldDelegate
         
         self.view = self.scrollView
         
+    }
+    
+    func _addCameraSubview() {
+        let cameraController = CameraViewController()
         
         
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) == true {
+            cameraController.sourceType = .Camera
+            cameraController.mediaTypes = [kUTTypeMovie as String]
+            cameraController.allowsEditing = false
+            cameraController.delegate = self
+            
+            //presentViewController(cameraController, animated: true, completion: nil)
+            self.addChildViewController(cameraController)
+            self.scrollView.addSubview(cameraController.view)
+            cameraController.didMoveToParentViewController(self)
+        }
         
+        
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let mediaType = info[UIImagePickerControllerMediaType] as! NSString
+        //dismissViewControllerAnimated(true, completion: nil)
+        // Handle a movie capture
+        if mediaType == kUTTypeMovie {
+            let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path
+            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {
+                UISaveVideoAtPathToSavedPhotosAlbum(path!, self, "video:didFinishSavingWithError:contextInfo:", nil)
+            }
+        }
+    }
+    
+    func video(videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject)
+    {
+        /*
+        var title = "Success"
+        var message = "Video was saved"
+        
+        if let _ = error {
+        title = "Error"
+        message = "Video failed to save"
+        }
+        */
+        /*
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
+        */
+        /*
+        let vc = ScrollViewController()
+        let modalStyle = UIModalTransitionStyle.CrossDissolve
+        vc.modalTransitionStyle = modalStyle
+        self.presentViewController(vc, animated: true, completion: {
+        
+        })
+        */
+        
+        //startCameraFromViewController(self, withDelegate: self)
+        //print(self.scrollView.subviews)
+        self.scrollView.subviews[0].removeFromSuperview()
+        _addCameraSubview()
     }
     
 }

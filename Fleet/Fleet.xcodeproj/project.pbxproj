@@ -18,11 +18,13 @@
 		A13C91E61C62E896003C1A56 /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91DF1C62E896003C1A56 /* Quicksand-Regular.otf */; };
 		A13C91E91C62EA66003C1A56 /* Corbert-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A13C91E81C62EA66003C1A56 /* Corbert-Regular.otf */; };
 		A1873DB51C64056800EE5DC6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DB41C64056800EE5DC6 /* SignUpViewController.swift */; };
-		A1873DB71C640A9400EE5DC6 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DB61C640A9400EE5DC6 /* CameraViewController.swift */; };
+		A1873DB71C640A9400EE5DC6 /* Camera3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DB61C640A9400EE5DC6 /* Camera3ViewController.swift */; };
 		A1873DB91C640ACF00EE5DC6 /* VideosSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DB81C640ACF00EE5DC6 /* VideosSearchViewController.swift */; };
 		A1873DBB1C640AE200EE5DC6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DBA1C640AE200EE5DC6 /* ProfileViewController.swift */; };
 		A1873DBD1C640AEF00EE5DC6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DBC1C640AEF00EE5DC6 /* SettingsViewController.swift */; };
 		A1873DBF1C6441EF00EE5DC6 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1873DBE1C6441EF00EE5DC6 /* ScrollViewController.swift */; };
+		A188464B1C6ABFA1001DB412 /* VideoInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A188464A1C6ABFA1001DB412 /* VideoInfoViewController.swift */; };
+		A188464D1C6AC063001DB412 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A188464C1C6AC063001DB412 /* CameraViewController.swift */; };
 		A1F47E8F1C65686E005EC95E /* VideoSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F47E8E1C65686E005EC95E /* VideoSearchBar.swift */; };
 		A1FD7EC71C65234B00603DF6 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD7EC61C65234B00603DF6 /* Video.swift */; };
 		A1FD7ECA1C65408D00603DF6 /* VideosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD7EC91C65408D00603DF6 /* VideosTableViewCell.swift */; };
@@ -51,11 +53,13 @@
 		A13C91DF1C62E896003C1A56 /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Regular.otf"; path = "Fleet/Assets.xcassets/Quicksand-Regular.otf"; sourceTree = "<group>"; };
 		A13C91E81C62EA66003C1A56 /* Corbert-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Corbert-Regular.otf"; path = "Fleet/Assets.xcassets/Corbert-Regular.otf"; sourceTree = "<group>"; };
 		A1873DB41C64056800EE5DC6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		A1873DB61C640A9400EE5DC6 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		A1873DB61C640A9400EE5DC6 /* Camera3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera3ViewController.swift; sourceTree = "<group>"; };
 		A1873DB81C640ACF00EE5DC6 /* VideosSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosSearchViewController.swift; sourceTree = "<group>"; };
 		A1873DBA1C640AE200EE5DC6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A1873DBC1C640AEF00EE5DC6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A1873DBE1C6441EF00EE5DC6 /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
+		A188464A1C6ABFA1001DB412 /* VideoInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoInfoViewController.swift; sourceTree = "<group>"; };
+		A188464C1C6AC063001DB412 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		A1F47E8E1C65686E005EC95E /* VideoSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSearchBar.swift; sourceTree = "<group>"; };
 		A1FD7EC61C65234B00603DF6 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		A1FD7EC91C65408D00603DF6 /* VideosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosTableViewCell.swift; sourceTree = "<group>"; };
@@ -186,7 +190,9 @@
 				B7F34A4A1C606C2500799BE6 /* LoginViewController.swift */,
 				A1873DB41C64056800EE5DC6 /* SignUpViewController.swift */,
 				A1873DBE1C6441EF00EE5DC6 /* ScrollViewController.swift */,
-				A1873DB61C640A9400EE5DC6 /* CameraViewController.swift */,
+				A188464C1C6AC063001DB412 /* CameraViewController.swift */,
+				A1873DB61C640A9400EE5DC6 /* Camera3ViewController.swift */,
+				A188464A1C6ABFA1001DB412 /* VideoInfoViewController.swift */,
 				A1873DB81C640ACF00EE5DC6 /* VideosSearchViewController.swift */,
 				A1FD7ECC1C654B1900603DF6 /* VideoViewController.swift */,
 				A1873DBA1C640AE200EE5DC6 /* ProfileViewController.swift */,
@@ -311,6 +317,7 @@
 			files = (
 				A1873DBB1C640AE200EE5DC6 /* ProfileViewController.swift in Sources */,
 				A1873DB91C640ACF00EE5DC6 /* VideosSearchViewController.swift in Sources */,
+				A188464D1C6AC063001DB412 /* CameraViewController.swift in Sources */,
 				A115BBFE1C69C18300F3C784 /* GradientView.swift in Sources */,
 				A1873DBD1C640AEF00EE5DC6 /* SettingsViewController.swift in Sources */,
 				A1873DBF1C6441EF00EE5DC6 /* ScrollViewController.swift in Sources */,
@@ -319,7 +326,8 @@
 				A1FD7ECD1C654B1900603DF6 /* VideoViewController.swift in Sources */,
 				B70999AC1C65730E003B2BB3 /* CredentialStore.swift in Sources */,
 				A1873DB51C64056800EE5DC6 /* SignUpViewController.swift in Sources */,
-				A1873DB71C640A9400EE5DC6 /* CameraViewController.swift in Sources */,
+				A188464B1C6ABFA1001DB412 /* VideoInfoViewController.swift in Sources */,
+				A1873DB71C640A9400EE5DC6 /* Camera3ViewController.swift in Sources */,
 				B70999AA1C6572A9003B2BB3 /* NetworkingManager.swift in Sources */,
 				A1F47E8F1C65686E005EC95E /* VideoSearchBar.swift in Sources */,
 				B7F34A4B1C606C2500799BE6 /* LoginViewController.swift in Sources */,
