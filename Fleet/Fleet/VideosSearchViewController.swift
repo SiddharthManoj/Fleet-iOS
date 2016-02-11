@@ -152,9 +152,11 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         }
         
         if searchActive {
-            cell.title.text = filtered[indexPath.row].title
-            cell.user.text = filtered[indexPath.row].user
-            _addTimers(filtered, cell: cell, indexPath: indexPath)
+            if !filtered.isEmpty {
+                cell.title.text = filtered[indexPath.row].title
+                cell.user.text = filtered[indexPath.row].user
+                _addTimers(filtered, cell: cell, indexPath: indexPath)
+            }
         }
         else {
             cell.title.text = currentVideos[indexPath.row].title
