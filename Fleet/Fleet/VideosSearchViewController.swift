@@ -88,6 +88,19 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.searchBar.endEditing(true)
+        self.searchBar.resignFirstResponder()
+        super.touchesBegan(touches, withEvent: event)
+    }
+    
+    // MARK: - UITextField methods
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.searchBar.resignFirstResponder()
+        return true
+    }
+    
     // MARK: - UISearchBar methods
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
@@ -103,11 +116,16 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     func searchBarCancelButtonClicked(searchBar: UISearchBar)
     {
         searchActive = false
+        self.searchBar.resignFirstResponder()
+        self.searchBar.endEditing(true)
+        self.view.endEditing(true)
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
         searchActive = false
+        self.searchBar.resignFirstResponder()
+        self.view.endEditing(true)
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)

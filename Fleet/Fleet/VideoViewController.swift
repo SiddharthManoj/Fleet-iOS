@@ -90,6 +90,18 @@ class VideoViewController: UIViewController {
         return true
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+        super.touchesBegan(touches, withEvent: event)
+    }
+    
+    // MARK: - UITextField methods
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     // MARK: - Internal methods
     
     func donePressed(sender: UIButton!)
@@ -102,6 +114,7 @@ class VideoViewController: UIViewController {
         self.focusView.backgroundColor = UIColor(white: 0, alpha: 1)
     }
     
+    /*
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let touch = touches.first {
             self.focusLocation = touch.locationInView(focusView)
@@ -110,6 +123,7 @@ class VideoViewController: UIViewController {
         super.touchesBegan(touches, withEvent: event)
         
     }
+    */
     
     func countSec(sender: NSTimer!)
     {

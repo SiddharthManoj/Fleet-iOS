@@ -120,6 +120,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         _addSignUpButton()
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+        super.touchesBegan(touches, withEvent: event)
+    }
+    
+    // MARK: - UITextField methods
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     // MARK: - Internal methods
     
     func namePressed(sender: UITextField!)
