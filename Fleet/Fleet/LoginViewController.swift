@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate
+class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate
 {
     var bgColorRed: CGFloat = 255/255
     var bgColorGreen: CGFloat = 255/255
@@ -33,39 +33,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     var fleetTagWidth: CGFloat = 274
     var fleetTagHeight: CGFloat = 40
     
-    var loginBoxXPos: CGFloat = 116
-    var loginBoxYPos: CGFloat = 220
-    var loginBoxWidth: CGFloat = 140
-    var loginBoxHeight: CGFloat = 40
-    
-    var loginTextXPos: CGFloat = 116
-    var loginTextYPos: CGFloat = 220
-    var loginTextWidth: CGFloat = 100
-    var loginTextHeight: CGFloat = 40
-    
-    var textFieldXPos: CGFloat = 80
-    var textFieldWidth: CGFloat = 300
-    var textFieldHeight: CGFloat = 40
-    
-    var nameFieldYPos: CGFloat = 310
-    var passFieldYPos: CGFloat = 360
-    
-    var signUpYPos: CGFloat = 481
-    var signUpWidth: CGFloat = 260
-    var signUpHeight: CGFloat = 50
-    
-    var signUpBoxXPos: CGFloat = 116
-    var signUpBoxYPos: CGFloat = 485
-    var signUpBoxWidth: CGFloat = 253
-    var signUpBoxHeight: CGFloat = 42
-    
     var loginWidth: CGFloat = 320
     var loginHeight: CGFloat = 50
-    var loginYOffset: CGFloat = 260
-    
-    var signUpQuestionYPos: CGFloat = 444
-    var signUpQuestionWidth: CGFloat = 200
-    var signUpQuestionHeight: CGFloat = 50
+    var loginYOffset: CGFloat = 400
     
     var quicksandReg: String = "Quicksand-Regular"
     var quicksandBold: String = "Quicksand-Bold"
@@ -75,49 +45,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate
     var fleetTagString: String = "see the world. as it happens."
     var loginQuestionString: String = "new to fleet?"
     
-    var signUpString: String = "SIGN UP"
-    var loginString: String = "LOG IN"
-    
-    var nameString: String = "NAME"
-    var passwordString: String = "PASSWORD"
-    
     var logoImg: String = "logo.png"
-    var loginBoxImg: String = "login_box.png"
-    var signUpBoxImg: String = "signup_box.png"
     
     // Do any additional setup after loading the view.
     var fleetLogo: UIImageView!
     var fleetName: UILabel!
     var fleetTag: UILabel!
-    var loginBox: UIImageView!
-    var loginText: UILabel!
-    var nameTextField: UITextField!
-    var nameLabel: UILabel!
-    var namePlaceholder: NSMutableAttributedString!
-    var passTextField: UITextField!
-    var passLabel: UILabel!
-    var loginButton: UIButton!
-    var signUpButton: UIButton!
-    var signUpBox: UIImageView!
     
-    var nameBorder = CALayer()
-    var passBorder = CALayer()
-
     // MARK: - UIViewController methods
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        let bgColor = UIColor(red: bgColorRed, green: bgColorGreen, blue: bgColorBlue, alpha: 1)
-        self.view.backgroundColor = bgColor
-        
-        _addFleetHeading()
-        _addLoginBox()
-        _addNameTextField()
-        _addPassTextField()
-        _addLoginButton()
-        _addSignUpButton()
+        if (FBSDKAccessToken.currentAccessToken() != nil) {
+            // User is already logged in
+            let vc = ScrollViewController()
+            let modalStyle = UIModalTransitionStyle.FlipHorizontal
+            vc.modalTransitionStyle = modalStyle
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+        else {
+            let bgColor = UIColor(red: bgColorRed, green: bgColorGreen, blue: bgColorBlue, alpha: 1)
+            self.view.backgroundColor = bgColor
+            
+            _addFleetHeading()
+            _addFBLoginButton()
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -132,49 +86,63 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         return true
     }
     
+    // MARK: - FB Delegate Methods
+    
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!)
+    {
+        print("User Logged In")
+        
+        if ((error) != nil)
+        {
+            // Process error
+        }
+        else if result.isCancelled {
+            // Handle cancellations
+        }
+        else {
+            // If you ask for multiple permissions at once, you
+            // should check if specific permissions missing
+            if result.grantedPermissions.contains("email")
+            {
+                // Do work
+                let vc = ScrollViewController()
+                let modalStyle = UIModalTransitionStyle.FlipHorizontal
+                vc.modalTransitionStyle = modalStyle
+                self.presentViewController(vc, animated: true, completion: nil)
+                
+                //SEND result.token TO SERVER --- MUST IMPLEMENT
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!)
+    {
+        print("User Logged Out")
+    }
+    
+    func returnUserData()
+    {
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+            
+            if ((error) != nil)
+            {
+                // Process error
+                print("Error: \(error)")
+            }
+            else
+            {
+                print("fetched user: \(result)")
+                let userName : NSString = result.valueForKey("name") as! NSString
+                print("User Name is: \(userName)")
+                let userEmail : NSString = result.valueForKey("email") as! NSString
+                print("User Email is: \(userEmail)")
+            }
+        })
+    }
+    
     // MARK: - Internal methods
     
-    func namePressed(sender: UITextField!)
-    {
-        UIView.animateWithDuration(0.5, animations: {
-            self.nameLabel.center = CGPointMake(22, 20)
-            self.nameLabel.alpha = 1
-            self.nameBorder.borderColor = UIColor(white: 0, alpha: 1).CGColor
-        })
-    }
-    
-    func passPressed(sender: UITextField!)
-    {
-        UIView.animateWithDuration(0.5, animations: {
-            self.passLabel.center = CGPointMake(45, 20)
-            self.passLabel.alpha = 1
-            self.passBorder.borderColor = UIColor(white: 0, alpha: 1).CGColor
-        })
-    }
-    
-    func signupPressed(sender: UIButton!)
-    {
-        let vc = SignUpViewController()
-        let modalStyle = UIModalTransitionStyle.FlipHorizontal
-        vc.modalTransitionStyle = modalStyle
-        self.presentViewController(vc, animated: true, completion: nil)
-    }
-    
-    func loginPressed(sender: UIButton!)
-    {
-        /*
-        let vc = CameraViewController()
-        let modalStyle = UIModalTransitionStyle.CrossDissolve
-        vc.modalTransitionStyle = modalStyle
-        self.presentViewController(vc, animated: true, completion: nil)
-        */
-        
-        let vc = ScrollViewController()
-        let modalStyle = UIModalTransitionStyle.CrossDissolve
-        vc.modalTransitionStyle = modalStyle
-        self.presentViewController(vc, animated: true, completion: nil)
-    }
-
     // MARK: - Private methods
     
     private func _addFleetHeading()
@@ -204,138 +172,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate
         
     }
     
-    private func _addLoginBox()
+    private func _addFBLoginButton()
     {
-        self.loginBox = UIImageView(frame: CGRect(x: loginBoxXPos, y: loginBoxYPos, width: loginBoxWidth, height: loginBoxHeight))
-        self.loginBox.image = UIImage(named: loginBoxImg)
-        
-        self.view.addSubview(loginBox)
-        
-        self.loginText = UILabel(frame: CGRect(x: self.view.center.x - loginTextWidth/2, y: loginTextYPos, width: loginTextWidth, height: loginTextHeight))
-        self.loginText.attributedText = NSAttributedString(string: loginString, attributes: [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont(name: quicksandReg, size: 21)!])
-        self.loginText.backgroundColor = UIColor(white: 1, alpha: 0)
-        self.loginText.textAlignment = .Center
-        
-        self.view.addSubview(loginText)
-    }
-    
-    private func _addNameTextField()
-    {
-        self.nameTextField = UITextField(frame: CGRect(x: self.view.center.x - textFieldWidth/2, y: nameFieldYPos, width: textFieldWidth, height: textFieldHeight))
-        self.nameTextField.font = UIFont(name: quicksandReg, size: 16)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = NSTextAlignment.Center
-        
-        let passPlaceholder = NSAttributedString(string: nameString, attributes: [
-            NSForegroundColorAttributeName : UIColor(white: 0, alpha: 1),
-            NSFontAttributeName : UIFont(name: quicksandReg, size: 16)!
-            ])
-        
-        self.nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
-        self.nameLabel.attributedText = passPlaceholder
-        self.nameLabel.textAlignment = .Center
-        self.nameLabel.alpha = 0.5
-        self.nameLabel.center = CGPointMake(self.nameTextField.frame.width/2, self.nameTextField.frame.height/2)
-        
-        self.nameTextField.addSubview(nameLabel)
-
-        self.nameTextField.textColor = UIColor.blackColor()
-        self.nameTextField.delegate = self
-
-        let width = CGFloat(1.0)
-        self.nameBorder.borderColor = UIColor(white: 0, alpha: 0.3).CGColor
-        self.nameBorder.frame = CGRect(x: 0, y: nameTextField.frame.size.height - width, width:  nameTextField.frame.size.width, height: nameTextField.frame.size.height)
-        
-        self.nameBorder.borderWidth = width
-        self.nameTextField.layer.addSublayer(self.nameBorder)
-        self.nameTextField.layer.masksToBounds = true
-        
-        nameTextField.leftViewMode = UITextFieldViewMode.Always
-        nameTextField.leftView = UIView(frame: CGRectMake(0,0,110,10))
-        
-        self.nameTextField.addTarget(self, action: "namePressed:", forControlEvents: .TouchDown)
-        
-        self.view.addSubview(nameTextField)
-    }
-    
-    private func _addPassTextField()
-    {
-        self.passTextField = UITextField(frame: CGRect(x: self.view.center.x - textFieldWidth/2, y: passFieldYPos, width: textFieldWidth, height: textFieldHeight))
-        self.passTextField.font = UIFont(name: quicksandReg, size: 16)
-        let passPlaceholder = NSAttributedString(string: passwordString, attributes: [
-            NSForegroundColorAttributeName : UIColor(white: 0, alpha: 1),
-            NSFontAttributeName : UIFont(name: quicksandReg, size: 16)!
-            ])
-        //self.passTextField.attributedPlaceholder = passPlaceholder
-        
-        self.passLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
-        self.passLabel.attributedText = passPlaceholder
-        self.passLabel.textAlignment = .Center
-        self.passLabel.alpha = 0.5
-        self.passLabel.center = CGPointMake(self.passTextField.frame.width/2, self.passTextField.frame.height/2)
-        
-        self.passTextField.addSubview(passLabel)
-        
-        self.passTextField.textColor = UIColor.blackColor()
-        self.passTextField.secureTextEntry = true
-        self.passTextField.delegate = self
-
-        let width = CGFloat(1.0)
-        self.passBorder.borderColor = UIColor(white: 0, alpha: 0.3).CGColor
-        self.passBorder.frame = CGRect(x: 0, y: passTextField.frame.size.height - width, width:  passTextField.frame.size.width, height: passTextField.frame.size.height)
-        
-        self.passBorder.borderWidth = width
-        passTextField.layer.addSublayer(self.passBorder)
-        passTextField.layer.masksToBounds = true
-        
-        passTextField.leftViewMode = UITextFieldViewMode.Always
-        passTextField.leftView = UIView(frame: CGRectMake(0,0,110,10))
-        
-        self.passTextField.addTarget(self, action: "passPressed:", forControlEvents: .TouchDown)
-        
-        self.view.addSubview(self.passTextField)
-    }
-    
-    private func _addLoginButton()
-    {
-        self.loginButton = UIButton()
-        self.loginButton.setTitle(loginString, forState: .Normal)
-        self.loginButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.loginButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
-        self.loginButton.frame = CGRectMake(self.view.center.x - loginWidth/2, self.view.center.y + loginYOffset, loginWidth, loginHeight)
-        self.loginButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
-        self.loginButton.addTarget(self, action: "loginPressed:", forControlEvents: .TouchUpInside)
-        
-        self.view.addSubview(self.loginButton)
-    }
-    
-    private func _addSignUpButton()
-    {
-        let signUpQuestionLabel = UILabel(frame: CGRect(x: self.view.center.x - signUpQuestionWidth/2, y: signUpQuestionYPos, width: signUpQuestionWidth, height: signUpQuestionHeight))
-        
-        let signUpQuestionText = NSMutableAttributedString(string: loginQuestionString, attributes: [
-            NSForegroundColorAttributeName: UIColor.blackColor(),
-            NSFontAttributeName: UIFont(name: quicksandReg, size: 18)!,
-            ])
-
-        signUpQuestionLabel.attributedText = signUpQuestionText
-        signUpQuestionLabel.textAlignment = .Center
-        signUpQuestionLabel.backgroundColor = UIColor(white: 1, alpha: 0)
-        
-        self.view.addSubview(signUpQuestionLabel)
-        
-        self.signUpBox = UIImageView(frame: CGRect(x: self.view.center.x - signUpBoxWidth/2, y: signUpBoxYPos, width: signUpBoxWidth, height: signUpBoxHeight))
-        self.signUpBox.image = UIImage(named: signUpBoxImg)
-        
-        self.view.addSubview(signUpBox)
-        
-        self.signUpButton = UIButton()
-        self.signUpButton.setTitle(signUpString, forState: .Normal)
-        self.signUpButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        self.signUpButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
-        self.signUpButton.frame = CGRectMake(self.view.center.x - signUpWidth/2, signUpYPos, signUpWidth, signUpHeight)
-        self.signUpButton.addTarget(self, action: "signupPressed:", forControlEvents: .TouchUpInside)
-        
-        self.view.addSubview(self.signUpButton)
+        let fbLoginButton: FBSDKLoginButton = FBSDKLoginButton()
+        fbLoginButton.center = CGPointMake(self.view.center.x, self.loginYOffset)
+        self.view.addSubview(fbLoginButton)
+        fbLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
+        fbLoginButton.delegate = self
     }
 }
