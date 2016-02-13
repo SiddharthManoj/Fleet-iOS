@@ -4,3 +4,5 @@
 
 #import <AFNetworking/AFNetworking.h>
 #import <SSKeychain/SSKeychain.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
