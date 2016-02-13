@@ -18,10 +18,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
     var fleetColorGreen: CGFloat = 206/255
     var fleetColorBlue: CGFloat = 177/255
     
-    var doneYPos: CGFloat = 580
-    var doneWidth: CGFloat = 200
-    var doneHeight: CGFloat = 60
-    
     var supportYPos: CGFloat = 100
     var supportWidth: CGFloat = 200
     var supportHeight: CGFloat = 60
@@ -42,9 +38,13 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
     var notificationsWidth: CGFloat = 200
     var notificationsHeight: CGFloat = 60
     
-    var logoutYPos: CGFloat = 500
+    var doneYPos: CGFloat = 500
+    var doneWidth: CGFloat = 200
+    var doneHeight: CGFloat = 50
+    
+    var logoutYPos: CGFloat = 580
     var logoutWidth: CGFloat = 200
-    var logoutHeight: CGFloat = 60
+    var logoutHeight: CGFloat = 50
     
     var quicksandReg: String = "Quicksand-Regular"
     var quicksandBold: String = "Quicksand-Bold"
@@ -54,7 +54,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
     var doneString: String = "Done"
     var supportString: String = "Support"
     var privacyPolicyString: String = "Privacy Policy"
-    var termsOfServiceString: String = "Terms of Service"
+    var termsofServiceString: String = "Terms of Service"
     var FAQString: String = "FAQ"
     var notificationsString: String = "Notifications"
     var logoutString: String = "Logout"
@@ -69,7 +69,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
     var doneButton: UIButton!
     var supportButton: UIButton!
     var privacyPolicyButton: UIButton!
-    var termsOfServiceButton: UIButton!
+    var termsofServiceButton: UIButton!
     var FAQButton: UIButton!
     var notificationsButton: UIButton!
     var logoutButton: UIButton!
@@ -102,7 +102,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
         _addFAQButton()
         _addNotificationsButton()
         _addLogoutButton()
-
+        
     }
     
     // MARK: - Internal methods
@@ -129,7 +129,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
     
     func FAQPressed(sender: UIButton!)
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let vc = FAQViewController()
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func notificationsPressed(sender: UIButton!)
@@ -144,39 +145,24 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
     
     // MARK: - Private methods
     
-    private func _addDoneButton()
-    {
-        self.doneButton = UIButton()
-        self.doneButton.setTitle(doneString, forState: .Normal)
-        self.doneButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.doneButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
-        self.doneButton.frame = CGRectMake(self.view.center.x - doneWidth/2, doneYPos, doneWidth, doneHeight)
-        self.doneButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
-        self.doneButton.addTarget(self, action: "donePressed:", forControlEvents: .TouchUpInside)
-        
-        self.view.addSubview(self.doneButton)
-    }
-    
     private func _addSupportButton()
     {
         self.supportButton = UIButton()
         self.supportButton.setTitle(supportString, forState: .Normal)
         self.supportButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        self.supportButton.titleLabel?.font = UIFont(name: quicksandBold, size: 20)
+        self.supportButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.supportButton.frame = CGRectMake(self.view.center.x - supportWidth/2, supportYPos, supportWidth, supportHeight)
-//        self.supportButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
         self.supportButton.addTarget(self, action: "supportPressed:", forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.supportButton)
     }
-    
     
     private func _addPrivacyPolicyButton()
     {
         self.privacyPolicyButton = UIButton()
         self.privacyPolicyButton.setTitle(privacyPolicyString, forState: .Normal)
         self.privacyPolicyButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        self.privacyPolicyButton.titleLabel?.font = UIFont(name: quicksandBold, size: 20)
+        self.privacyPolicyButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.privacyPolicyButton.frame = CGRectMake(self.view.center.x - privacyPolicyWidth/2, privacyPolicyYPos, privacyPolicyWidth, privacyPolicyHeight)
         self.privacyPolicyButton.addTarget(self, action: "privacyPolicyPressed:", forControlEvents: .TouchUpInside)
         
@@ -185,14 +171,14 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
     
     private func _addTermsofServiceButton()
     {
-        self.termsOfServiceButton = UIButton()
-        self.termsOfServiceButton.setTitle(termsOfServiceString, forState: .Normal)
-        self.termsOfServiceButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        self.termsOfServiceButton.titleLabel?.font = UIFont(name: quicksandBold, size: 20)
-        self.termsOfServiceButton.frame = CGRectMake(self.view.center.x - termsofServiceWidth/2, termsofServiceYPos, termsofServiceWidth, termsofServiceHeight)
-        self.termsOfServiceButton.addTarget(self, action: "termsofServicePressed:", forControlEvents: .TouchUpInside)
+        self.termsofServiceButton = UIButton()
+        self.termsofServiceButton.setTitle(termsofServiceString, forState: .Normal)
+        self.termsofServiceButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.termsofServiceButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
+        self.termsofServiceButton.frame = CGRectMake(self.view.center.x - termsofServiceWidth/2, termsofServiceYPos, termsofServiceWidth, termsofServiceHeight)
+        self.termsofServiceButton.addTarget(self, action: "termsofServicePressed:", forControlEvents: .TouchUpInside)
         
-        self.view.addSubview(self.termsOfServiceButton)
+        self.view.addSubview(self.termsofServiceButton)
     }
     
     private func _addFAQButton()
@@ -200,19 +186,19 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
         self.FAQButton = UIButton()
         self.FAQButton.setTitle(FAQString, forState: .Normal)
         self.FAQButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        self.FAQButton.titleLabel?.font = UIFont(name: quicksandBold, size: 20)
+        self.FAQButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.FAQButton.frame = CGRectMake(self.view.center.x - FAQWidth/2, FAQYPos, FAQWidth, FAQHeight)
         self.FAQButton.addTarget(self, action: "FAQPressed:", forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.FAQButton)
     }
     
-    private func  _addNotificationsButton()
+    private func _addNotificationsButton()
     {
         self.notificationsButton = UIButton()
         self.notificationsButton.setTitle(notificationsString, forState: .Normal)
         self.notificationsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        self.notificationsButton.titleLabel?.font = UIFont(name: quicksandBold, size: 20)
+        self.notificationsButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.notificationsButton.frame = CGRectMake(self.view.center.x - notificationsWidth/2, notificationsYPos, notificationsWidth, notificationsHeight)
         self.notificationsButton.addTarget(self, action: "notificationsPressed:", forControlEvents: .TouchUpInside)
         
@@ -231,6 +217,18 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
         
         self.view.addSubview(self.logoutButton)
     }
-
+    
+    private func _addDoneButton()
+    {
+        self.doneButton = UIButton()
+        self.doneButton.setTitle(doneString, forState: .Normal)
+        self.doneButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.doneButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
+        self.doneButton.frame = CGRectMake(self.view.center.x - doneWidth/2, doneYPos, doneWidth, doneHeight)
+        self.doneButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
+        self.doneButton.addTarget(self, action: "donePressed:", forControlEvents: .TouchUpInside)
+        
+        self.view.addSubview(self.doneButton)
+    }
     
 }
