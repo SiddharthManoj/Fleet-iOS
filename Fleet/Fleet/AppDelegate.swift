@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        if (FBSDKAccessToken.currentAccessToken() != nil) {
+            // User is already logged in
+            print("ALREADY LOGGED IN")
+        }
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

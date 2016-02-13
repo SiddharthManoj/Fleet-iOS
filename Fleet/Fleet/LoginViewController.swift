@@ -58,19 +58,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     {
         super.viewDidLoad()
         
+        let bgColor = UIColor(red: bgColorRed, green: bgColorGreen, blue: bgColorBlue, alpha: 1)
+        self.view.backgroundColor = bgColor
+        
+        _addFleetHeading()
+        
+        if (FBSDKAccessToken.currentAccessToken() == nil) {
+            _addFBLoginButton()
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
         if (FBSDKAccessToken.currentAccessToken() != nil) {
             // User is already logged in
             let vc = ScrollViewController()
-            let modalStyle = UIModalTransitionStyle.FlipHorizontal
-            vc.modalTransitionStyle = modalStyle
-            self.presentViewController(vc, animated: true, completion: nil)
-        }
-        else {
-            let bgColor = UIColor(red: bgColorRed, green: bgColorGreen, blue: bgColorBlue, alpha: 1)
-            self.view.backgroundColor = bgColor
-            
-            _addFleetHeading()
-            _addFBLoginButton()
+            self.presentViewController(vc, animated: false, completion: nil)
         }
     }
     
@@ -95,9 +100,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         if ((error) != nil)
         {
             // Process error
+            print("Error: \(error)")
         }
         else if result.isCancelled {
             // Handle cancellations
+            print("Login Cancelled")
         }
         else {
             // If you ask for multiple permissions at once, you
