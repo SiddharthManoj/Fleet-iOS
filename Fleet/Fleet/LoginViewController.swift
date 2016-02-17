@@ -120,14 +120,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
                         let email: String = result.valueForKey("email") as! String
                         
                         NetworkingManager.sharedInstance.authenticate(FBSDKAccessToken.currentAccessToken().tokenString, email: email, completionClosure: {
-                            (userUUID: String!) in
+                            (userUUID: String!, signup: Bool) in
                             
-                            let vc = ScrollViewController()
-                            let defaults = NSUserDefaults.standardUserDefaults()
+                            var vc: UIViewController
                             
-                            defaults.setObject(userUUID, forKey: "uuid")
-                            defaults.setObject(email, forKey: "email")
-                            
+                            if (signup == true) {
+                                vc = SignUpViewController()
+                            }
+                            else {
+                                vc = ScrollViewController()
+                                let defaults = NSUserDefaults.standardUserDefaults()
+                                defaults.setObject(userUUID, forKey: "uuid")
+                                defaults.setObject(email, forKey: "email")
+                            }
+                        
                             self.presentViewController(vc, animated: true, completion: nil)
                         })
                     }

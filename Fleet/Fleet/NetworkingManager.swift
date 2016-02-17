@@ -38,7 +38,7 @@ class NetworkingManager: NSObject
         self._setAuthTokenHeader()
     }
     
-    func authenticate(fb_token: String!, email: String!, completionClosure:(userUUID: String!) -> ())
+    func authenticate(fb_token: String!, email: String!, completionClosure:(userUUID: String!, signup: Bool) -> ())
     {
         let parameters = ["email": email, "token": fb_token]
         
@@ -51,11 +51,14 @@ class NetworkingManager: NSObject
                     let authToken = jsonResult["token"] as? String
                     let userUUID = jsonResult["uuid"] as? String
                     let email = jsonResult["email"] as? String
-                    
-                    self.credentialStore.setAuthToken(authToken)
+                    let userExists = jsonResult["exists"] as? Bool
                     
                     if (authToken != nil && userUUID != nil && email != nil) {
-                        completionClosure(userUUID: userUUID)
+                        self.credentialStore.setAuthToken(authToken)
+                        completionClosure(userUUID: userUUID, signup: false)
+                    }
+                    else if (userExists != nil && userExists == false) {
+                        completionClosure(userUUID: userUUID, signup: true)
                     }
                 }
                 else {
