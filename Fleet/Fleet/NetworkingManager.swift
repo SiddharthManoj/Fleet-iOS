@@ -38,9 +38,41 @@ class NetworkingManager: NSObject
         self._setAuthTokenHeader()
     }
     
-    func authenticate(username: String!, password: String!)
+    func authenticate(fb_token: String!, email: String!, completionClosure:(userUUID: String!) -> ())
     {
+        let parameters = ["email": email, "token": fb_token]
         
+        self.manager.POST(NetworkingManager.authenticateURLPathComponent,
+            parameters: parameters,
+            progress:  nil,
+            success: {
+                (dataTask: NSURLSessionDataTask, responseObject: AnyObject?) -> Void in
+                if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
+                    let authToken = jsonResult["token"] as? String
+                    let userUUID = jsonResult["uuid"] as? String
+                    let email = jsonResult["email"] as? String
+                    
+                    self.credentialStore.setAuthToken(authToken)
+                    
+                    if (authToken != nil && userUUID != nil && email != nil) {
+                        completionClosure(userUUID: userUUID)
+                    }
+                }
+                else {
+                    print("Error: responseObject couldn't be converted to Dictionary")
+                }
+            }, failure: {
+                (dataTask: NSURLSessionDataTask?, error: NSError) -> Void in
+                let errorMessage = "Error: " + error.localizedDescription
+                print(errorMessage)
+                
+                if let response = dataTask!.response as? NSHTTPURLResponse {
+                    if (response.statusCode == 401) {
+                        NetworkingManager.sharedInstance.credentialStore.clearSavedCredentials()
+                    }
+                }
+            }
+        )
     }
     
     func logout()

@@ -107,17 +107,31 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
             print("Login Cancelled")
         }
         else {
-            // If you ask for multiple permissions at once, you
-            // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
-                // Do work
-                let vc = ScrollViewController()
-                let modalStyle = UIModalTransitionStyle.FlipHorizontal
-                vc.modalTransitionStyle = modalStyle
-                self.presentViewController(vc, animated: true, completion: nil)
-                
-                //SEND result.token TO SERVER --- MUST IMPLEMENT
+                let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+                graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+                    if ((error) != nil)
+                    {
+                        print("Error: \(error)")
+                    }
+                    else
+                    {
+                        let email: String = result.valueForKey("email") as! String
+                        
+                        NetworkingManager.sharedInstance.authenticate(FBSDKAccessToken.currentAccessToken().tokenString, email: email, completionClosure: {
+                            (userUUID: String!) in
+                            
+                            let vc = ScrollViewController()
+                            let defaults = NSUserDefaults.standardUserDefaults()
+                            
+                            defaults.setObject(userUUID, forKey: "uuid")
+                            defaults.setObject(email, forKey: "email")
+                            
+                            self.presentViewController(vc, animated: true, completion: nil)
+                        })
+                    }
+                })
             }
         }
     }
