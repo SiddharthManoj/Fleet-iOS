@@ -45,5 +45,12 @@ class FAQViewController: UIViewController, UITextFieldDelegate
         self.FAQLabel.backgroundColor = UIColor(white: 1, alpha: 0)
         
         self.view.addSubview(FAQLabel)
+        
+        _addFAQ();
+    }
+    
+    private func _addFAQ()
+    {
+        
     }
 }

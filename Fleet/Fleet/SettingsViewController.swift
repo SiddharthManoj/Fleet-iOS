@@ -140,7 +140,10 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
     
     func logoutPressed(sender: UIButton!)
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let vc = LoginViewController()
+        let modalStyle = UIModalTransitionStyle.CrossDissolve
+        vc.modalTransitionStyle = modalStyle
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     // MARK: - Private methods
