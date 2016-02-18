@@ -36,6 +36,7 @@
 		B7F34A401C60677900799BE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7F34A3F1C60677900799BE6 /* Assets.xcassets */; };
 		B7F34A431C60677900799BE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F34A411C60677900799BE6 /* LaunchScreen.storyboard */; };
 		B7F34A4B1C606C2500799BE6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F34A4A1C606C2500799BE6 /* LoginViewController.swift */; };
+		BFB806701C6EE4DE00EAE63D /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8066F1C6EE4DE00EAE63D /* FAQViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		B7F34A421C60677900799BE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7F34A441C60677900799BE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7F34A4A1C606C2500799BE6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BFB8066F1C6EE4DE00EAE63D /* FAQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				A1FD7ECC1C654B1900603DF6 /* VideoViewController.swift */,
 				A1873DBA1C640AE200EE5DC6 /* ProfileViewController.swift */,
 				A1873DBC1C640AEF00EE5DC6 /* SettingsViewController.swift */,
+				BFB8066F1C6EE4DE00EAE63D /* FAQViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				A1873DB71C640A9400EE5DC6 /* Camera3ViewController.swift in Sources */,
 				B70999AA1C6572A9003B2BB3 /* NetworkingManager.swift in Sources */,
 				A1F47E8F1C65686E005EC95E /* VideoSearchBar.swift in Sources */,
+				BFB806701C6EE4DE00EAE63D /* FAQViewController.swift in Sources */,
 				B7F34A4B1C606C2500799BE6 /* LoginViewController.swift in Sources */,
 				B7F34A391C60677900799BE6 /* AppDelegate.swift in Sources */,
 			);
