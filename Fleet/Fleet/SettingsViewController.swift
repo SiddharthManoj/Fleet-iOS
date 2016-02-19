@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UITextFieldDelegate
+class SettingsViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate
 {
     var bgColorRed: CGFloat = 255/255
     var bgColorGreen: CGFloat = 255/255
@@ -72,7 +72,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
     var termsofServiceButton: UIButton!
     var FAQButton: UIButton!
     var notificationsButton: UIButton!
-    var logoutButton: UIButton!
     
     // MARK: - UIViewController methods
     
@@ -95,14 +94,70 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
         /////
         
         
-        _addDoneButton()
-        _addSupportButton()
-        _addPrivacyPolicyButton()
-        _addTermsofServiceButton()
-        _addFAQButton()
-        _addNotificationsButton()
-        _addLogoutButton()
+        self._addDoneButton()
+        self._addSupportButton()
+        self._addPrivacyPolicyButton()
+        self._addTermsofServiceButton()
+        self._addFAQButton()
+        self._addFBLogoutButton()
+        self._addNotificationsButton()
+    }
+    
+    // MARK: - FB Delegate Methods
+    
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!)
+    {
+        print("User Logged In")
         
+        if ((error) != nil)
+        {
+            // Process error
+            print("Error: \(error)")
+        }
+        else if result.isCancelled {
+            // Handle cancellations
+            print("Login Cancelled")
+        }
+        else {
+            if result.grantedPermissions.contains("email")
+            {
+                let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+                graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+                    if ((error) != nil)
+                    {
+                        print("Error: \(error)")
+                    }
+                    else
+                    {
+                        let email: String = result.valueForKey("email") as! String
+                        
+                        NetworkingManager.sharedInstance.authenticate(FBSDKAccessToken.currentAccessToken().tokenString, email: email, completionClosure: {
+                            (userUUID: String!, signup: Bool) in
+                            
+                            var vc: UIViewController
+                            
+                            if (signup == true) {
+                                vc = SignUpViewController()
+                            }
+                            else {
+                                vc = ScrollViewController()
+                                let defaults = NSUserDefaults.standardUserDefaults()
+                                defaults.setObject(userUUID, forKey: "uuid")
+                                defaults.setObject(email, forKey: "email")
+                            }
+                            
+                            self.presentViewController(vc, animated: true, completion: nil)
+                        })
+                    }
+                })
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!)
+    {
+        let vc: UIViewController = LoginViewController()
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     // MARK: - Internal methods
@@ -208,18 +263,15 @@ class SettingsViewController: UIViewController, UITextFieldDelegate
         self.view.addSubview(self.notificationsButton)
     }
     
-    private func _addLogoutButton()
+    private func _addFBLogoutButton()
     {
-        self.logoutButton = UIButton()
-        self.logoutButton.setTitle(logoutString, forState: .Normal)
-        self.logoutButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.logoutButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
-        self.logoutButton.frame = CGRectMake(self.view.center.x - logoutWidth/2, logoutYPos, logoutWidth, logoutHeight)
-        self.logoutButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
-        self.logoutButton.addTarget(self, action: "logoutPressed:", forControlEvents: .TouchUpInside)
-        
-        self.view.addSubview(self.logoutButton)
+        let fbLogoutButton: FBSDKLoginButton = FBSDKLoginButton()
+        fbLogoutButton.center = CGPointMake(self.view.center.x, logoutYPos)
+        self.view.addSubview(fbLogoutButton)
+        fbLogoutButton.readPermissions = ["public_profile", "email", "user_friends"]
+        fbLogoutButton.delegate = self
     }
+    
     
     private func _addDoneButton()
     {

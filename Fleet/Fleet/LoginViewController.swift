@@ -109,7 +109,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         else {
             if result.grantedPermissions.contains("email")
             {
-                let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+                let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters:["fields": "email"])
                 graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
                     if ((error) != nil)
                     {
