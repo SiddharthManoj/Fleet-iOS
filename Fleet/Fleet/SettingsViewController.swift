@@ -107,56 +107,17 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, FBSDKLoginB
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!)
     {
-        print("User Logged In")
-        
-        if ((error) != nil)
-        {
-            // Process error
-            print("Error: \(error)")
-        }
-        else if result.isCancelled {
-            // Handle cancellations
-            print("Login Cancelled")
-        }
-        else {
-            if result.grantedPermissions.contains("email")
-            {
-                let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-                graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-                    if ((error) != nil)
-                    {
-                        print("Error: \(error)")
-                    }
-                    else
-                    {
-                        let email: String = result.valueForKey("email") as! String
-                        
-                        NetworkingManager.sharedInstance.authenticate(FBSDKAccessToken.currentAccessToken().tokenString, email: email, completionClosure: {
-                            (userUUID: String!, signup: Bool) in
-                            
-                            var vc: UIViewController
-                            
-                            if (signup == true) {
-                                vc = SignUpViewController()
-                            }
-                            else {
-                                vc = ScrollViewController()
-                                let defaults = NSUserDefaults.standardUserDefaults()
-                                defaults.setObject(userUUID, forKey: "uuid")
-                                defaults.setObject(email, forKey: "email")
-                            }
-                            
-                            self.presentViewController(vc, animated: true, completion: nil)
-                        })
-                    }
-                })
-            }
-        }
+        //no need to implement this
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!)
     {
         let vc: UIViewController = LoginViewController()
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey("email")
+        defaults.removeObjectForKey("username")
+        defaults.removeObjectForKey("uuid")
+        NetworkingManager.sharedInstance.logout()
         self.presentViewController(vc, animated: true, completion: nil)
     }
     

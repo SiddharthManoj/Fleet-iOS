@@ -52,28 +52,42 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     var fleetName: UILabel!
     var fleetTag: UILabel!
     
+    var isSigningUp = false
+    
     // MARK: - UIViewController methods
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        self.isSigningUp = false
+        
         let bgColor = UIColor(red: bgColorRed, green: bgColorGreen, blue: bgColorBlue, alpha: 1)
         self.view.backgroundColor = bgColor
         
+        let defaults = NSUserDefaults.standardUserDefaults()
         _addFleetHeading()
         
-        if (FBSDKAccessToken.currentAccessToken() == nil) {
-            _addFBLoginButton()
+        if (FBSDKAccessToken.currentAccessToken() == nil || defaults.objectForKey("email") == nil || !NetworkingManager.sharedInstance.credentialStore.isLoggedIn()) {
+            FBSDKAccessToken.setCurrentAccessToken(nil)
+            FBSDKProfile.setCurrentProfile(nil)
+            NetworkingManager.sharedInstance.logout()
+            self._addFBLoginButton()
+        }
+        if (!NetworkingManager.sharedInstance.credentialStore.isLoggedIn() && defaults.objectForKey("email") != nil) {
+            defaults.removeObjectForKey("email")
+            defaults.removeObjectForKey("username")
+            defaults.removeObjectForKey("uuid")
         }
     }
     
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated)
-        
-        if (FBSDKAccessToken.currentAccessToken() != nil) {
+                
+        if (FBSDKAccessToken.currentAccessToken() != nil && NetworkingManager.sharedInstance.credentialStore.isLoggedIn()) {
             // User is already logged in
+            self.isSigningUp = false
             let vc = ScrollViewController()
             self.presentViewController(vc, animated: false, completion: nil)
         }
@@ -120,18 +134,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
                         let email: String = result.valueForKey("email") as! String
                         
                         NetworkingManager.sharedInstance.authenticate(FBSDKAccessToken.currentAccessToken().tokenString, email: email, completionClosure: {
-                            (userUUID: String!, signup: Bool) in
+                            (userUUID: String!, username: String!, signup: Bool) in
                             
                             var vc: UIViewController
+                            let defaults = NSUserDefaults.standardUserDefaults()
+                            defaults.setObject(userUUID, forKey: "uuid")
+                            defaults.setObject(username, forKey: "username")
+                            defaults.setObject(email, forKey: "email")
                             
                             if (signup == true) {
                                 vc = SignUpViewController()
+                                self.isSigningUp = true
                             }
                             else {
                                 vc = ScrollViewController()
-                                let defaults = NSUserDefaults.standardUserDefaults()
-                                defaults.setObject(userUUID, forKey: "uuid")
-                                defaults.setObject(email, forKey: "email")
                             }
                         
                             self.presentViewController(vc, animated: true, completion: nil)

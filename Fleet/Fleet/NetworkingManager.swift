@@ -38,9 +38,9 @@ class NetworkingManager: NSObject
         self._setAuthTokenHeader()
     }
     
-    func authenticate(fb_token: String!, email: String!, completionClosure:(userUUID: String!, signup: Bool) -> ())
+    func authenticate(fb_token: String!, email: String!, completionClosure:(userUUID: String!, username: String!, signup: Bool) -> ())
     {
-        let parameters = ["email": email, "token": fb_token]
+        let parameters = ["email": email, "fb_token": fb_token]
         
         self.manager.POST(NetworkingManager.authenticateURLPathComponent,
             parameters: parameters,
@@ -51,14 +51,15 @@ class NetworkingManager: NSObject
                     let authToken = jsonResult["token"] as? String
                     let userUUID = jsonResult["uuid"] as? String
                     let email = jsonResult["email"] as? String
+                    let username = jsonResult["username"] as? String
                     let userExists = jsonResult["exists"] as? Bool
                     
-                    if (authToken != nil && userUUID != nil && email != nil) {
+                    if (authToken != nil && userUUID != nil && email != nil && username != nil) {
                         self.credentialStore.setAuthToken(authToken)
-                        completionClosure(userUUID: userUUID, signup: false)
+                        completionClosure(userUUID: userUUID, username: username, signup: false)
                     }
                     else if (userExists != nil && userExists == false) {
-                        completionClosure(userUUID: userUUID, signup: true)
+                        completionClosure(userUUID: userUUID, username:nil, signup: true)
                     }
                 }
                 else {

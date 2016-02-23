@@ -39,14 +39,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
     
     var nameFieldYPos: CGFloat = 310
     
-    var signUpYPos: CGFloat = 481
+    var signUpXPos: CGFloat = 60
+    var signUpYPos: CGFloat = 480
     var signUpWidth: CGFloat = 260
     var signUpHeight: CGFloat = 50
-    
-    var signUpBoxXPos: CGFloat = 116
-    var signUpBoxYPos: CGFloat = 485
-    var signUpBoxWidth: CGFloat = 253
-    var signUpBoxHeight: CGFloat = 42
     
     var quicksandReg: String = "Quicksand-Regular"
     var quicksandBold: String = "Quicksand-Bold"
@@ -70,7 +66,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
     var nameTextField: UITextField!
     var nameLabel: UILabel!
     var namePlaceholder: NSMutableAttributedString!
-    var signUpButton: UIButton!
+    var signupButton: UIButton!
     var signUpBox: UIImageView!
     
     var nameBorder = CALayer()
@@ -106,7 +102,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
     func namePressed(sender: UITextField!)
     {
         UIView.animateWithDuration(0.5, animations: {
-            self.nameLabel.center = CGPointMake(22, 20)
+            self.nameLabel.center = CGPointMake(38, 20)
             self.nameLabel.alpha = 1
             self.nameBorder.borderColor = UIColor(white: 0, alpha: 1).CGColor
         })
@@ -114,7 +110,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
     
     func signupPressed(sender: UIButton!)
     {
-       
+        let email = NSUserDefaults.standardUserDefaults().objectForKey("email") as! String
+        User.createNewUser(self.nameTextField.text!, newEmail: email, vc: self)
     }
     
     func loginPressed(sender: UIButton!)
@@ -159,6 +156,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
         self.nameTextField.font = UIFont(name: quicksandReg, size: 16)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.Center
+        self.nameTextField.autocapitalizationType = UITextAutocapitalizationType.None
         
         let passPlaceholder = NSAttributedString(string: nameString, attributes: [
             NSForegroundColorAttributeName : UIColor(white: 0, alpha: 1),
@@ -173,15 +171,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
         
         self.nameTextField.addSubview(nameLabel)
         
-        self.nameTextField.textColor = UIColor.blackColor()
+        self.nameTextField.textColor = UIColor.grayColor()
         self.nameTextField.delegate = self
         
-        let width = CGFloat(1.0)
-        self.nameBorder.borderColor = UIColor(white: 0, alpha: 0.3).CGColor
-        self.nameBorder.frame = CGRect(x: 0, y: nameTextField.frame.size.height - width, width:  nameTextField.frame.size.width, height: nameTextField.frame.size.height)
-        
-        self.nameBorder.borderWidth = width
-        self.nameTextField.layer.addSublayer(self.nameBorder)
         self.nameTextField.layer.masksToBounds = true
         
         nameTextField.leftViewMode = UITextFieldViewMode.Always
@@ -194,13 +186,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
     
     private func _addSignupButton()
     {
-        let signupButton: UIButton = UIButton()
-        signupButton.setTitle(signUpString, forState: .Normal)
-        signupButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        signupButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
-        signupButton.frame = CGRectMake(self.view.center.x - signUpWidth/2, self.view.center.y + signUpYPos, signUpWidth, signUpHeight)
-        signupButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
-        signupButton.addTarget(self, action: "signupPressed:", forControlEvents: .TouchUpInside)
+        self.signupButton = UIButton()
+        self.signupButton.setTitle(signUpString, forState: .Normal)
+        self.signupButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.signupButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
+        self.signupButton.frame = CGRect(x: self.signUpXPos, y: self.signUpYPos, width: self.signUpWidth, height: self.signUpHeight)
+        self.signupButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
+        self.signupButton.addTarget(self, action: "signupPressed:", forControlEvents: .TouchUpInside)
         
         self.view.addSubview(signupButton)
     }
