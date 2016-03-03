@@ -10,8 +10,11 @@ import UIKit
 
 class NetworkingManager: NSObject
 {
-    static let sharedInstance = NetworkingManager()
-    static let baseURLString = "http://localhost:3003/api"
+    static let webBaseURLString = "http://localhost:3003/api"
+    static let videoBaseURLString = "http://localhost:1935"
+    static let webSharedInstance = NetworkingManager(baseURL: webBaseURLString)
+    static let videoSharedInstance = NetworkingManager(baseURL: videoBaseURLString)
+
     static let authenticateURLPathComponent = "authenticate"
     
     var manager: AFHTTPSessionManager
@@ -19,9 +22,9 @@ class NetworkingManager: NSObject
     
     // MARK: - Initializers
     
-    override init()
+    init(baseURL: String)
     {
-        let baseURL = NSURL(string: NetworkingManager.baseURLString)
+        let baseURL = NSURL(string: baseURL)
         self.manager = AFHTTPSessionManager(baseURL: baseURL)
         self.credentialStore = CredentialStore()
         
@@ -72,7 +75,7 @@ class NetworkingManager: NSObject
                 
                 if let response = dataTask!.response as? NSHTTPURLResponse {
                     if (response.statusCode == 401) {
-                        NetworkingManager.sharedInstance.credentialStore.clearSavedCredentials()
+                        NetworkingManager.webSharedInstance.credentialStore.clearSavedCredentials()
                     }
                 }
             }

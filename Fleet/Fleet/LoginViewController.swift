@@ -68,13 +68,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         let defaults = NSUserDefaults.standardUserDefaults()
         _addFleetHeading()
         
-        if (FBSDKAccessToken.currentAccessToken() == nil || defaults.objectForKey("email") == nil || !NetworkingManager.sharedInstance.credentialStore.isLoggedIn()) {
+        if (FBSDKAccessToken.currentAccessToken() == nil || defaults.objectForKey("email") == nil || !NetworkingManager.webSharedInstance.credentialStore.isLoggedIn()) {
             FBSDKAccessToken.setCurrentAccessToken(nil)
             FBSDKProfile.setCurrentProfile(nil)
-            NetworkingManager.sharedInstance.logout()
+            NetworkingManager.webSharedInstance.logout()
+            NetworkingManager.videoSharedInstance.logout()
             self._addFBLoginButton()
         }
-        if (!NetworkingManager.sharedInstance.credentialStore.isLoggedIn() && defaults.objectForKey("email") != nil) {
+        if (!NetworkingManager.webSharedInstance.credentialStore.isLoggedIn() && defaults.objectForKey("email") != nil) {
             defaults.removeObjectForKey("email")
             defaults.removeObjectForKey("username")
             defaults.removeObjectForKey("uuid")
@@ -85,7 +86,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     {
         super.viewDidAppear(animated)
                 
-        if (FBSDKAccessToken.currentAccessToken() != nil && NetworkingManager.sharedInstance.credentialStore.isLoggedIn()) {
+        if (FBSDKAccessToken.currentAccessToken() != nil && NetworkingManager.webSharedInstance.credentialStore.isLoggedIn()) {
             // User is already logged in
             self.isSigningUp = false
             let vc = ScrollViewController()
@@ -133,7 +134,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
                     {
                         let email: String = result.valueForKey("email") as! String
                         
-                        NetworkingManager.sharedInstance.authenticate(FBSDKAccessToken.currentAccessToken().tokenString, email: email, completionClosure: {
+                        NetworkingManager.webSharedInstance.authenticate(FBSDKAccessToken.currentAccessToken().tokenString, email: email, completionClosure: {
                             (userUUID: String!, username: String!, signup: Bool) in
                             
                             var vc: UIViewController

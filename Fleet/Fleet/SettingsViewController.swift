@@ -117,7 +117,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, FBSDKLoginB
         defaults.removeObjectForKey("email")
         defaults.removeObjectForKey("username")
         defaults.removeObjectForKey("uuid")
-        NetworkingManager.sharedInstance.logout()
+        NetworkingManager.webSharedInstance.logout()
+        NetworkingManager.videoSharedInstance.logout()
         self.presentViewController(vc, animated: true, completion: nil)
     }
     

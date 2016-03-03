@@ -22,12 +22,13 @@ class User: NSObject
     
     class func logout ()
     {
-        NetworkingManager.sharedInstance.credentialStore.clearSavedCredentials()
+        NetworkingManager.webSharedInstance.credentialStore.clearSavedCredentials()
+        NetworkingManager.videoSharedInstance.credentialStore.clearSavedCredentials()
     }
     
     class func createNewUser(newUsername: String, newEmail: String, vc: UIViewController)
     {
-        let manager = NetworkingManager.sharedInstance.manager
+        let manager = NetworkingManager.webSharedInstance.manager
         let parameters = ["username": newUsername, "email": newEmail]
         
         manager.POST(User.userPath,
@@ -43,7 +44,7 @@ class User: NSObject
                         FBSDKProfile.setCurrentProfile(nil)
                     }
                     else {
-                        NetworkingManager.sharedInstance.authenticate(FBSDKAccessToken.currentAccessToken().tokenString, email: newEmail, completionClosure: { (userUUID, username, signup) -> () in
+                        NetworkingManager.webSharedInstance.authenticate(FBSDKAccessToken.currentAccessToken().tokenString, email: newEmail, completionClosure: { (userUUID, username, signup) -> () in
                             if (userUUID != nil && username != nil && signup == false) {
                                 let defaults = NSUserDefaults.standardUserDefaults()
                                 defaults.setObject(userUUID, forKey: "uuid")
@@ -59,7 +60,8 @@ class User: NSObject
                                 let lvc: UIViewController = LoginViewController()
                                 FBSDKAccessToken.setCurrentAccessToken(nil)
                                 FBSDKProfile.setCurrentProfile(nil)
-                                NetworkingManager.sharedInstance.logout()
+                                NetworkingManager.webSharedInstance.logout()
+                                NetworkingManager.videoSharedInstance.logout()
                                 vc.presentViewController(lvc, animated: true, completion: nil)
                             }
                         })
@@ -77,7 +79,8 @@ class User: NSObject
                 
                 if let response = dataTask!.response as? NSHTTPURLResponse {
                     if (response.statusCode == 401) {
-                        NetworkingManager.sharedInstance.credentialStore.clearSavedCredentials()
+                        NetworkingManager.webSharedInstance.logout()
+                        NetworkingManager.videoSharedInstance.logout()
                         FBSDKAccessToken.setCurrentAccessToken(nil)
                         FBSDKProfile.setCurrentProfile(nil)
                     }
