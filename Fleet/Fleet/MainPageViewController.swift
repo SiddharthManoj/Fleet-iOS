@@ -118,7 +118,7 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         if mediaType == kUTTypeMovie {
             let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path
             if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {
-                UISaveVideoAtPathToSavedPhotosAlbum(path!, self, "video:didFinishSavingWithError:contextInfo:", nil)
+                UISaveVideoAtPathToSavedPhotosAlbum(path!, self, Selector("video:didFinishSavingWithError:contextInfo:"), nil)
             }
         }
     }

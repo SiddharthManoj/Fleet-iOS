@@ -145,7 +145,7 @@ class VideoViewController: UIViewController {
         self.doneButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.doneButton.frame = CGRectMake(self.view.center.x - doneWidth/2, doneYPos, doneWidth, doneHeight)
         self.doneButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
-        self.doneButton.addTarget(self, action: "donePressed:", forControlEvents: .TouchUpInside)
+        self.doneButton.addTarget(self, action: #selector(VideoViewController.donePressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.doneButton)
     }
@@ -261,7 +261,7 @@ class VideoViewController: UIViewController {
     
     private func _addTimer()
     {
-        _ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: "countSec:", userInfo: nil, repeats: true)
+        _ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: #selector(VideoViewController.countSec(_:)), userInfo: nil, repeats: true)
     }
 
 }

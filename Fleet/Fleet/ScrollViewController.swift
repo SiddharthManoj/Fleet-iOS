@@ -124,7 +124,7 @@ class ScrollViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         if mediaType == kUTTypeMovie {
             let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path
             if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {
-                UISaveVideoAtPathToSavedPhotosAlbum(path!, self, "video:didFinishSavingWithError:contextInfo:", nil)
+                UISaveVideoAtPathToSavedPhotosAlbum(path!, self, #selector(ScrollViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
             }
         }
     }

@@ -13,6 +13,12 @@ import AVFoundation
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate {
     
+    var recordButton: UIImage!
+    
+    var recordButtonYPos: CGFloat = 500
+    var recordButtonWidth: CGFloat = 50
+    var recordButtonHeight: CGFloat = 50
+    
     let captureSession = AVCaptureSession()
     let screenWidth = UIScreen.mainScreen().bounds.size.width
     var previewLayer: AVCaptureVideoPreviewLayer?
@@ -38,6 +44,20 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
                 }
             }
         }
+        
+        self._addRecordButton()
+    }
+    
+    func recordPressed(sender: UIButton!) {
+        
+    }
+    
+    private func _addRecordButton() {
+        let recordButton = "record_button.png"
+        let record = UIImage(named: recordButton)
+        let recordView = UIImageView(image: record!)
+        recordView.frame = CGRect(x: self.view.center.x - recordButtonWidth/2, y: 600, width: recordButtonWidth, height: recordButtonHeight)
+        view.addSubview(recordView)
     }
     
     func focusTo(value: Float) {
@@ -95,6 +115,28 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         self.view.layer.addSublayer(previewLayer!)
         previewLayer?.frame = self.view.layer.frame
         captureSession.startRunning()
+//        var err : NSError? = nil
+//        captureSession.addInput(AVCaptureDeviceInput(device: captureDevice, error: &err))
+//        
+//        if err != nil {
+//            println("error: \(err?.localizedDescription)")
+//        }
+//        
+//        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+//        self.cameraView.layer.addSublayer(previewLayer)
+//        self.cameraView.bringSubviewToFront(takePhotoButton)
+//        self.cameraView.bringSubviewToFront(self.snappedPicture)
+//        self.cameraView.bringSubviewToFront(self.backButton)
+//        previewLayer?.frame = self.cameraView.layer.frame
+//        captureSession.startRunning()
+    }
+    
+    func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
+        return
+    }
+    
+    func captureOutput(captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAtURL fileURL: NSURL!, fromConnections connections: [AnyObject]!) {
+        return
     }
     
     
