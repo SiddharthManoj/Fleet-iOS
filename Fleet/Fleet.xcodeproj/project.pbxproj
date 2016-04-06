@@ -32,6 +32,7 @@
 		B70999AA1C6572A9003B2BB3 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70999A91C6572A9003B2BB3 /* NetworkingManager.swift */; };
 		B70999AC1C65730E003B2BB3 /* CredentialStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70999AB1C65730E003B2BB3 /* CredentialStore.swift */; };
 		B70999B01C783491003B2BB3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70999AF1C783491003B2BB3 /* User.swift */; };
+		B70999B21C8D382A003B2BB3 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70999B11C8D382A003B2BB3 /* UserDefaults.swift */; };
 		B7F34A391C60677900799BE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F34A381C60677900799BE6 /* AppDelegate.swift */; };
 		B7F34A3E1C60677900799BE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F34A3C1C60677900799BE6 /* Main.storyboard */; };
 		B7F34A401C60677900799BE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7F34A3F1C60677900799BE6 /* Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		B70999A91C6572A9003B2BB3 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		B70999AB1C65730E003B2BB3 /* CredentialStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialStore.swift; sourceTree = "<group>"; };
 		B70999AF1C783491003B2BB3 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B70999B11C8D382A003B2BB3 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		B7F34A351C60677900799BE6 /* Fleet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fleet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F34A381C60677900799BE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7F34A3D1C60677900799BE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			children = (
 				A1FD7EC61C65234B00603DF6 /* Video.swift */,
 				B70999AF1C783491003B2BB3 /* User.swift */,
+				B70999B11C8D382A003B2BB3 /* UserDefaults.swift */,
 				B70999A91C6572A9003B2BB3 /* NetworkingManager.swift */,
 				B70999AB1C65730E003B2BB3 /* CredentialStore.swift */,
 			);
@@ -337,6 +340,7 @@
 				B70999AA1C6572A9003B2BB3 /* NetworkingManager.swift in Sources */,
 				A1F47E8F1C65686E005EC95E /* VideoSearchBar.swift in Sources */,
 				BFB806701C6EE4DE00EAE63D /* FAQViewController.swift in Sources */,
+				B70999B21C8D382A003B2BB3 /* UserDefaults.swift in Sources */,
 				B7F34A4B1C606C2500799BE6 /* LoginViewController.swift in Sources */,
 				B7F34A391C60677900799BE6 /* AppDelegate.swift in Sources */,
 				B70999B01C783491003B2BB3 /* User.swift in Sources */,
