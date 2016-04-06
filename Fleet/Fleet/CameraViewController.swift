@@ -13,7 +13,7 @@ import AVFoundation
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate {
     
-    var recordButton: UIImage!
+    var recordButton: UIButton!
     
     var recordButtonYPos: CGFloat = 500
     var recordButtonWidth: CGFloat = 50
@@ -49,15 +49,26 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     func recordPressed(sender: UIButton!) {
+        let recordingDelegate:AVCaptureFileOutputRecordingDelegate? = self
         
+        let videoFileOutput = AVCaptureMovieFileOutput()
+        self.captureSession.addOutput(videoFileOutput)
+        
+        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        let filePath = documentsURL.URLByAppendingPathComponent("temp")
+        
+        // Do recording and save the output to the `filePath`
+        videoFileOutput.startRecordingToOutputFileURL(filePath, recordingDelegate: recordingDelegate)
+
     }
     
     private func _addRecordButton() {
-        let recordButton = "record_button.png"
-        let record = UIImage(named: recordButton)
-        let recordView = UIImageView(image: record!)
-        recordView.frame = CGRect(x: self.view.center.x - recordButtonWidth/2, y: 600, width: recordButtonWidth, height: recordButtonHeight)
-        view.addSubview(recordView)
+        self.recordButton = UIButton()
+        self.recordButton.setImage(UIImage(named: "record_button.png"), forState: .Normal)
+        self.recordButton.frame = CGRectMake(self.view.center.x - recordButtonWidth/2, 600, recordButtonWidth, recordButtonHeight)
+        self.recordButton.addTarget(self, action: #selector(CameraViewController.recordPressed(_:)), forControlEvents: .TouchUpInside)
+        
+        self.view.addSubview(self.recordButton)
     }
     
     func focusTo(value: Float) {
@@ -115,6 +126,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         self.view.layer.addSublayer(previewLayer!)
         previewLayer?.frame = self.view.layer.frame
         captureSession.startRunning()
+        
 //        var err : NSError? = nil
 //        captureSession.addInput(AVCaptureDeviceInput(device: captureDevice, error: &err))
 //        
@@ -144,36 +156,36 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         
         //parameters (user id (UID) and the actual data)
         
-//        let defaults = NSUserDefaults.standardUserDefaults()
-//        let uuid = defaults.objectForKey("uuid") as! String
-//        
-//        let manager = NetworkingManager.videoSharedInstance.manager
-//        
-//        let url = NetworkingManager.videoBaseURLString + "mp4:sample.mp4/" + "playlist.m3u8"
-//        
-//        let fileURL = NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("sample", ofType: "mp4")!)
-//        
-//        let parameters = [
-//            "uuid": uuid,
-//            "videoName":"sample",
-//            "contentBody" : "Some body content for the test application",
-//            "title" : "title of video",
-//            "typeOfContent":"video"
-//        ]
-//        
-//        manager.POST(url, parameters: parameters, constructingBodyWithBlock: { (data: AFMultipartFormData!) -> Void in
-//            if let _ = try? data.appendPartWithFileURL(fileURL, name: "video_data") {
-//                print("Appended video data")
-//            }
-//            else {
-//                print("Could not append video data")
-//            }
-//            }, progress: nil, success: { (dataTask: NSURLSessionDataTask, responseObject: AnyObject?) -> Void in
-//                print("Successfully uploaded video")
-//            }, failure: { (dataTask: NSURLSessionDataTask?, error: NSError) in
-//                print("Failed to upload a video")
-//            }
-//        )
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let uuid = defaults.objectForKey("uuid") as! String
+        
+        let manager = NetworkingManager.videoSharedInstance.manager
+        
+        let url = NetworkingManager.videoBaseURLString + "mp4:sample.mp4/" + "playlist.m3u8"
+        
+        let fileURL = NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("sample", ofType: "mp4")!)
+        
+        let parameters = [
+            "uuid": uuid,
+            "videoName":"sample",
+            "contentBody" : "Some body content for the test application",
+            "title" : "title of video",
+            "typeOfContent":"video"
+        ]
+        
+        manager.POST(url, parameters: parameters, constructingBodyWithBlock: { (data: AFMultipartFormData!) -> Void in
+            if let _ = try? data.appendPartWithFileURL(fileURL, name: "video_data") {
+                print("Appended video data")
+            }
+            else {
+                print("Could not append video data")
+            }
+            }, progress: nil, success: { (dataTask: NSURLSessionDataTask, responseObject: AnyObject?) -> Void in
+                print("Successfully uploaded video")
+            }, failure: { (dataTask: NSURLSessionDataTask?, error: NSError) in
+                print("Failed to upload a video")
+            }
+        )
     }
     
     //create a manager. sharedInstance.video ->do post and get to stream
