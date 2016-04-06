@@ -49,8 +49,17 @@ class FAQViewController: UIViewController, UITextFieldDelegate
         _addFAQ();
     }
     
+    override func viewWillAppear(animated: Bool) {
+        navigationItem.title = "FAQ"
+    }
+    
     private func _addFAQ()
     {
+        self.FAQLabel = UILabel(frame: CGRect(x: 186, y: 145, width: 100, height: 40))
+        self.FAQLabel.attributedText = NSAttributedString(string: "Hello", attributes: [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont(name: quicksandReg, size: 20)!])
+        self.FAQLabel.backgroundColor = UIColor(white: 1, alpha: 0)
+        self.FAQLabel.textAlignment = .Left
         
+        self.view.addSubview(FAQLabel)
     }
 }

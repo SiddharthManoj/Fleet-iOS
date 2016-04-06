@@ -16,6 +16,8 @@ class NetworkingManager: NSObject
     static let videoSharedInstance = NetworkingManager(baseURL: videoBaseURLString)
 
     static let authenticateURLPathComponent = "authenticate"
+    static let videoSharedInstance = NetworkingManager()
+    static let videoBaseURLString = "http://[wowza-ip]:1935/vod/"
     
     var manager: AFHTTPSessionManager
     var credentialStore : CredentialStore

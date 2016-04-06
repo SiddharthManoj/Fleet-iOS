@@ -51,7 +51,10 @@ class User: NSObject
                                 defaults.setObject(username, forKey: "username")
                                 defaults.setObject(newEmail, forKey: "email")
 
-                                let svc: UIViewController = ScrollViewController()
+                                //let svc: UIViewController = ScrollViewController()
+                                
+                                let svc: UIViewController = MainPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+                                
                                 vc.presentViewController(svc, animated: true, completion: nil)
                             }
                             else {

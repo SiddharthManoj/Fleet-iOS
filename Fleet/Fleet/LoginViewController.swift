@@ -89,7 +89,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         if (FBSDKAccessToken.currentAccessToken() != nil && NetworkingManager.webSharedInstance.credentialStore.isLoggedIn()) {
             // User is already logged in
             self.isSigningUp = false
-            let vc = ScrollViewController()
+            //let vc = ScrollViewController()
+            let vc = MainPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+            
             self.presentViewController(vc, animated: false, completion: nil)
         }
     }
@@ -148,7 +150,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
                                 self.isSigningUp = true
                             }
                             else {
-                                vc = ScrollViewController()
+                                //vc = ScrollViewController()
+                                vc = MainPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
                             }
                         
                             self.presentViewController(vc, animated: true, completion: nil)
