@@ -35,25 +35,26 @@ class RecordVideoViewController: UIViewController {
     }
     
     func video(videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject) {
-        
+        /*
         var title = "Success"
         var message = "Video was saved"
+
         
         if let saveError = error {
             title = "Error"
             message = "Video failed to save"
         }
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+
+        //let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-        presentViewController(alert, animated: true, completion: nil)
+        presentViewController(alert, animated: true, completion: nil)*/
     }
     
 }
 
 extension RecordVideoViewController: UIImagePickerControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        
+        /*
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         dismissViewControllerAnimated(true, completion: nil)
         // Handle a movie capture
@@ -62,7 +63,7 @@ extension RecordVideoViewController: UIImagePickerControllerDelegate {
             if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {
                 UISaveVideoAtPathToSavedPhotosAlbum(path!, self, #selector(RecordVideoViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
             }
-        }
+        }*/
     }
     
 }

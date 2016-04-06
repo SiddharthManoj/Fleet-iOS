@@ -15,7 +15,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
     
     var recordButton: UIButton!
     
-    var recordButtonYPos: CGFloat = 500
+    var recordButtonYPos: CGFloat = 300
     var recordButtonWidth: CGFloat = 50
     var recordButtonHeight: CGFloat = 50
     
@@ -65,7 +65,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
     private func _addRecordButton() {
         self.recordButton = UIButton()
         self.recordButton.setImage(UIImage(named: "record_button.png"), forState: .Normal)
-        self.recordButton.frame = CGRectMake(self.view.center.x - recordButtonWidth/2, 600, recordButtonWidth, recordButtonHeight)
+        self.recordButton.frame = CGRectMake(self.view.center.x - recordButtonWidth/2, recordButtonYPos, recordButtonWidth, recordButtonHeight)
         
         self.recordButton.addTarget(self, action: "recordPressed:", forControlEvents: .TouchUpInside)
 //        self.recordButton.addTarget(self, action: #selector(CameraViewController.recordPressed(_:)), forControlEvents: .TouchUpInside)

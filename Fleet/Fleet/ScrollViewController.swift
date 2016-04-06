@@ -116,7 +116,7 @@ class ScrollViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
     }
         */
-
+/*
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         //dismissViewControllerAnimated(true, completion: nil)
@@ -129,7 +129,7 @@ class ScrollViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             }
         }
     }
-    
+    */
     func video(videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject)
     {
         /*
