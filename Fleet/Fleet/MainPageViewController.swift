@@ -87,7 +87,6 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         }
         if viewController.isKindOfClass(ProfileViewController) {
             self.index = 2
-            return nil;
         }
         
         //decrement the index to get the viewController before the current one
