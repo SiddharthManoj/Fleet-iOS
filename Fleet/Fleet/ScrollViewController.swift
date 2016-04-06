@@ -69,7 +69,7 @@ class ScrollViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         self.scrollView.showsHorizontalScrollIndicator = false
         self.scrollView.showsVerticalScrollIndicator = false
         
-        _addCameraSubview()
+        //_addCameraSubview()
         
         let videosVC = VideosSearchViewController()
         let profileVC = ProfileViewController()
@@ -96,6 +96,7 @@ class ScrollViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
     }
     
+    /*
     func _addCameraSubview() {
         let cameraController = CameraViewController()
         
@@ -114,7 +115,8 @@ class ScrollViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         
     }
-    
+        */
+
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         //dismissViewControllerAnimated(true, completion: nil)
@@ -155,7 +157,7 @@ class ScrollViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         //startCameraFromViewController(self, withDelegate: self)
         //print(self.scrollView.subviews)
         self.scrollView.subviews[0].removeFromSuperview()
-        _addCameraSubview()
+        //_addCameraSubview()
     }
     
 }

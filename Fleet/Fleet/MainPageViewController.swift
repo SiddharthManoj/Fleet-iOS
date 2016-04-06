@@ -42,7 +42,7 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         
         //first view controller = firstViewControllers navigation controller.
         if index == 0 {
-            return _addCameraSubview()
+            return CameraViewController()
         }
         
         //second view controller = secondViewController's navigation controller.
@@ -96,6 +96,7 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         
     }
     
+    /*
     func _addCameraSubview() -> CameraViewController! {
         let cameraController =  CameraViewController()
         
@@ -108,7 +109,8 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         
         return cameraController
     }
-    
+    */
+
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         //dismissViewControllerAnimated(true, completion: nil)
