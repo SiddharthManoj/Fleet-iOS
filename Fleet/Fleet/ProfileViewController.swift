@@ -101,7 +101,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate
         self.settingsButton = UIButton()
         self.settingsButton.setImage(UIImage(named: "settings_icon.png"), forState: .Normal)
         self.settingsButton.frame = CGRectMake(310, 30, settingsWidth, settingsHeight)
-        self.settingsButton.addTarget(self, action: #selector(ProfileViewController.settingsPressed(_:)), forControlEvents: .TouchUpInside)
+        self.settingsButton.addTarget(self, action: "settingsPressed:", forControlEvents: .TouchUpInside)
+//        self.settingsButton.addTarget(self, action: #selector(ProfileViewController.settingsPressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.settingsButton)
     }

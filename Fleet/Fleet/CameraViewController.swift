@@ -11,7 +11,7 @@ import MobileCoreServices
 import MediaPlayer
 import AVFoundation
 
-class CameraViewController: UIViewController, UINavigationControllerDelegate {
+class CameraViewController: UIViewController, UINavigationControllerDelegate, AVCaptureFileOutputRecordingDelegate {
     
     var recordButton: UIButton!
     
@@ -66,7 +66,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         self.recordButton = UIButton()
         self.recordButton.setImage(UIImage(named: "record_button.png"), forState: .Normal)
         self.recordButton.frame = CGRectMake(self.view.center.x - recordButtonWidth/2, 600, recordButtonWidth, recordButtonHeight)
-        self.recordButton.addTarget(self, action: #selector(CameraViewController.recordPressed(_:)), forControlEvents: .TouchUpInside)
+        
+        self.recordButton.addTarget(self, action: "recordPressed:", forControlEvents: .TouchUpInside)
+//        self.recordButton.addTarget(self, action: #selector(CameraViewController.recordPressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.recordButton)
     }
