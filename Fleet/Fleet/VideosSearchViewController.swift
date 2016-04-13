@@ -26,8 +26,6 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     var searchActive: Bool = false
     
-    var filtered: [Video] = []
-    
     var quicksandReg: String = "Quicksand-Regular"
     var quicksandBold: String = "Quicksand-Bold"
     var corbertReg: String = "Corbert-Regular"
@@ -42,8 +40,8 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     //var videosLabel: UILabel!
     
-    var videos: [Video]!
-    var currentVideos: [Video]!
+    var videos: [Video] = []
+    var filteredVideos: [Video] = []
     
     var searchBar: UISearchBar!
     var scrollView: UIScrollView!
@@ -64,28 +62,18 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         
         let bgColor = UIColor(red: bgColorRed, green: bgColorGreen, blue: bgColorBlue, alpha: 1)
         self.view.backgroundColor = bgColor
-        
-        // quickly just for testing, will delete later
-        /*
-        self.videosLabel = UILabel(frame: CGRect(x: self.view.center.x - 200/2, y: 100, width: 200, height: 50))
-        self.videosLabel.attributedText = NSAttributedString(string: "videos", attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: corbertReg, size: 50)!])
-        self.videosLabel.textAlignment = .Center
-        self.videosLabel.backgroundColor = UIColor(white: 1, alpha: 0)
-        
-        self.view.addSubview(videosLabel)
-        */
-        
-        _generateVideos()
-        
+                
+        //_generateVideos()
         
         _addSearch()
         _addScrollView()
         _addTableView()
         
-        
         _setAlphas()
-        
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        _getVideos()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -130,17 +118,17 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        filtered = currentVideos.filter({ (video) -> Bool in
+        self.filteredVideos = self.videos.filter({ (video) -> Bool in
             let tmpVideo: Video = video
             let tmpTitle = tmpVideo.title
             let range = tmpTitle.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range != nil
         })
-        if filtered.count == 0 {
-            searchActive = false
+        if self.filteredVideos.count == 0 {
+            self.searchActive = false
         }
         else {
-            searchActive = true
+            self.searchActive = true
         }
         self.tableView.reloadData()
     }
@@ -153,10 +141,10 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if searchActive {
-            return filtered.count
+        if self.searchActive {
+            return self.filteredVideos.count
         }
-        return currentVideos.count
+        return self.videos.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
@@ -169,17 +157,17 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
             cell.backgroundColor = UIColor(white: 0.98, alpha: 1)
         }
         
-        if searchActive {
-            if !filtered.isEmpty {
-                cell.title.text = filtered[indexPath.row].title
-                cell.user.text = filtered[indexPath.row].user
-                _addTimers(filtered, cell: cell, indexPath: indexPath)
+        if self.searchActive {
+            if !self.filteredVideos.isEmpty {
+                cell.title.text = self.filteredVideos[indexPath.row].title
+                cell.user.text = self.filteredVideos[indexPath.row].user
+                _addTimers(self.filteredVideos, cell: cell, indexPath: indexPath)
             }
         }
         else {
-            cell.title.text = currentVideos[indexPath.row].title
-            cell.user.text = currentVideos[indexPath.row].user
-            _addTimers(currentVideos, cell: cell, indexPath: indexPath)
+            cell.title.text = self.videos[indexPath.row].title
+            cell.user.text = self.videos[indexPath.row].user
+            _addTimers(self.videos, cell: cell, indexPath: indexPath)
         }
 
         return cell
@@ -189,7 +177,7 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let vc = VideoViewController()
-        vc.videoTitle = currentVideos[indexPath.row].title
+        vc.videoTitle = self.videos[indexPath.row].title
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
@@ -238,39 +226,35 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         let currentDate = NSDate()
             
         for index in 1...20 {
-            let randomMinute: NSInteger = Int(arc4random_uniform(60)) + 1
             let randomRating: NSInteger = Int(arc4random_uniform(10)) + 1
                 
-            sampleVideos.append(Video.init(newTitle: "Live Video \(index)", newUser: "sample user \(index)", newDatePosted: currentDate, newTimeRemaining: randomMinute))
+            sampleVideos.append(Video.init(newTitle: "Live Video \(index)", newUser: "sample user \(index)", newDatePosted: currentDate))
             
             sampleVideos[index-1].rating = randomRating
         }
         self.videos = sampleVideos
-        self.currentVideos = sampleVideos
     }
     
     private func _sortVideos()
     {
-        self.currentVideos.removeAll()
+        //self.videos.removeAll()
         
         if hotBool {
-            
+            /*
             for video in self.videos {
-                if video.rating > 8 {
-                    self.currentVideos.append(video)
-                }
+                //sort by hot
             }
+            */
         }
         else if newBool {
-            
+            /*
             for video in self.videos {
-                if video.timeRemaining > 45 {
-                    self.currentVideos.append(video)
-                }
+                //sort by new
             }
+            */
         }
         else if followBool {
-            self.currentVideos = self.videos
+            //get videos followed
         }
         
         self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
@@ -295,14 +279,14 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         }
     }
     
-    private func _addTimers(videos: [Video], cell: VideosTableViewCell, indexPath: NSIndexPath) {
-        if videos[indexPath.row].timeRemaining < 10 {
+    private func _addTimers(vids: [Video], cell: VideosTableViewCell, indexPath: NSIndexPath) {
+        if NSDate.init().timeIntervalSince1970 - vids[indexPath.row].datePosted.timeIntervalSince1970 < 10 {
             cell.timer.image = UIImage(named: "red_timer.png")
         }
-        else if videos[indexPath.row].timeRemaining < 20 {
+        else if NSDate.init().timeIntervalSince1970 - vids[indexPath.row].datePosted.timeIntervalSince1970 < 20 {
             cell.timer.image = UIImage(named: "orange_timer.png")
         }
-        else if videos[indexPath.row].timeRemaining < 30 {
+        else if NSDate.init().timeIntervalSince1970 - vids[indexPath.row].datePosted.timeIntervalSince1970 < 30 {
             cell.timer.image = UIImage(named: "yellow_timer.png")
         }
         else {
@@ -395,6 +379,88 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         self.tableView.dataSource = self
         
         self.view.addSubview(tableView)
+    }
+    
+    private func _getVideos()
+    {
+        let manager = NetworkingManager.webSharedInstance.manager
+        
+        
+        if (self.hotBool) {
+            let parameters = ["order": "hot", "count": 10]
+            manager.GET(Video.videoPath,
+                parameters: parameters,
+                progress: nil,
+                success: { (dataTask: NSURLSessionDataTask, responseObject: AnyObject?) -> Void in
+                    if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
+                        let successful = jsonResult["success"] as? Bool
+                        if (successful == false) {
+                            print("Failed to get hot videos")
+                        }
+                        else if (successful == true) {
+                            let resultVideos = jsonResult["videos"] as! [Dictionary<String, AnyObject>]
+                            for resultVid in resultVideos {
+                                let datePosted = NSDate.init(timeIntervalSince1970: resultVid["create-date"] as! NSTimeInterval)
+                                self.videos.append(Video.init(newTitle: resultVid["title"]! as! String, newUser: resultVid["username"]! as! String, newDatePosted: datePosted))
+                            }
+                            
+                            self.tableView.reloadData()
+                        }
+                    }
+                    else {
+                        print("Error: responseObject couldn't be converted to Dictionary")
+                    }
+                },
+                failure: { (dataTask: NSURLSessionDataTask?, error: NSError) -> Void in
+                    let errorMessage = "Error: " + error.localizedDescription
+                    print(errorMessage)
+                    
+                    if let response = dataTask!.response as? NSHTTPURLResponse {
+                        if (response.statusCode == 401) {
+                            NetworkingManager.webSharedInstance.logout()
+                        }
+                    }
+                }
+            )
+        }
+        else if (self.newBool) {
+            let parameters = ["order": "new", "count": 10]
+            manager.GET(Video.videoPath,
+                parameters: parameters,
+                progress: nil,
+                success: { (dataTask: NSURLSessionDataTask, responseObject: AnyObject?) -> Void in
+                    if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
+                        let successful = jsonResult["success"] as? Bool
+                        if (successful == false) {
+                            print("Failed to get new videos")
+                        }
+                        else if (successful == true) {
+                            let resultVideos = jsonResult["videos"] as! [Dictionary<String, AnyObject>]
+                            for resultVid in resultVideos {
+                                let datePosted = NSDate.init(timeIntervalSince1970: resultVid["create-date"] as! NSTimeInterval)
+                                self.videos.append(Video.init(newTitle: resultVid["title"]! as! String, newUser: resultVid["username"]! as! String, newDatePosted: datePosted))
+                            }
+                            
+                            self.tableView.reloadData()
+                        }
+                    }
+                    else {
+                        print("Error: responseObject couldn't be converted to Dictionary")
+                    }
+                },
+                failure: { (dataTask: NSURLSessionDataTask?, error: NSError) -> Void in
+                    let errorMessage = "Error: " + error.localizedDescription
+                    print(errorMessage)
+                    
+                    if let response = dataTask!.response as? NSHTTPURLResponse {
+                        if (response.statusCode == 401) {
+                            NetworkingManager.webSharedInstance.logout()
+                        }
+                    }
+                }
+            )
+
+        }
     }
     
 }

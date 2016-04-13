@@ -11,24 +11,22 @@ import UIKit
 
 class Video: NSObject
 {
+    static var videoPath = "videos/"
+    
     var title: String
     var user: String
     var thumbnail: UIImage
     var datePosted: NSDate
-    //var timeRemaining: NSTimeInterval
-    var timeRemaining: NSInteger
     var rating: NSInteger
     
     // MARK: - Initializers
     
-    init(newTitle: String, newUser: String, newDatePosted: NSDate, newTimeRemaining: NSInteger)
+    init(newTitle: String, newUser: String, newDatePosted: NSDate)
     {
         self.title = newTitle
         self.user = newUser
         self.thumbnail = UIImage(named: "default.png")!
         self.datePosted = newDatePosted
-        //self.timeRemaining = NSDate().timeIntervalSinceDate(self.datePosted)
-        self.timeRemaining = newTimeRemaining
         self.rating = 0
     }
     
