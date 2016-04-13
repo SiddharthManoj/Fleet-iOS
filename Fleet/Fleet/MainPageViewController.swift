@@ -42,7 +42,7 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         
         //first view controller = firstViewControllers navigation controller.
         if index == 0 {
-            return _addCameraSubview()
+            return CameraViewController()
         }
         
         //second view controller = secondViewController's navigation controller.
@@ -87,7 +87,6 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         }
         if viewController.isKindOfClass(ProfileViewController) {
             self.index = 2
-            return nil;
         }
         
         //decrement the index to get the viewController before the current one
@@ -96,6 +95,7 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         
     }
     
+    /*
     func _addCameraSubview() -> CameraViewController! {
         let cameraController =  CameraViewController()
         
@@ -108,7 +108,8 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         
         return cameraController
     }
-    
+    */
+
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         //dismissViewControllerAnimated(true, completion: nil)
@@ -117,7 +118,7 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         if mediaType == kUTTypeMovie {
             let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path
             if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {
-                UISaveVideoAtPathToSavedPhotosAlbum(path!, self, "video:didFinishSavingWithError:contextInfo:", nil)
+                UISaveVideoAtPathToSavedPhotosAlbum(path!, self, Selector("video:didFinishSavingWithError:contextInfo:"), nil)
             }
         }
     }

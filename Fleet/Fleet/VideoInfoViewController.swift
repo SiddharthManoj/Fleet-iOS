@@ -92,7 +92,9 @@ class VideoInfoViewController: UIViewController, UITextFieldDelegate
         self.doneButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.doneButton.frame = CGRectMake(self.view.center.x - doneWidth/2, doneYPos, doneWidth, doneHeight)
         self.doneButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
+        
         self.doneButton.addTarget(self, action: "donePressed:", forControlEvents: .TouchUpInside)
+//        self.doneButton.addTarget(self, action: #selector(VideoInfoViewController.donePressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.doneButton)
     }

@@ -140,6 +140,7 @@ class Camera3ViewController: UIViewController, UITextFieldDelegate, UIImagePicke
             let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path
             if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {
                 UISaveVideoAtPathToSavedPhotosAlbum(path!, self, "video:didFinishSavingWithError:contextInfo:", nil)
+//                UISaveVideoAtPathToSavedPhotosAlbum(path!, self, #selector(Camera3ViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
             }
         }
     }
@@ -193,6 +194,7 @@ class Camera3ViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         self.captureButton.frame = CGRect(x: self.view.frame.width/2 - 40, y: 440, width: 80, height: 80)
         self.captureButton.layer.cornerRadius = 0.5 * self.captureButton.bounds.size.width
         self.captureButton.addTarget(self, action: "recordVideo:", forControlEvents: .TouchUpInside)
+//        self.captureButton.addTarget(self, action: #selector(Camera3ViewController.recordVideo(_:)), forControlEvents: .TouchUpInside)
         self.captureButton.backgroundColor = UIColor(white: 1, alpha: 0.7)
         self.view.addSubview(captureButton)
     }

@@ -85,7 +85,7 @@ class VideoSearchBar: UISearchBar
         var index: Int!
         let searchBarView = subviews[0]
         
-        for var i=0; i<searchBarView.subviews.count; ++i {
+        for i in 0 ..< searchBarView.subviews.count {
             if searchBarView.subviews[i].isKindOfClass(UITextField) {
                 index = i
                 break
@@ -100,7 +100,7 @@ class VideoSearchBar: UISearchBar
         var index: Int!
         let searchBarView = subviews[0]
         
-        for var i=0; i<searchBarView.subviews.count; ++i {
+        for i in 0 ..< searchBarView.subviews.count {
             if searchBarView.subviews[i].isKindOfClass(UIImage) {
                 index = i
                 break

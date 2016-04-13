@@ -316,7 +316,9 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         self.hotButton.setTitleColor(UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), forState: .Normal)
         self.hotButton.contentHorizontalAlignment = .Center
         self.hotButton.titleLabel?.font = UIFont(name: quicksandReg, size: 25)
+        
         self.hotButton.addTarget(self, action: "hotPressed:", forControlEvents: .TouchUpInside)
+//        self.hotButton.addTarget(self, action: #selector(VideosSearchViewController.hotPressed(_:)), forControlEvents: .TouchUpInside)
         
         self.scrollView.addSubview(hotButton)
         
@@ -325,7 +327,9 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         self.newButton.setTitleColor(UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), forState: .Normal)
         self.newButton.contentHorizontalAlignment = .Center
         self.newButton.titleLabel?.font = UIFont(name: quicksandReg, size: 25)
+        
         self.newButton.addTarget(self, action: "newPressed:", forControlEvents: .TouchUpInside)
+//        self.newButton.addTarget(self, action: #selector(VideosSearchViewController.newPressed(_:)), forControlEvents: .TouchUpInside)
         
         var newFrame = self.newButton.frame
         newFrame.origin.x = self.hotButton.frame.width
@@ -338,7 +342,9 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         self.followButton.setTitleColor(UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), forState: .Normal)
         self.followButton.contentHorizontalAlignment = .Center
         self.followButton.titleLabel?.font = UIFont(name: quicksandReg, size: 25)
+        
         self.followButton.addTarget(self, action: "followPressed:", forControlEvents: .TouchUpInside)
+//        self.followButton.addTarget(self, action: #selector(VideosSearchViewController.followPressed(_:)), forControlEvents: .TouchUpInside)
         
         var followFrame = self.followButton.frame
         followFrame.origin.x = self.hotButton.frame.width+self.newButton.frame.width

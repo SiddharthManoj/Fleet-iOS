@@ -172,7 +172,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, FBSDKLoginB
         self.supportButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.supportButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.supportButton.frame = CGRectMake(self.view.center.x - supportWidth/2, supportYPos, supportWidth, supportHeight)
+        
         self.supportButton.addTarget(self, action: "supportPressed:", forControlEvents: .TouchUpInside)
+//        self.supportButton.addTarget(self, action: #selector(SettingsViewController.supportPressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.supportButton)
     }
@@ -184,7 +186,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, FBSDKLoginB
         self.privacyPolicyButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.privacyPolicyButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.privacyPolicyButton.frame = CGRectMake(self.view.center.x - privacyPolicyWidth/2, privacyPolicyYPos, privacyPolicyWidth, privacyPolicyHeight)
+        
         self.privacyPolicyButton.addTarget(self, action: "privacyPolicyPressed:", forControlEvents: .TouchUpInside)
+//        self.privacyPolicyButton.addTarget(self, action: #selector(SettingsViewController.privacyPolicyPressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.privacyPolicyButton)
     }
@@ -196,8 +200,10 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, FBSDKLoginB
         self.termsofServiceButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.termsofServiceButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.termsofServiceButton.frame = CGRectMake(self.view.center.x - termsofServiceWidth/2, termsofServiceYPos, termsofServiceWidth, termsofServiceHeight)
-        self.termsofServiceButton.addTarget(self, action: "termsofServicePressed:", forControlEvents: .TouchUpInside)
         
+        self.termsofServiceButton.addTarget(self, action: "termsofServicePressed:", forControlEvents: .TouchUpInside)
+//        self.termsofServiceButton.addTarget(self, action: #selector(SettingsViewController.termsofServicePressed(_:)), forControlEvents: .TouchUpInside)
+      
         self.view.addSubview(self.termsofServiceButton)
     }
     
@@ -208,7 +214,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, FBSDKLoginB
         self.FAQButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.FAQButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.FAQButton.frame = CGRectMake(self.view.center.x - FAQWidth/2, FAQYPos, FAQWidth, FAQHeight)
+        
         self.FAQButton.addTarget(self, action: "FAQPressed:", forControlEvents: .TouchUpInside)
+//        self.FAQButton.addTarget(self, action: #selector(SettingsViewController.FAQPressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.FAQButton)
     }
@@ -220,8 +228,10 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, FBSDKLoginB
         self.notificationsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.notificationsButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.notificationsButton.frame = CGRectMake(self.view.center.x - notificationsWidth/2, notificationsYPos, notificationsWidth, notificationsHeight)
+       
         self.notificationsButton.addTarget(self, action: "notificationsPressed:", forControlEvents: .TouchUpInside)
-        
+//        self.notificationsButton.addTarget(self, action: #selector(SettingsViewController.notificationsPressed(_:)), forControlEvents: .TouchUpInside)
+       
         self.view.addSubview(self.notificationsButton)
     }
     
@@ -243,7 +253,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, FBSDKLoginB
         self.doneButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.doneButton.frame = CGRectMake(self.view.center.x - doneWidth/2, doneYPos, doneWidth, doneHeight)
         self.doneButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
+        
         self.doneButton.addTarget(self, action: "donePressed:", forControlEvents: .TouchUpInside)
+//        self.doneButton.addTarget(self, action: #selector(SettingsViewController.donePressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.doneButton)
     }
