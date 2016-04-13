@@ -20,6 +20,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
     var recordButtonHeight: CGFloat = 50
     
     let captureSession = AVCaptureSession()
+    let videoOutput = AVCaptureMovieFileOutput()
     let screenWidth = UIScreen.mainScreen().bounds.size.width
     var previewLayer: AVCaptureVideoPreviewLayer?
     
@@ -29,7 +30,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
         
         super.viewDidLoad()
         //uploadVideos()
-        captureSession.sessionPreset = AVCaptureSessionPresetHigh
+        self.captureSession.sessionPreset = AVCaptureSessionPresetHigh
         
         let devices = AVCaptureDevice.devices()
         
@@ -44,21 +45,42 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
                 }
             }
         }
-        
+
         self._addRecordButton()
     }
     
     func recordPressed(sender: UIButton!) {
         let recordingDelegate:AVCaptureFileOutputRecordingDelegate? = self
         
-        let videoFileOutput = AVCaptureMovieFileOutput()
-        self.captureSession.addOutput(videoFileOutput)
-        
-        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-        let filePath = documentsURL.URLByAppendingPathComponent("temp")
-        
         // Do recording and save the output to the `filePath`
-        videoFileOutput.startRecordingToOutputFileURL(filePath, recordingDelegate: recordingDelegate)
+        if (self.videoOutput.recording == true) {
+            self.videoOutput.stopRecording()
+        }
+        else {
+            var captureSessionHasOutput = false
+            for output in self.captureSession.outputs {
+                if (output as! AVCaptureMovieFileOutput == self.videoOutput) {
+                    captureSessionHasOutput = true
+                }
+            }
+            
+            if (!captureSessionHasOutput) {
+                self.captureSession.addOutput(self.videoOutput)
+            }
+            
+            let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+            let filePath = documentsURL.URLByAppendingPathComponent("temp")
+            
+            let con = self.videoOutput.connectionWithMediaType(AVMediaTypeVideo)
+            if (con != nil && con.active) {
+                self.videoOutput.startRecordingToOutputFileURL(filePath, recordingDelegate: recordingDelegate)
+            }
+            else {
+                print("Could not record video. Connection could not be established w/ session")
+            }
+
+            
+        }
 
     }
     
