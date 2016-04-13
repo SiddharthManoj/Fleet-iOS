@@ -63,7 +63,7 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         let bgColor = UIColor(red: bgColorRed, green: bgColorGreen, blue: bgColorBlue, alpha: 1)
         self.view.backgroundColor = bgColor
                 
-        //_generateVideos()
+        _generateVideos()
         
         _addSearch()
         _addScrollView()
@@ -124,7 +124,7 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
             let range = tmpTitle.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range != nil
         })
-        if self.filteredVideos.count == 0 {
+        if searchText.isEmpty {
             self.searchActive = false
         }
         else {

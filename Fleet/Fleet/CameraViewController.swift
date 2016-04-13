@@ -78,8 +78,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
             else {
                 print("Could not record video. Connection could not be established w/ session")
             }
-
-            
         }
 
     }
