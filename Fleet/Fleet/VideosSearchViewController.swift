@@ -189,9 +189,9 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     func hotPressed(sender: UIButton!)
     {
-        hotBool = true
-        newBool = false
-        followBool = false
+        self.hotBool = true
+        self.newBool = false
+        self.followBool = false
         
         _setAlphas()
         _sortVideos()
@@ -199,9 +199,9 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     func newPressed(sender: UIButton!)
     {
-        hotBool = false
-        newBool = true
-        followBool = false
+        self.hotBool = false
+        self.newBool = true
+        self.followBool = false
         
         _setAlphas()
         _sortVideos()
@@ -209,9 +209,9 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     func followPressed(sender: UIButton!)
     {
-        hotBool = false
-        newBool = false
-        followBool = true
+        self.hotBool = false
+        self.newBool = false
+        self.followBool = true
         
         _setAlphas()
         _sortVideos()
@@ -390,7 +390,6 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     private func _getVideos()
     {
         let manager = NetworkingManager.webSharedInstance.manager
-        
         
         if (self.hotBool) {
             let parameters = ["order": "hot", "count": 10]
