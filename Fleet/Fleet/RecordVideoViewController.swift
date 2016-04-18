@@ -54,7 +54,7 @@ class RecordVideoViewController: UIViewController {
 
 extension RecordVideoViewController: UIImagePickerControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        /*
+        
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         dismissViewControllerAnimated(true, completion: nil)
         // Handle a movie capture
@@ -63,7 +63,7 @@ extension RecordVideoViewController: UIImagePickerControllerDelegate {
             if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {
                 UISaveVideoAtPathToSavedPhotosAlbum(path!, self, #selector(RecordVideoViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
             }
-        }*/
+        }
     }
     
 }
