@@ -179,8 +179,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
         nameTextField.leftViewMode = UITextFieldViewMode.Always
         nameTextField.leftView = UIView(frame: CGRectMake(0,0,110,10))
         
-        self.nameTextField.addTarget(self, action: "namePressed:", forControlEvents: .TouchUpInside)
-//        self.nameTextField.addTarget(self, action: #selector(SignUpViewController.namePressed(_:)), forControlEvents: .TouchDown)
+        self.nameTextField.addTarget(self, action: #selector(SignUpViewController.namePressed(_:)), forControlEvents: .TouchDown)
         
         self.view.addSubview(nameTextField)
     }
@@ -194,8 +193,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate
         self.signupButton.frame = CGRect(x: self.signUpXPos, y: self.signUpYPos, width: self.signUpWidth, height: self.signUpHeight)
         self.signupButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
         
-        self.signupButton.addTarget(self, action: "signupPressed:", forControlEvents: .TouchUpInside)
-//        self.signupButton.addTarget(self, action: #selector(SignUpViewController.signupPressed(_:)), forControlEvents: .TouchUpInside)
+        self.signupButton.addTarget(self, action: #selector(SignUpViewController.signupPressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(signupButton)
     }

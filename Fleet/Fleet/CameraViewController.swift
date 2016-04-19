@@ -66,32 +66,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
         // Do recording and save the output to the `filePath`
         if (self.videoOutput.recording == true) {
             self.videoOutput.stopRecording()
-            let title = "Success"
-            let message = "Video was saved"
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-            presentViewController(alert, animated: true, completion: nil)
-            
-//            if let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL) {
-//                // Save video to the main photo album
-//                let selectorToCall = Selector("videoWasSavedSuccessfully:didFinishSavingWithError:context:")
-//                UISaveVideoAtPathToSavedPhotosAlbum(pickedVideo.relativePath!, self, selectorToCall, nil)
-//                
-//                // Save the video to the app directory so we can play it later
-//                let videoData = NSData(contentsOfURL: pickedVideo)
-//                let paths = NSSearchPathForDirectoriesInDomains(
-//                    NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-//                let documentsDirectory: AnyObject = paths[0]
-//                let dataPath = documentsDirectory.stringByAppendingPathComponent(filePath)
-//                videoData?.writeToFile(dataPath, atomically: false)
-//                
-//                self.dismissViewControllerAnimated(true, completion: nil)
-//                
-//            }
-//            
-//            imagePicker.dismissViewControllerAnimated(true, completion: {
-//                // Anything you want to happen when the user saves an video
-//            })
+            print("Video successfully saved")
         }
         else {
             var captureSessionHasOutput = false
@@ -124,8 +99,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
         self.recordButton.setImage(UIImage(named: "record_button.png"), forState: .Normal)
         self.recordButton.frame = CGRectMake(self.view.center.x - recordButtonWidth/2, recordButtonYPos, recordButtonWidth, recordButtonHeight)
         
-        self.recordButton.addTarget(self, action: "recordPressed:", forControlEvents: .TouchUpInside)
-//        self.recordButton.addTarget(self, action: #selector(CameraViewController.recordPressed(_:)), forControlEvents: .TouchUpInside)
+        self.recordButton.addTarget(self, action: #selector(CameraViewController.recordPressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.recordButton)
     }
@@ -191,6 +165,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
         
         let vsvc = VideoSubmitViewController()
         vsvc.fileURL = outputFileURL
+        
         self.presentViewController(vsvc, animated: true, completion: nil)
         
         return
@@ -198,22 +173,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
     
     func captureOutput(captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAtURL fileURL: NSURL!, fromConnections connections: [AnyObject]!) {
         return
-    }
-    
-}
-
-extension CameraViewController: UIImagePickerControllerDelegate {
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        
-        let mediaType = info[UIImagePickerControllerMediaType] as! NSString
-        dismissViewControllerAnimated(true, completion: nil)
-        // Handle a movie capture
-        if mediaType == kUTTypeMovie {
-            let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path
-            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {
-                UISaveVideoAtPathToSavedPhotosAlbum(path!, self, #selector(RecordVideoViewController.video(_:didFinishSavingWithError:contextInfo:)), nil)
-            }
-        }
     }
     
 }
