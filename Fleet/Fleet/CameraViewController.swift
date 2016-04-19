@@ -185,24 +185,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
         self.view.layer.addSublayer(previewLayer!)
         previewLayer?.frame = self.view.layer.frame
         captureSession.startRunning()
-        
-//        var err : NSError? = nil
-//        captureSession.addInput(AVCaptureDeviceInput(device: captureDevice, error: &err))
-//        
-//        if err != nil {
-//            println("error: \(err?.localizedDescription)")
-//        }
-//        
-//        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-//        self.cameraView.layer.addSublayer(previewLayer)
-//        self.cameraView.bringSubviewToFront(takePhotoButton)
-//        self.cameraView.bringSubviewToFront(self.snappedPicture)
-//        self.cameraView.bringSubviewToFront(self.backButton)
-//        previewLayer?.frame = self.cameraView.layer.frame
-//        captureSession.startRunning()
     }
     
     func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
+        
+        let vsvc = VideoSubmitViewController()
+        vsvc.fileURL = outputFileURL
+        self.presentViewController(vsvc, animated: true, completion: nil)
+        
         return
     }
     
@@ -210,47 +200,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, AV
         return
     }
     
-    
-    func uploadVideos() {
-        
-        //parameters (user id (UID) and the actual data)
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let uuid = defaults.objectForKey("uuid") as! String
-        
-        let manager = NetworkingManager.videoSharedInstance.manager
-        
-        let url = NetworkingManager.videoBaseURLString + "mp4:sample.mp4/" + "playlist.m3u8"
-        
-        let fileURL = NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("sample", ofType: "mp4")!)
-        
-        let parameters = [
-            "uuid": uuid,
-            "videoName":"sample",
-            "contentBody" : "Some body content for the test application",
-            "title" : "title of video",
-            "typeOfContent":"video"
-        ]
-        
-        manager.POST(url, parameters: parameters, constructingBodyWithBlock: { (data: AFMultipartFormData!) -> Void in
-            if let _ = try? data.appendPartWithFileURL(fileURL, name: "video_data") {
-                print("Appended video data")
-            }
-            else {
-                print("Could not append video data")
-            }
-            }, progress: nil, success: { (dataTask: NSURLSessionDataTask, responseObject: AnyObject?) -> Void in
-                print("Successfully uploaded video")
-            }, failure: { (dataTask: NSURLSessionDataTask?, error: NSError) in
-                print("Failed to upload a video")
-            }
-        )
-    }
-    
-    //create a manager. sharedInstance.video ->do post and get to stream
-
-    // MARK: - UIImagePickerController methods
-
 }
 
 extension CameraViewController: UIImagePickerControllerDelegate {

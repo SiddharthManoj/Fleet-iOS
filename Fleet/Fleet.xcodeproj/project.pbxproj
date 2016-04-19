@@ -33,13 +33,13 @@
 		B70999AC1C65730E003B2BB3 /* CredentialStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70999AB1C65730E003B2BB3 /* CredentialStore.swift */; };
 		B70999B01C783491003B2BB3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70999AF1C783491003B2BB3 /* User.swift */; };
 		B70999B21C8D382A003B2BB3 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70999B11C8D382A003B2BB3 /* UserDefaults.swift */; };
+		B7C76AAD1CC6D2F400151A6E /* VideoSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C76AAC1CC6D2F400151A6E /* VideoSubmitViewController.swift */; };
 		B7F34A391C60677900799BE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F34A381C60677900799BE6 /* AppDelegate.swift */; };
 		B7F34A3E1C60677900799BE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F34A3C1C60677900799BE6 /* Main.storyboard */; };
 		B7F34A401C60677900799BE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7F34A3F1C60677900799BE6 /* Assets.xcassets */; };
 		B7F34A431C60677900799BE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F34A411C60677900799BE6 /* LaunchScreen.storyboard */; };
 		B7F34A4B1C606C2500799BE6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F34A4A1C606C2500799BE6 /* LoginViewController.swift */; };
 		BF758DD61CB4AA03008D3A4E /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF758DD51CB4AA03008D3A4E /* MainPageViewController.swift */; };
-		BF758DDA1CB4C350008D3A4E /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF758DD91CB4C350008D3A4E /* RecordVideoViewController.swift */; };
 		BFB806701C6EE4DE00EAE63D /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB8066F1C6EE4DE00EAE63D /* FAQViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +74,7 @@
 		B70999AB1C65730E003B2BB3 /* CredentialStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialStore.swift; sourceTree = "<group>"; };
 		B70999AF1C783491003B2BB3 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B70999B11C8D382A003B2BB3 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		B7C76AAC1CC6D2F400151A6E /* VideoSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSubmitViewController.swift; sourceTree = "<group>"; };
 		B7F34A351C60677900799BE6 /* Fleet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fleet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F34A381C60677900799BE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7F34A3D1C60677900799BE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,7 +83,6 @@
 		B7F34A441C60677900799BE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7F34A4A1C606C2500799BE6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BF758DD51CB4AA03008D3A4E /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
-		BF758DD91CB4C350008D3A4E /* RecordVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
 		BFB8066F1C6EE4DE00EAE63D /* FAQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,6 +204,7 @@
 				A1873DBE1C6441EF00EE5DC6 /* ScrollViewController.swift */,
 				BF758DD51CB4AA03008D3A4E /* MainPageViewController.swift */,
 				A188464C1C6AC063001DB412 /* CameraViewController.swift */,
+				B7C76AAC1CC6D2F400151A6E /* VideoSubmitViewController.swift */,
 				A1873DB61C640A9400EE5DC6 /* Camera3ViewController.swift */,
 				A188464A1C6ABFA1001DB412 /* VideoInfoViewController.swift */,
 				A1873DB81C640ACF00EE5DC6 /* VideosSearchViewController.swift */,
@@ -211,7 +212,6 @@
 				A1873DBA1C640AE200EE5DC6 /* ProfileViewController.swift */,
 				A1873DBC1C640AEF00EE5DC6 /* SettingsViewController.swift */,
 				BFB8066F1C6EE4DE00EAE63D /* FAQViewController.swift */,
-				BF758DD91CB4C350008D3A4E /* RecordVideoViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -250,7 +250,7 @@
 				TargetAttributes = {
 					B7F34A341C60677900799BE6 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = J2RN8KLD9K;
+						DevelopmentTeam = 7KP2V8DA69;
 					};
 				};
 			};
@@ -341,8 +341,8 @@
 				A1FD7EC71C65234B00603DF6 /* Video.swift in Sources */,
 				A1FD7ECA1C65408D00603DF6 /* VideosTableViewCell.swift in Sources */,
 				A1FD7ECD1C654B1900603DF6 /* VideoViewController.swift in Sources */,
+				B7C76AAD1CC6D2F400151A6E /* VideoSubmitViewController.swift in Sources */,
 				B70999AC1C65730E003B2BB3 /* CredentialStore.swift in Sources */,
-				BF758DDA1CB4C350008D3A4E /* RecordVideoViewController.swift in Sources */,
 				A1873DB51C64056800EE5DC6 /* SignUpViewController.swift in Sources */,
 				A188464B1C6ABFA1001DB412 /* VideoInfoViewController.swift in Sources */,
 				A1873DB71C640A9400EE5DC6 /* Camera3ViewController.swift in Sources */,
