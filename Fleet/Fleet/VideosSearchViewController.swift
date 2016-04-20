@@ -24,8 +24,6 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     var newBool: Bool = false
     var followBool: Bool = false
     
-    var searchActive: Bool = false
-    
     var quicksandReg: String = "Quicksand-Regular"
     var quicksandBold: String = "Quicksand-Bold"
     var corbertReg: String = "Corbert-Regular"
@@ -36,12 +34,7 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     var loginBoxImg: String = "login_box.png"
     var signUpBoxImg: String = "signup_box.png"
     
-    // Do any additional setup after loading the view.
-    
-    //var videosLabel: UILabel!
-    
     var videos: [Video] = []
-    var filteredVideos: [Video] = []
     
     var searchBar: UISearchBar!
     var scrollView: UIScrollView!
@@ -62,8 +55,6 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         
         let bgColor = UIColor(red: bgColorRed, green: bgColorGreen, blue: bgColorBlue, alpha: 1)
         self.view.backgroundColor = bgColor
-                
-        _generateVideos()
         
         _addSearch()
         _addScrollView()
@@ -84,52 +75,34 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     // MARK: - UITextField methods
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
         self.searchBar.resignFirstResponder()
         return true
     }
     
     // MARK: - UISearchBar methods
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
-    {
-        searchActive = true
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar)
-    {
-        searchActive = false
-    }
-    
     func searchBarCancelButtonClicked(searchBar: UISearchBar)
     {
-        searchActive = false
         self.searchBar.resignFirstResponder()
         self.searchBar.endEditing(true)
         self.view.endEditing(true)
+        
+        self._getVideos()
+
+        self.tableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
-        searchActive = false
         self.searchBar.resignFirstResponder()
         self.view.endEditing(true)
-    }
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
-    {
-        self.filteredVideos = self.videos.filter({ (video) -> Bool in
-            let tmpVideo: Video = video
-            let tmpTitle = tmpVideo.title
-            let range = tmpTitle.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range != nil
-        })
-        if searchText.isEmpty {
-            self.searchActive = false
+        
+        if (!self.searchBar.text!.isEmpty) {
+            self._getVideos()
         }
-        else {
-            self.searchActive = true
-        }
+        
         self.tableView.reloadData()
     }
     
@@ -141,9 +114,6 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if self.searchActive {
-            return self.filteredVideos.count
-        }
         return self.videos.count
     }
     
@@ -157,18 +127,9 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
             cell.backgroundColor = UIColor(white: 0.98, alpha: 1)
         }
         
-        if self.searchActive {
-            if !self.filteredVideos.isEmpty {
-                cell.title.text = self.filteredVideos[indexPath.row].title
-                cell.user.text = self.filteredVideos[indexPath.row].user
-                _addTimers(self.filteredVideos, cell: cell, indexPath: indexPath)
-            }
-        }
-        else {
-            cell.title.text = self.videos[indexPath.row].title
-            cell.user.text = self.videos[indexPath.row].user
-            _addTimers(self.videos, cell: cell, indexPath: indexPath)
-        }
+        cell.title.text = self.videos[indexPath.row].title
+        cell.user.text = self.videos[indexPath.row].user
+        _addTimers(self.videos, cell: cell, indexPath: indexPath)
 
         return cell
     }
@@ -193,8 +154,8 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         self.newBool = false
         self.followBool = false
         
-        _setAlphas()
-        _sortVideos()
+        self._setAlphas()
+        self._getVideos()
     }
     
     func newPressed(sender: UIButton!)
@@ -203,8 +164,8 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         self.newBool = true
         self.followBool = false
         
-        _setAlphas()
-        _sortVideos()
+        self._setAlphas()
+        self._getVideos()
     }
     
     func followPressed(sender: UIButton!)
@@ -213,53 +174,11 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         self.newBool = false
         self.followBool = true
         
-        _setAlphas()
-        _sortVideos()
+        self._setAlphas()
     }
     
     // MARK: - Private methods
-    
-    private func _generateVideos()
-    {
-        var sampleVideos = [Video]()
-            
-        let currentDate = NSDate()
-            
-        for index in 1...20 {
-            let randomRating: NSInteger = Int(arc4random_uniform(10)) + 1
-                
-            sampleVideos.append(Video.init(newTitle: "Live Video \(index)", newUser: "sample user \(index)", newDatePosted: currentDate))
-            
-            sampleVideos[index-1].rating = randomRating
-        }
-        self.videos = sampleVideos
-    }
-    
-    private func _sortVideos()
-    {
-        //self.videos.removeAll()
         
-        if hotBool {
-            /*
-            for video in self.videos {
-                //sort by hot
-            }
-            */
-        }
-        else if newBool {
-            /*
-            for video in self.videos {
-                //sort by new
-            }
-            */
-        }
-        else if followBool {
-            //get videos followed
-        }
-        
-        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
-    }
-    
     private func _setAlphas()
     {
         if hotBool {
@@ -344,7 +263,6 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         self.followButton.titleLabel?.font = UIFont(name: quicksandReg, size: 25)
         
         self.followButton.addTarget(self, action: "followPressed:", forControlEvents: .TouchUpInside)
-//        self.followButton.addTarget(self, action: #selector(VideosSearchViewController.followPressed(_:)), forControlEvents: .TouchUpInside)
         
         var followFrame = self.followButton.frame
         followFrame.origin.x = self.hotButton.frame.width+self.newButton.frame.width
@@ -389,11 +307,16 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
     
     private func _getVideos()
     {
+        self.videos = []
         let manager = NetworkingManager.webSharedInstance.manager
         
+        var parameters: Dictionary<String, String> = [:]
+        if (!self.searchBar.text!.isEmpty) {
+            parameters["tag"] = self.searchBar.text!.lowercaseString
+        }
+        
         if (self.hotBool) {
-            let parameters = ["order": "hot", "count": 10]
-            manager.GET(Video.videoPath,
+            manager.GET(Video.videoPath + "list/hot",
                 parameters: parameters,
                 progress: nil,
                 success: { (dataTask: NSURLSessionDataTask, responseObject: AnyObject?) -> Void in
@@ -405,8 +328,8 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
                         else if (successful == true) {
                             let resultVideos = jsonResult["videos"] as! [Dictionary<String, AnyObject>]
                             for resultVid in resultVideos {
-                                let datePosted = NSDate.init(timeIntervalSince1970: resultVid["create-date"] as! NSTimeInterval)
-                                self.videos.append(Video.init(newTitle: resultVid["title"]! as! String, newUser: resultVid["username"]! as! String, newDatePosted: datePosted))
+                                let datePosted = NSDate.init(timeIntervalSince1970: resultVid["created_at"] as! NSTimeInterval)
+                                self.videos.append(Video.init(newTitle: resultVid["title"]! as! String, newUser: resultVid["author_username"]! as! String, newDatePosted: datePosted))
                             }
                             
                             self.tableView.reloadData()
@@ -429,8 +352,7 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
             )
         }
         else if (self.newBool) {
-            let parameters = ["order": "new", "count": 10]
-            manager.GET(Video.videoPath,
+            manager.GET(Video.videoPath + "list/new",
                 parameters: parameters,
                 progress: nil,
                 success: { (dataTask: NSURLSessionDataTask, responseObject: AnyObject?) -> Void in
@@ -442,8 +364,8 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
                         else if (successful == true) {
                             let resultVideos = jsonResult["videos"] as! [Dictionary<String, AnyObject>]
                             for resultVid in resultVideos {
-                                let datePosted = NSDate.init(timeIntervalSince1970: resultVid["create-date"] as! NSTimeInterval)
-                                self.videos.append(Video.init(newTitle: resultVid["title"]! as! String, newUser: resultVid["username"]! as! String, newDatePosted: datePosted))
+                                let datePosted = NSDate.init(timeIntervalSince1970: resultVid["created_at"] as! NSTimeInterval)
+                                self.videos.append(Video.init(newTitle: resultVid["title"]! as! String, newUser: resultVid["author_username"]! as! String, newDatePosted: datePosted))
                             }
                             
                             self.tableView.reloadData()
