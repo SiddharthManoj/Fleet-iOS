@@ -31,10 +31,6 @@ class VideoViewController: UIViewController {
     var fleetTitle: String = "fleet"
     var doneString: String = "DONE"
     
-    var logoImg: String = "logo.png"
-    var loginBoxImg: String = "login_box.png"
-    var signUpBoxImg: String = "signup_box.png"
-    
     // Do any additional setup after loading the view.
     
     var videoTitle: String!
@@ -43,7 +39,9 @@ class VideoViewController: UIViewController {
     
     var focusView: UIImageView!
     var focusTouch: UITapGestureRecognizer!
-    var focusLocation: CGPoint!
+    var focusTimes: [Double]!
+    var duration: Double!
+    var author: String!
     
     var gradient: CGGradientRef!
     

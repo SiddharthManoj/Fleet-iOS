@@ -17,17 +17,21 @@ class Video: NSObject
     var user: String
     var thumbnail: UIImage
     var datePosted: NSDate
-    var rating: NSInteger
+    var rating: Int
+    var duration: Double
+    var focusTimes: [Double]
     
     // MARK: - Initializers
     
-    init(newTitle: String, newUser: String, newDatePosted: NSDate)
+    init(newTitle: String, newUser: String, newDatePosted: NSDate, newDuration: Double, newFocusTimes: [Double])
     {
         self.title = newTitle
         self.user = newUser
         self.thumbnail = UIImage(named: "default.png")!
         self.datePosted = newDatePosted
         self.rating = 0
+        self.duration = newDuration
+        self.focusTimes = newFocusTimes
     }
     
 }
