@@ -76,7 +76,9 @@ class VideoSubmitViewController: UIViewController, UITextFieldDelegate
     
     func publishPressed(sender: UIButton!)
     {
-        self._uploadVideos()
+        if (!self.tag1TextField.text!.isEmpty && !self.tag2TextField.text!.isEmpty) {
+            self._uploadVideos()
+        }
     }
     
     func tag1Pressed(sender: UITextField!)
