@@ -50,10 +50,15 @@ class VideoViewController: UIViewController {
     var focusCounter: Int!
     var timerSpeed: NSTimeInterval!
     
+    var playerTimerObserver: AnyObject!
+    
     var player: AVPlayer!
     
     
     // MARK: - UIViewController methods
+    
+    override func viewWillAppear(animated: Bool) {
+    }
     
     override func viewDidLoad()
     {
@@ -120,6 +125,7 @@ class VideoViewController: UIViewController {
         }
         else {
             self.player.pause()
+            self.player.removeTimeObserver(self.playerTimerObserver)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         
@@ -235,7 +241,13 @@ class VideoViewController: UIViewController {
     
     private func _addTimer()
     {
-        _ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: #selector(VideoViewController.countSec(_:)), userInfo: nil, repeats: true)
+        
+        let interval = CMTimeMakeWithSeconds(1.0, 1000000000)
+        self.playerTimerObserver = self.player.addPeriodicTimeObserverForInterval(interval, queue: nil, usingBlock: { (time: CMTime) in
+            self.countSec(nil)
+        })
+ 
+        //_ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: #selector(VideoViewController.countSec(_:)), userInfo: nil, repeats: true)
     }
 
 }
