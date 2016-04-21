@@ -47,18 +47,14 @@ class VideoViewController: UIViewController {
     var author: String!
     
     var scaledFocusTimes: [Int]!
-    
     var gradient: CGGradientRef!
-    
     var timelineBars: [UIImageView]!
-
     var timelineBarHeights: [CGFloat]!
-    
     var counter: Int!
-    
     var focusCounter: Int!
-    
     var timerSpeed: NSTimeInterval!
+    
+    var player: AVPlayer!
     
     
     // MARK: - UIViewController methods
@@ -117,15 +113,27 @@ class VideoViewController: UIViewController {
     
     func donePressed(sender: UIButton!)
     {
+        self.player.pause()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func focusTapped(sender: UITapGestureRecognizer!)
     {
+        if (self.focusTimes.count > 0 && self.focusCounter < self.focusTimes.count - 1) {
+            self.player.seekToTime(CMTimeMakeWithSeconds(self.focusTimes[self.focusCounter], 1000000000))
+        }
+        else {
+            self.donePressed(nil)
+        }
+        
+        
         if self.focusCounter<self.scaledFocusTimes.count {
             self.counter = self.scaledFocusTimes[self.focusCounter]
             self.focusCounter = self.focusCounter + 1;
         }
+        
+        //self.player.currentTime().seconds
+        //let time = CMTime.init(seconds: self.focusTimes[self.focusCounter], preferredTimescale: 1000000000)
     }
     
     func countSec(sender: NSTimer!)
@@ -192,11 +200,11 @@ class VideoViewController: UIViewController {
         //let manager = NetworkingManager.videoSharedInstance.manager
         
         let videoURL = NSURL(string: url)
-        let player = AVPlayer(URL: videoURL!)
+        self.player = AVPlayer(URL: videoURL!)
         let playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = self.view.bounds
         self.view.layer.addSublayer(playerLayer)
-        player.play()
+        self.player.play()
         
         /*
         manager.GET(url, parameters: nil, constructingBodyWithBlock: { (data: AFMultipartFormData!) -> Void in
