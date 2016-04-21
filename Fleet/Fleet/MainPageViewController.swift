@@ -32,8 +32,6 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         self.delegate = self
         
         let firstViewController = self.viewControllerAtIndex(self.index)
-        //      let secondViewController = self.viewControllerAtIndex(1)
-        //      let thirdViewController = self.viewControllerAtIndex(2)
         let viewControllers: NSArray = [firstViewController]
         self.setViewControllers(viewControllers as? [UIViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
     }
@@ -95,21 +93,6 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         
     }
     
-    /*
-    func _addCameraSubview() -> CameraViewController! {
-        let cameraController =  CameraViewController()
-        
-        if UIImagePickerController.isSourceTypeAvailable(.Camera) == true {
-            cameraController.sourceType = .Camera
-            cameraController.mediaTypes = [kUTTypeMovie as String]
-            cameraController.allowsEditing = false
-            cameraController.delegate = self
-        }
-        
-        return cameraController
-    }
-    */
-
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         //dismissViewControllerAnimated(true, completion: nil)

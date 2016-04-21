@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 import Foundation
 
 class VideoViewController: UIViewController {
@@ -45,18 +47,14 @@ class VideoViewController: UIViewController {
     var author: String!
     
     var scaledFocusTimes: [Int]!
-    
     var gradient: CGGradientRef!
-    
     var timelineBars: [UIImageView]!
-
     var timelineBarHeights: [CGFloat]!
-    
     var counter: Int!
-    
     var focusCounter: Int!
-    
     var timerSpeed: NSTimeInterval!
+    
+    var player: AVPlayer!
     
     
     // MARK: - UIViewController methods
@@ -72,7 +70,7 @@ class VideoViewController: UIViewController {
         // quickly just for testing, will delete later
         
         self.videoLabel = UILabel(frame: CGRect(x: self.view.center.x - 400/2, y: 100, width: 400, height: 50))
-        self.videoLabel.attributedText = NSAttributedString(string: videoTitle, attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: corbertReg, size: 50)!])
+        self.videoLabel.attributedText = NSAttributedString(string: videoTitle, attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: corbertReg, size: 24)!])
         self.videoLabel.textAlignment = .Center
         self.videoLabel.backgroundColor = UIColor(white: 1, alpha: 0)
         
@@ -85,13 +83,14 @@ class VideoViewController: UIViewController {
         
         self.timerSpeed = self.duration/Double(numBars)
         
-        _addDoneButton()
+        self._playVideo()
+        
         _addFocusView()
         _addTapGesture()
         _setHeights()
         _addTimeline()
         _addTimer()
-
+        _addDoneButton()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -114,29 +113,25 @@ class VideoViewController: UIViewController {
     
     func donePressed(sender: UIButton!)
     {
+        self.player.pause()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func focusTapped(sender: UITapGestureRecognizer!)
     {
-        //self.focusView.backgroundColor = UIColor(white: 0, alpha: 1)
+        if (self.focusTimes.count > 0 && self.focusCounter < self.focusTimes.count) {
+            self.player.seekToTime(CMTimeMakeWithSeconds(self.focusTimes[self.focusCounter], 1000000000))
+        }
+        else {
+            self.donePressed(nil)
+        }
+        
         
         if self.focusCounter<self.scaledFocusTimes.count {
             self.counter = self.scaledFocusTimes[self.focusCounter]
             self.focusCounter = self.focusCounter + 1;
         }
     }
-    
-    /*
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let touch = touches.first {
-            self.focusLocation = touch.locationInView(focusView)
-            //_handleFocusTap(self.focusLocation)
-        }
-        super.touchesBegan(touches, withEvent: event)
-        
-    }
-    */
     
     func countSec(sender: NSTimer!)
     {
@@ -174,17 +169,14 @@ class VideoViewController: UIViewController {
         self.doneButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.doneButton.frame = CGRectMake(self.view.center.x - doneWidth/2, doneYPos, doneWidth, doneHeight)
         self.doneButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
-        self.doneButton.addTarget(self, action: "donePressed:", forControlEvents: .TouchUpInside)
-//        self.doneButton.addTarget(self, action: #selector(VideoViewController.donePressed(_:)), forControlEvents: .TouchUpInside)
+        self.doneButton.addTarget(self, action: #selector(VideoViewController.donePressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.doneButton)
     }
     
     private func _addFocusView()
     {
-        self.focusView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-        self.focusView.image = UIImage(named: "china_background")
-        self.view.addSubview(focusView)
+        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
     }
     
     private func _handleFocusTap(tapLocation: CGPoint!)
@@ -199,68 +191,18 @@ class VideoViewController: UIViewController {
         self.focusView.layer.addSublayer(circleLayer)
     }
     
-    /*
-    private func _handleFocusTap(focusLocation: CGPoint!)
+    private func _playVideo()
     {
-        let gradientView = GradientView(frame: CGRectMake(0, 0, self.focusView.frame.width, self.focusView.frame.height))
+        let url = NetworkingManager.videoBaseURLString + "mp4:sample.mp4/" + "playlist.m3u8"
         
-        // Set the gradient colors
-        gradientView.myColors = [UIColor(white: 1, alpha: 1).CGColor, UIColor(white: 0, alpha: 1).CGColor]
-        
-        // Optionally set some locations
-        //gradientView.locations = [0.2, 1.0]
-        
-        gradientView.mode = .Radial
-        
-        gradientView.centerPoint = focusLocation
-        
-        gradientView.alpha = 0.3
-        
-        // Add it as a subview in all of its awesome
-        self.focusView.addSubview(gradientView)
+        let videoURL = NSURL(string: url)
+        self.player = AVPlayer(URL: videoURL!)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.view.bounds
+        self.view.layer.addSublayer(playerLayer)
+        self.player.play()
         
     }
-    */
-
-    /*
-    private func _handleFocusTap()
-    {
-        /*
-        // Initialize a gradient view
-        let gradientView = GradientView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        
-        // Set the gradient colors
-        gradientView.colors = [UIColor.redColor(), UIColor.blueColor()]
-        
-        // Optionally set some locations
-        gradientView.locations = [0.8, 1.0]
-        
-        gradientView.mode = .Radial
-        
-        // Add it as a subview in all of its awesome
-        self.focusView.addSubview(gradientView)
-        */
-        let context = UIGraphicsGetCurrentContext()
-        let size = self.focusView.bounds.size
-        
-        let locations: [CGFloat] = [0.0, 1.0]
-        
-        let colors = [UIColor.whiteColor().CGColor,
-            UIColor.blueColor().CGColor]
-        
-        let colorspace = CGColorSpaceCreateDeviceRGB()
-        
-        let gradient = CGGradientCreateWithColors(colorspace,
-            colors, locations)
-
-        let options: CGGradientDrawingOptions = [.DrawsAfterEndLocation]
-
-        let center = CGPoint(x: self.focusView.bounds.midX, y: self.focusView.bounds.midY)
-        CGContextDrawRadialGradient(context, gradient, center, 0, center, min(size.width, size.height) / 2, options)
-
-        
-    }
-    */
     
     private func _addTapGesture()
     {
@@ -303,8 +245,7 @@ class VideoViewController: UIViewController {
     
     private func _addTimer()
     {
-        _ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: "countSec:", userInfo: nil, repeats: true)
-//        _ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: #selector(VideoViewController.countSec(_:)), userInfo: nil, repeats: true)
+        _ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: #selector(VideoViewController.countSec(_:)), userInfo: nil, repeats: true)
     }
 
 }
