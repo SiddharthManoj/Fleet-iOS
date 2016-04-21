@@ -85,13 +85,12 @@ class VideoViewController: UIViewController {
         
         self.timerSpeed = self.duration/Double(numBars)
         
-        _addDoneButton()
         _addFocusView()
         _addTapGesture()
         _setHeights()
         _addTimeline()
         _addTimer()
-
+        _addDoneButton()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -119,24 +118,11 @@ class VideoViewController: UIViewController {
     
     func focusTapped(sender: UITapGestureRecognizer!)
     {
-        //self.focusView.backgroundColor = UIColor(white: 0, alpha: 1)
-        
         if self.focusCounter<self.scaledFocusTimes.count {
             self.counter = self.scaledFocusTimes[self.focusCounter]
             self.focusCounter = self.focusCounter + 1;
         }
     }
-    
-    /*
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let touch = touches.first {
-            self.focusLocation = touch.locationInView(focusView)
-            //_handleFocusTap(self.focusLocation)
-        }
-        super.touchesBegan(touches, withEvent: event)
-        
-    }
-    */
     
     func countSec(sender: NSTimer!)
     {
@@ -174,8 +160,7 @@ class VideoViewController: UIViewController {
         self.doneButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
         self.doneButton.frame = CGRectMake(self.view.center.x - doneWidth/2, doneYPos, doneWidth, doneHeight)
         self.doneButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
-        self.doneButton.addTarget(self, action: "donePressed:", forControlEvents: .TouchUpInside)
-//        self.doneButton.addTarget(self, action: #selector(VideoViewController.donePressed(_:)), forControlEvents: .TouchUpInside)
+        self.doneButton.addTarget(self, action: #selector(VideoViewController.donePressed(_:)), forControlEvents: .TouchUpInside)
         
         self.view.addSubview(self.doneButton)
     }
@@ -263,8 +248,7 @@ class VideoViewController: UIViewController {
     
     private func _addTimer()
     {
-        _ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: "countSec:", userInfo: nil, repeats: true)
-//        _ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: #selector(VideoViewController.countSec(_:)), userInfo: nil, repeats: true)
+        _ = NSTimer.scheduledTimerWithTimeInterval(timerSpeed, target: self, selector: #selector(VideoViewController.countSec(_:)), userInfo: nil, repeats: true)
     }
 
 }
