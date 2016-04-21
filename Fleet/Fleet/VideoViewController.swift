@@ -179,7 +179,7 @@ class VideoViewController: UIViewController {
     {
         var url: String!
         if (self.s3 != nil && !self.s3.isEmpty) {
-            url = NetworkingManager.videoBaseURLString + self.s3 + "playlist.m3u8"
+            url = NetworkingManager.videoBaseURLString + self.s3 + "/playlist.m3u8"
         }
         else {
             url = NetworkingManager.videoBaseURLString + "mp4:sample.mp4/" + "playlist.m3u8"
