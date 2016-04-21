@@ -194,7 +194,6 @@ class VideoViewController: UIViewController {
     private func _playVideo()
     {
         let url = NetworkingManager.videoBaseURLString + "mp4:sample.mp4/" + "playlist.m3u8"
-        //let manager = NetworkingManager.videoSharedInstance.manager
         
         let videoURL = NSURL(string: url)
         self.player = AVPlayer(URL: videoURL!)
@@ -203,24 +202,6 @@ class VideoViewController: UIViewController {
         self.view.layer.addSublayer(playerLayer)
         self.player.play()
         
-        /*
-        manager.GET(url, parameters: nil, constructingBodyWithBlock: { (data: AFMultipartFormData!) -> Void in
-            if let _ = try? data.appendPartWithFileURL(self.fileURL, name: "video_data") {
-                print("Appended video data")
-            }
-            else {
-                print("Could not append video data")
-            }
-            }, progress: nil, success: { (dataTask: NSURLSessionDataTask, responseObject: AnyObject?) -> Void in
-                print("Successfully uploaded video")
-                self.dismissViewControllerAnimated(false, completion: nil)
-                
-            }, failure: { (dataTask: NSURLSessionDataTask?, error: NSError) in
-                print("Failed to upload a video")
-                self.dismissViewControllerAnimated(false, completion: nil)
-            }
-        )
-        */
     }
     
     private func _addTapGesture()
