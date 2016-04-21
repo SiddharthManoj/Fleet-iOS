@@ -20,10 +20,11 @@ class Video: NSObject
     var rating: Int
     var duration: Double
     var focusTimes: [Double]
+    var s3: String
     
     // MARK: - Initializers
     
-    init(newTitle: String, newUser: String, newDatePosted: NSDate, newDuration: Double, newFocusTimes: [Double])
+    init(newTitle: String, newUser: String, newDatePosted: NSDate, newDuration: Double, newFocusTimes: [Double], newS3: String)
     {
         self.title = newTitle
         self.user = newUser
@@ -32,6 +33,7 @@ class Video: NSObject
         self.rating = 0
         self.duration = newDuration
         self.focusTimes = newFocusTimes
+        self.s3 = newS3
     }
     
 }

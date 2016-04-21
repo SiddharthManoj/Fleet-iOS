@@ -142,6 +142,7 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         vc.duration = self.videos[indexPath.row].duration
         vc.focusTimes = self.videos[indexPath.row].focusTimes
         vc.author = self.videos[indexPath.row].user
+        vc.s3 = self.videos[indexPath.row].s3
 
         self.presentViewController(vc, animated: true, completion: nil)
     }
@@ -333,7 +334,7 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
                             let resultVideos = jsonResult["videos"] as! [Dictionary<String, AnyObject>]
                             for resultVid in resultVideos {
                                 let datePosted = NSDate.init(timeIntervalSince1970: resultVid["created_at"] as! NSTimeInterval)
-                                self.videos.append(Video.init(newTitle: resultVid["title"]! as! String, newUser: resultVid["author_username"]! as! String, newDatePosted: datePosted, newDuration: resultVid["duration"]! as! Double, newFocusTimes: resultVid["video_focuses"]! as! [Double]))
+                                self.videos.append(Video.init(newTitle: resultVid["title"]! as! String, newUser: resultVid["author_username"]! as! String, newDatePosted: datePosted, newDuration: resultVid["duration"]! as! Double, newFocusTimes: resultVid["video_focuses"]! as! [Double], newS3: resultVid["s3"]! as! String))
                             }
                             
                             self.tableView.reloadData()
@@ -369,7 +370,7 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
                             let resultVideos = jsonResult["videos"] as! [Dictionary<String, AnyObject>]
                             for resultVid in resultVideos {
                                 let datePosted = NSDate.init(timeIntervalSince1970: resultVid["created_at"] as! NSTimeInterval)
-                                self.videos.append(Video.init(newTitle: resultVid["title"]! as! String, newUser: resultVid["author_username"]! as! String, newDatePosted: datePosted, newDuration: resultVid["duration"]! as! Double, newFocusTimes: resultVid["video_focuses"]! as! [Double]))
+                                self.videos.append(Video.init(newTitle: resultVid["title"]! as! String, newUser: resultVid["author_username"]! as! String, newDatePosted: datePosted, newDuration: resultVid["duration"]! as! Double, newFocusTimes: resultVid["video_focuses"]! as! [Double], newS3: resultVid["s3"]! as! String))
                             }
                             
                             self.tableView.reloadData()

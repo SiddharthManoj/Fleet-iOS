@@ -40,6 +40,7 @@ class VideoViewController: UIViewController {
     var focusTimes: [Double]!
     var duration: Double!
     var author: String!
+    var s3: String!
     
     var scaledFocusTimes: [Int]!
     var gradient: CGGradientRef!
@@ -176,7 +177,13 @@ class VideoViewController: UIViewController {
     
     private func _playVideo()
     {
-        let url = NetworkingManager.videoBaseURLString + "mp4:sample.mp4/" + "playlist.m3u8"
+        var url: String!
+        if (self.s3 != nil && !self.s3.isEmpty) {
+            url = NetworkingManager.videoBaseURLString + self.s3 + "playlist.m3u8"
+        }
+        else {
+            url = NetworkingManager.videoBaseURLString + "mp4:sample.mp4/" + "playlist.m3u8"
+        }
         
         let videoURL = NSURL(string: url)
         self.player = AVPlayer(URL: videoURL!)
