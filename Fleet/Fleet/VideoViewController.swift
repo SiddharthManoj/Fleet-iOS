@@ -199,68 +199,28 @@ class VideoViewController: UIViewController {
         self.focusView.layer.addSublayer(circleLayer)
     }
     
-    /*
-    private func _handleFocusTap(focusLocation: CGPoint!)
+    private func _playVideo()
     {
-        let gradientView = GradientView(frame: CGRectMake(0, 0, self.focusView.frame.width, self.focusView.frame.height))
+        let url = NetworkingManager.videoBaseURLString + "mp4:sample.mp4/" + "playlist.m3u8"
+        let manager = NetworkingManager.videoSharedInstance.manager
         
-        // Set the gradient colors
-        gradientView.myColors = [UIColor(white: 1, alpha: 1).CGColor, UIColor(white: 0, alpha: 1).CGColor]
-        
-        // Optionally set some locations
-        //gradientView.locations = [0.2, 1.0]
-        
-        gradientView.mode = .Radial
-        
-        gradientView.centerPoint = focusLocation
-        
-        gradientView.alpha = 0.3
-        
-        // Add it as a subview in all of its awesome
-        self.focusView.addSubview(gradientView)
-        
+        manager.GET(url, parameters: nil, constructingBodyWithBlock: { (data: AFMultipartFormData!) -> Void in
+            if let _ = try? data.appendPartWithFileURL(self.fileURL, name: "video_data") {
+                print("Appended video data")
+            }
+            else {
+                print("Could not append video data")
+            }
+            }, progress: nil, success: { (dataTask: NSURLSessionDataTask, responseObject: AnyObject?) -> Void in
+                print("Successfully uploaded video")
+                self.dismissViewControllerAnimated(false, completion: nil)
+                
+            }, failure: { (dataTask: NSURLSessionDataTask?, error: NSError) in
+                print("Failed to upload a video")
+                self.dismissViewControllerAnimated(false, completion: nil)
+            }
+        )
     }
-    */
-
-    /*
-    private func _handleFocusTap()
-    {
-        /*
-        // Initialize a gradient view
-        let gradientView = GradientView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        
-        // Set the gradient colors
-        gradientView.colors = [UIColor.redColor(), UIColor.blueColor()]
-        
-        // Optionally set some locations
-        gradientView.locations = [0.8, 1.0]
-        
-        gradientView.mode = .Radial
-        
-        // Add it as a subview in all of its awesome
-        self.focusView.addSubview(gradientView)
-        */
-        let context = UIGraphicsGetCurrentContext()
-        let size = self.focusView.bounds.size
-        
-        let locations: [CGFloat] = [0.0, 1.0]
-        
-        let colors = [UIColor.whiteColor().CGColor,
-            UIColor.blueColor().CGColor]
-        
-        let colorspace = CGColorSpaceCreateDeviceRGB()
-        
-        let gradient = CGGradientCreateWithColors(colorspace,
-            colors, locations)
-
-        let options: CGGradientDrawingOptions = [.DrawsAfterEndLocation]
-
-        let center = CGPoint(x: self.focusView.bounds.midX, y: self.focusView.bounds.midY)
-        CGContextDrawRadialGradient(context, gradient, center, 0, center, min(size.width, size.height) / 2, options)
-
-        
-    }
-    */
     
     private func _addTapGesture()
     {
