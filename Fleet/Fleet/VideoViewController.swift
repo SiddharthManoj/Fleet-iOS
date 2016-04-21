@@ -65,7 +65,7 @@ class VideoViewController: UIViewController {
         
         // quickly just for testing, will delete later
         
-        self.videoLabel = UILabel(frame: CGRect(x: self.view.center.x - 275, y: 80, width: 400, height: 50))
+        self.videoLabel = UILabel(frame: CGRect(x: self.view.center.x - 250, y: 80, width: 400, height: 50))
         self.videoLabel.attributedText = NSAttributedString(string: videoTitle, attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: corbertReg, size: 20)!])
         self.videoLabel.textAlignment = .Center
         self.videoLabel.backgroundColor = UIColor(white: 1, alpha: 0)
