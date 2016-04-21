@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 import Foundation
 
 class VideoViewController: UIViewController {
@@ -72,7 +74,7 @@ class VideoViewController: UIViewController {
         // quickly just for testing, will delete later
         
         self.videoLabel = UILabel(frame: CGRect(x: self.view.center.x - 400/2, y: 100, width: 400, height: 50))
-        self.videoLabel.attributedText = NSAttributedString(string: videoTitle, attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: corbertReg, size: 50)!])
+        self.videoLabel.attributedText = NSAttributedString(string: videoTitle, attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: corbertReg, size: 24)!])
         self.videoLabel.textAlignment = .Center
         self.videoLabel.backgroundColor = UIColor(white: 1, alpha: 0)
         
@@ -84,6 +86,8 @@ class VideoViewController: UIViewController {
         self.focusCounter = 0;
         
         self.timerSpeed = self.duration/Double(numBars)
+        
+        self._playVideo()
         
         _addFocusView()
         _addTapGesture()
@@ -167,9 +171,7 @@ class VideoViewController: UIViewController {
     
     private func _addFocusView()
     {
-        self.focusView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-        self.focusView.image = UIImage(named: "china_background")
-        self.view.addSubview(focusView)
+        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
     }
     
     private func _handleFocusTap(tapLocation: CGPoint!)
@@ -187,8 +189,16 @@ class VideoViewController: UIViewController {
     private func _playVideo()
     {
         let url = NetworkingManager.videoBaseURLString + "mp4:sample.mp4/" + "playlist.m3u8"
-        let manager = NetworkingManager.videoSharedInstance.manager
+        //let manager = NetworkingManager.videoSharedInstance.manager
         
+        let videoURL = NSURL(string: url)
+        let player = AVPlayer(URL: videoURL!)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.view.bounds
+        self.view.layer.addSublayer(playerLayer)
+        player.play()
+        
+        /*
         manager.GET(url, parameters: nil, constructingBodyWithBlock: { (data: AFMultipartFormData!) -> Void in
             if let _ = try? data.appendPartWithFileURL(self.fileURL, name: "video_data") {
                 print("Appended video data")
@@ -205,6 +215,7 @@ class VideoViewController: UIViewController {
                 self.dismissViewControllerAnimated(false, completion: nil)
             }
         )
+        */
     }
     
     private func _addTapGesture()
