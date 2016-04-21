@@ -21,10 +21,6 @@ class VideoViewController: UIViewController {
     var fleetColorGreen: CGFloat = 206/255
     var fleetColorBlue: CGFloat = 177/255
     
-    var doneYPos: CGFloat = 500
-    var doneWidth: CGFloat = 200
-    var doneHeight: CGFloat = 80
-    
     var numBars: Int = 41
     
     var quicksandReg: String = "Quicksand-Regular"
@@ -32,13 +28,11 @@ class VideoViewController: UIViewController {
     var corbertReg: String = "Corbert-Regular"
     
     var fleetTitle: String = "fleet"
-    var doneString: String = "DONE"
     
     // Do any additional setup after loading the view.
     
     var videoTitle: String!
     var videoLabel: UILabel!
-    var doneButton: UIButton!
     
     var focusView: UIImageView!
     var focusTouch: UITapGestureRecognizer!
@@ -90,7 +84,6 @@ class VideoViewController: UIViewController {
         _setHeights()
         _addTimeline()
         _addTimer()
-        _addDoneButton()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -111,19 +104,14 @@ class VideoViewController: UIViewController {
     
     // MARK: - Internal methods
     
-    func donePressed(sender: UIButton!)
-    {
-        self.player.pause()
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     func focusTapped(sender: UITapGestureRecognizer!)
     {
         if (self.focusTimes.count > 0 && self.focusCounter < self.focusTimes.count) {
             self.player.seekToTime(CMTimeMakeWithSeconds(self.focusTimes[self.focusCounter], 1000000000))
         }
         else {
-            self.donePressed(nil)
+            self.player.pause()
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
         
         
@@ -159,19 +147,6 @@ class VideoViewController: UIViewController {
                 self.focusCounter = self.focusCounter + 1
             }
         }
-    }
-    
-    private func _addDoneButton()
-    {
-        self.doneButton = UIButton()
-        self.doneButton.setTitle(doneString, forState: .Normal)
-        self.doneButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.doneButton.titleLabel?.font = UIFont(name: quicksandReg, size: 20)
-        self.doneButton.frame = CGRectMake(self.view.center.x - doneWidth/2, doneYPos, doneWidth, doneHeight)
-        self.doneButton.backgroundColor = UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1)
-        self.doneButton.addTarget(self, action: #selector(VideoViewController.donePressed(_:)), forControlEvents: .TouchUpInside)
-        
-        self.view.addSubview(self.doneButton)
     }
     
     private func _addFocusView()
