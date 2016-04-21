@@ -57,10 +57,10 @@
 		<dict>
 			<key>fleetapp.info</key>
 			<dict/>
-			<key>NSIncludesSubdomains</key>
-			<true/>
-			<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-			<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<true/>
 			<key>facebook.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
