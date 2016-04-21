@@ -131,9 +131,6 @@ class VideoViewController: UIViewController {
             self.counter = self.scaledFocusTimes[self.focusCounter]
             self.focusCounter = self.focusCounter + 1;
         }
-        
-        //self.player.currentTime().seconds
-        //let time = CMTime.init(seconds: self.focusTimes[self.focusCounter], preferredTimescale: 1000000000)
     }
     
     func countSec(sender: NSTimer!)
