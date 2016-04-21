@@ -10,8 +10,8 @@ import UIKit
 
 class NetworkingManager: NSObject
 {
-    static let webBaseURLString = "http://localhost:3003/api"
-    static let videoBaseURLString = "http://localhost:1935/vod/"
+    static let webBaseURLString = "http://teamfleet.info:3003/api"
+    static let videoBaseURLString = "http://teamfleet.info:1935/vod/"
     static let webSharedInstance = NetworkingManager(baseURL: webBaseURLString)
     static let videoSharedInstance = NetworkingManager(baseURL: videoBaseURLString)
 
