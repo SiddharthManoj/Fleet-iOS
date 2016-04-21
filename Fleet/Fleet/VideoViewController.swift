@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class VideoViewController: UIViewController {
 
@@ -22,7 +23,7 @@ class VideoViewController: UIViewController {
     var doneWidth: CGFloat = 200
     var doneHeight: CGFloat = 80
     
-    var numBars: Int = 40
+    var numBars: Int = 41
     
     var quicksandReg: String = "Quicksand-Regular"
     var quicksandBold: String = "Quicksand-Bold"
@@ -43,15 +44,19 @@ class VideoViewController: UIViewController {
     var duration: Double!
     var author: String!
     
+    var scaledFocusTimes: [Int]!
+    
     var gradient: CGGradientRef!
     
     var timelineBars: [UIImageView]!
-    
+
     var timelineBarHeights: [CGFloat]!
     
     var counter: Int!
     
-    var timerSpeed: NSTimeInterval = 0.4
+    var focusCounter: Int!
+    
+    var timerSpeed: NSTimeInterval!
     
     
     // MARK: - UIViewController methods
@@ -73,7 +78,12 @@ class VideoViewController: UIViewController {
         
         self.view.addSubview(videoLabel)
         
+        self.scaledFocusTimes = []
+        
         self.counter = 1
+        self.focusCounter = 0;
+        
+        self.timerSpeed = self.duration/Double(numBars)
         
         _addDoneButton()
         _addFocusView()
@@ -109,7 +119,12 @@ class VideoViewController: UIViewController {
     
     func focusTapped(sender: UITapGestureRecognizer!)
     {
-        self.focusView.backgroundColor = UIColor(white: 0, alpha: 1)
+        //self.focusView.backgroundColor = UIColor(white: 0, alpha: 1)
+        
+        if self.focusCounter<self.scaledFocusTimes.count {
+            self.counter = self.scaledFocusTimes[self.focusCounter]
+            self.focusCounter = self.focusCounter + 1;
+        }
     }
     
     /*
@@ -128,12 +143,28 @@ class VideoViewController: UIViewController {
         for bar in self.timelineBars {
             UIView.animateWithDuration(1, animations: {
                 bar.frame = CGRect(x: bar.frame.origin.x, y: -5, width: 5, height: max(CGFloat(45 - abs(self.timelineBars.indexOf(bar)! - self.counter)*5), 25))
+                for i in 0...self.scaledFocusTimes.count-1 {
+                    if self.timelineBars.indexOf(bar)==self.scaledFocusTimes[i] {
+                        bar.frame = CGRect(x: bar.frame.origin.x, y: -5, width: 9, height: max(CGFloat(45 - abs(self.timelineBars.indexOf(bar)! - self.counter)*5)+10, 25+10))
+                    }
+                }
+                
             })
         }
+
         self.counter = self.counter + 1
+        _updateFocusCount()
     }
     
     // MARK: - Private methods
+    
+    private func _updateFocusCount() {
+        if self.focusCounter<self.scaledFocusTimes.count {
+            if self.counter==self.scaledFocusTimes[self.focusCounter] {
+                self.focusCounter = self.focusCounter + 1
+            }
+        }
+    }
     
     private func _addDoneButton()
     {
@@ -233,18 +264,30 @@ class VideoViewController: UIViewController {
     
     private func _addTapGesture()
     {
-        //self.focusTouch = UITapGestureRecognizer(target: self, action: "focusTapped:")
-        //self.view.addGestureRecognizer(focusTouch)
+        self.focusTouch = UITapGestureRecognizer(target: self, action: "focusTapped:")
+        self.view.addGestureRecognizer(focusTouch)
     }
     
     private func _addTimeline()
     {
+        for i in 0...self.focusTimes.count-1 {
+            let scaledInt = Int(floor(Double(numBars)*self.focusTimes[i]/self.duration))
+            self.scaledFocusTimes.append(scaledInt)
+        }
+        
         self.timelineBars = [UIImageView]()
         self.timelineBars.removeAll()
-        for i in 0...(numBars+1) {
+        for i in 0...(numBars) {
             let newBar = UIImageView(frame: CGRect(x:Int(self.view.frame.width)/numBars * i, y: -5, width: 5, height: Int(self.timelineBarHeights[i])))
-            newBar.image = UIImage(named: "time_bar.png")
             newBar.alpha = 0.9
+            newBar.image = UIImage(named: "time_bar.png")
+            for j in 0...self.scaledFocusTimes.count-1 {
+                if i==self.scaledFocusTimes[j] {
+                    newBar.frame = CGRect(x:Int(self.view.frame.width)/numBars * i - 2, y: -5, width: 9, height: Int(self.timelineBarHeights[i]+10))
+                    newBar.image = UIImage(named: "green_timebar.png")
+                    break;
+                }
+            }
             self.timelineBars.append(newBar)
             self.view.addSubview(self.timelineBars[i])
         }
