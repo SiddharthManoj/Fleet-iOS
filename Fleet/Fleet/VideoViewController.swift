@@ -119,7 +119,7 @@ class VideoViewController: UIViewController {
     
     func focusTapped(sender: UITapGestureRecognizer!)
     {
-        if (self.focusTimes.count > 0 && self.focusCounter < self.focusTimes.count - 1) {
+        if (self.focusTimes.count > 0 && self.focusCounter < self.focusTimes.count) {
             self.player.seekToTime(CMTimeMakeWithSeconds(self.focusTimes[self.focusCounter], 1000000000))
         }
         else {
