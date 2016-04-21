@@ -139,9 +139,10 @@ class VideosSearchViewController: UIViewController, UITextFieldDelegate, UISearc
         
         let vc = VideoViewController()
         vc.videoTitle = self.videos[indexPath.row].title
-        vc.author = self.videos[indexPath.row].user
         vc.duration = self.videos[indexPath.row].duration
         vc.focusTimes = self.videos[indexPath.row].focusTimes
+        vc.author = self.videos[indexPath.row].user
+
         self.presentViewController(vc, animated: true, completion: nil)
     }
     

@@ -33,6 +33,7 @@ class VideoViewController: UIViewController {
     
     var videoTitle: String!
     var videoLabel: UILabel!
+    var authorLabel: UILabel!
     
     var focusView: UIImageView!
     var focusTouch: UITapGestureRecognizer!
@@ -63,12 +64,19 @@ class VideoViewController: UIViewController {
         
         // quickly just for testing, will delete later
         
-        self.videoLabel = UILabel(frame: CGRect(x: self.view.center.x - 400/2, y: 100, width: 400, height: 50))
-        self.videoLabel.attributedText = NSAttributedString(string: videoTitle, attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: corbertReg, size: 24)!])
+        self.videoLabel = UILabel(frame: CGRect(x: self.view.center.x - 275, y: 80, width: 400, height: 50))
+        self.videoLabel.attributedText = NSAttributedString(string: videoTitle, attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: corbertReg, size: 20)!])
         self.videoLabel.textAlignment = .Center
         self.videoLabel.backgroundColor = UIColor(white: 1, alpha: 0)
         
+        self.authorLabel = UILabel(frame: CGRect(x: self.view.center.x - 300, y: 100, width: 400, height: 50))
+        self.authorLabel.attributedText = NSAttributedString(string: self.author, attributes: [NSForegroundColorAttributeName: UIColor(red: fleetColorRed, green: fleetColorGreen, blue: fleetColorBlue, alpha: 1), NSFontAttributeName: UIFont(name: corbertReg, size: 16)!])
+        self.authorLabel.textAlignment = .Center
+        self.authorLabel.backgroundColor = UIColor(white: 1, alpha: 0)
+
+        
         self.view.addSubview(videoLabel)
+        self.view.addSubview(self.authorLabel)
         
         self.scaledFocusTimes = []
         
